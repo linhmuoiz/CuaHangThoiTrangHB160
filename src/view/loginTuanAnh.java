@@ -15,6 +15,7 @@ public class loginTuanAnh extends javax.swing.JFrame {
      */
     public loginTuanAnh() {
         initComponents();
+        System.out.println("tao là ô môi ");
     }
 
     /**

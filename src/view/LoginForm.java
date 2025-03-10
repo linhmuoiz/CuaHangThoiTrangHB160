@@ -18,6 +18,7 @@ public class LoginForm extends javax.swing.JFrame {
         System.out.println("Đã làm backend");
         System.out.println("ngu vcl ra");
         System.out.println("huhuhaha");
+        System.out.println("Đã sửa xong");
     }
 
     /**

@@ -19,6 +19,7 @@ public class LoginForm extends javax.swing.JFrame {
         System.out.println("ngu vcl ra");
         System.out.println("huhuhaha");
         System.out.println("Đã sửa xong");
+        System.out.println("gia đạt đói rồi ae");
     }
 
     /**

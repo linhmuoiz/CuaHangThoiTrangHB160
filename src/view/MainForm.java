@@ -4,7 +4,7 @@
  */
 package view;
 
-
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,7 +17,17 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         initComponents();
+        showPanel(new QuanLyNhanVienJPanel());
     }
+
+    private void showPanel(JPanel panel) {
+        System.out.println("Showing panel: " + panel.getClass().getName()); // In ra console
+        mainPanel.removeAll();
+        mainPanel.add(panel);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -411,7 +421,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        mainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        mainPanel.setBackground(new java.awt.Color(246, 225, 225));
         mainPanel.setMaximumSize(new java.awt.Dimension(1500, 1000));
         mainPanel.setMinimumSize(new java.awt.Dimension(1500, 1000));
         mainPanel.setName(""); // NOI18N
@@ -425,7 +435,7 @@ public class MainForm extends javax.swing.JFrame {
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -435,8 +445,7 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(MenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,7 +453,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(MenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0))
         );
 
@@ -486,10 +495,16 @@ public class MainForm extends javax.swing.JFrame {
 
     private void panelNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelNhanVienMouseClicked
         // TODO add your handling code here:
+        System.out.println("JlNhanVienMouseClicked called"); 
+        showPanel(new QuanLyNhanVienJPanel());
+
     }//GEN-LAST:event_panelNhanVienMouseClicked
 
     private void JlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JlNhanVienMouseClicked
         // TODO add your handling code here:
+        System.out.println("JlNhanVienMouseClicked called"); 
+        showPanel(new QuanLyNhanVienJPanel());
+
     }//GEN-LAST:event_JlNhanVienMouseClicked
 
     /**
@@ -523,6 +538,7 @@ public class MainForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainForm().setVisible(true);
+                
             }
         });
     }

@@ -15,7 +15,7 @@ public class loginThanhThuy extends javax.swing.JFrame {
      */
     public loginThanhThuy() {
         initComponents();
-        System.out.println("thanhthuy 123");
+        System.out.println("thanhthuy 1234567");
     }
 
     /**

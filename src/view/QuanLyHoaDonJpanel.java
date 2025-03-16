@@ -241,7 +241,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Chi Tiết Hoá Đơn", "Mã Hoá Đơn", "Mã Sản Phẩ", "Giá", "Số Lượng"
+                "Mã Sản Phẩm", "Tên Sản Phẩm", "Danh Mục", "Màu ", "Kích Thước", "Số Lượng", "Giá Bán", "Giảm Giá", "Tổng Tiền"
             }
         ));
         rSTableMetro1.setColorBackgoundHead(new java.awt.Color(128, 0, 0));

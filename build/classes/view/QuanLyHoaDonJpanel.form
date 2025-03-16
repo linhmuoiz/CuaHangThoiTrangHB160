@@ -444,7 +444,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="80" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ho&#xe1; &#x110;&#x1a1;n Chi Ti&#x1ebf;t"/>
+        <Property name="text" type="java.lang.String" value="Chi ti&#x1ebf;t Ho&#xe1; &#x110;&#x1a1;n"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel3">

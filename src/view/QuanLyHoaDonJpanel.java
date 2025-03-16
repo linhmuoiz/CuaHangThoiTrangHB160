@@ -230,7 +230,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel1.setText("Hoá Đơn Chi Tiết");
+        jLabel1.setText("Chi tiết Hoá Đơn");
 
         jPanel3.setBackground(new java.awt.Color(246, 225, 225));
         jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));

@@ -17,16 +17,9 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         initComponents();
-        showPanel(new QuanLyNhanVienJPanel());
     }
 
-    private void showPanel(JPanel panel) {
-        System.out.println("Showing panel: " + panel.getClass().getName()); // In ra console
-        mainPanel.removeAll();
-        mainPanel.add(panel);
-        mainPanel.repaint();
-        mainPanel.revalidate();
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -495,16 +488,10 @@ public class MainForm extends javax.swing.JFrame {
 
     private void panelNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelNhanVienMouseClicked
         // TODO add your handling code here:
-        System.out.println("JlNhanVienMouseClicked called"); 
-        showPanel(new QuanLyNhanVienJPanel());
-
     }//GEN-LAST:event_panelNhanVienMouseClicked
 
     private void JlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JlNhanVienMouseClicked
         // TODO add your handling code here:
-        System.out.println("JlNhanVienMouseClicked called"); 
-        showPanel(new QuanLyNhanVienJPanel());
-
     }//GEN-LAST:event_JlNhanVienMouseClicked
 
     /**
@@ -538,7 +525,7 @@ public class MainForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainForm().setVisible(true);
-                
+
             }
         });
     }

@@ -418,6 +418,8 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             }
         ));
         rSTableMetro1.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
+        rSTableMetro1.setColorBordeFilas(new java.awt.Color(128, 0, 0));
+        rSTableMetro1.setColorBordeHead(new java.awt.Color(246, 225, 225));
         rSTableMetro1.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
         rSTableMetro1.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
         rSTableMetro1.setColorFilasForeground1(new java.awt.Color(128, 0, 0));

@@ -19,7 +19,11 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
     }
 
-    
+    private void showPanel(JPanel panel) {
+        mainPanel.removeAll();
+        mainPanel.add(panel);
+        mainPanel.validate();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,8 +40,8 @@ public class MainForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        PanelHoaDon = new javax.swing.JPanel();
+        labelHoaDon = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
@@ -50,7 +54,7 @@ public class MainForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        PanelDanhMuc = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
 
@@ -128,33 +132,41 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(35, 35, 35))
         );
 
-        jPanel5.setBackground(new java.awt.Color(246, 225, 225));
-        jPanel5.setPreferredSize(new java.awt.Dimension(300, 75));
-        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        PanelHoaDon.setBackground(new java.awt.Color(246, 225, 225));
+        PanelHoaDon.setPreferredSize(new java.awt.Dimension(300, 75));
+        PanelHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelHoaDonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel5MouseEntered(evt);
+                PanelHoaDonMouseEntered(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/document-2-48.png"))); // NOI18N
-        jLabel4.setText("  Hoá Đơn");
+        labelHoaDon.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
+        labelHoaDon.setForeground(new java.awt.Color(128, 0, 0));
+        labelHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/document-2-48.png"))); // NOI18N
+        labelHoaDon.setText("  Hoá Đơn");
+        labelHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelHoaDonMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout PanelHoaDonLayout = new javax.swing.GroupLayout(PanelHoaDon);
+        PanelHoaDon.setLayout(PanelHoaDonLayout);
+        PanelHoaDonLayout.setHorizontalGroup(
+            PanelHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelHoaDonLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel4)
+                .addComponent(labelHoaDon)
                 .addGap(50, 50, 50))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        PanelHoaDonLayout.setVerticalGroup(
+            PanelHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelHoaDonLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addComponent(labelHoaDon)
                 .addGap(35, 35, 35))
         );
 
@@ -341,11 +353,11 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(35, 35, 35))
         );
 
-        jPanel6.setBackground(new java.awt.Color(246, 225, 225));
-        jPanel6.setPreferredSize(new java.awt.Dimension(300, 75));
-        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        PanelDanhMuc.setBackground(new java.awt.Color(246, 225, 225));
+        PanelDanhMuc.setPreferredSize(new java.awt.Dimension(300, 75));
+        PanelDanhMuc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel6MouseEntered(evt);
+                PanelDanhMucMouseEntered(evt);
             }
         });
 
@@ -353,19 +365,24 @@ public class MainForm extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(128, 0, 0));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/t-shirt-48.png"))); // NOI18N
         jLabel5.setText("  Danh Mục");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout PanelDanhMucLayout = new javax.swing.GroupLayout(PanelDanhMuc);
+        PanelDanhMuc.setLayout(PanelDanhMucLayout);
+        PanelDanhMucLayout.setHorizontalGroup(
+            PanelDanhMucLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDanhMucLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel5)
                 .addGap(50, 50, 50))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+        PanelDanhMucLayout.setVerticalGroup(
+            PanelDanhMucLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDanhMucLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(35, 35, 35))
@@ -376,7 +393,7 @@ public class MainForm extends javax.swing.JFrame {
         MenuPanelLayout.setHorizontalGroup(
             MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -387,7 +404,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         MenuPanelLayout.setVerticalGroup(
             MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,9 +413,9 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PanelHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PanelDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -411,7 +428,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mainPanel.setBackground(new java.awt.Color(246, 225, 225));
@@ -419,17 +436,7 @@ public class MainForm extends javax.swing.JFrame {
         mainPanel.setMinimumSize(new java.awt.Dimension(1500, 1000));
         mainPanel.setName(""); // NOI18N
         mainPanel.setPreferredSize(new java.awt.Dimension(1500, 1000));
-
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1500, Short.MAX_VALUE)
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        mainPanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -458,9 +465,9 @@ public class MainForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jPanel4MouseEntered
 
-    private void jPanel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseEntered
+    private void PanelHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelHoaDonMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel5MouseEntered
+    }//GEN-LAST:event_PanelHoaDonMouseEntered
 
     private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
         // TODO add your handling code here:
@@ -482,17 +489,34 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel12MouseEntered
 
-    private void jPanel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseEntered
+    private void PanelDanhMucMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelDanhMucMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel6MouseEntered
+        
+    }//GEN-LAST:event_PanelDanhMucMouseEntered
 
     private void panelNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelNhanVienMouseClicked
         // TODO add your handling code here:
+        showPanel(new QuanLyNhanVienJPanel());
     }//GEN-LAST:event_panelNhanVienMouseClicked
 
     private void JlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JlNhanVienMouseClicked
         // TODO add your handling code here:
+        showPanel(new QuanLyNhanVienJPanel());
     }//GEN-LAST:event_JlNhanVienMouseClicked
+
+    private void PanelHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelHoaDonMouseClicked
+        // TODO add your handling code here:
+        showPanel(new QuanLyHoaDonJpanel());
+    }//GEN-LAST:event_PanelHoaDonMouseClicked
+
+    private void labelHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelHoaDonMouseClicked
+        // TODO add your handling code here:
+        showPanel(new QuanLyHoaDonJpanel());
+    }//GEN-LAST:event_labelHoaDonMouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -533,12 +557,13 @@ public class MainForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JlNhanVien;
     private javax.swing.JPanel MenuPanel;
+    private javax.swing.JPanel PanelDanhMuc;
+    private javax.swing.JPanel PanelHoaDon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
@@ -548,10 +573,9 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel labelHoaDon;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel panelNhanVien;
     // End of variables declaration//GEN-END:variables

@@ -12,7 +12,7 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
 
     /**
      * Creates new form QuanLyDanhMucJpanel
-     */
+     */public QuanLyDanhMucJpanel(){
         initComponents();
     }
 

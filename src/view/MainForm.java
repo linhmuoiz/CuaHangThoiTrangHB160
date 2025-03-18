@@ -212,6 +212,11 @@ public class MainForm extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(128, 0, 0));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sale-48.png"))); // NOI18N
         jLabel8.setText("  Khuyến Mại");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -309,7 +314,7 @@ public class MainForm extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(128, 0, 0));
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/padlock-48.png"))); // NOI18N
-        jLabel11.setText("  Quên Mật khẩu");
+        jLabel11.setText("  Đổi Mật khẩu");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -517,6 +522,11 @@ public class MainForm extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        showPanel(new QuanLyKhuyenMaiJpanel());
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments

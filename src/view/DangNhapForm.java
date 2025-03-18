@@ -39,7 +39,6 @@ public class DangNhapForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1000, 350));
         setMinimumSize(new java.awt.Dimension(1000, 350));
-        setPreferredSize(new java.awt.Dimension(1000, 350));
 
         jPanel1.setBackground(new java.awt.Color(128, 0, 0));
         jPanel1.setMaximumSize(new java.awt.Dimension(500, 600));

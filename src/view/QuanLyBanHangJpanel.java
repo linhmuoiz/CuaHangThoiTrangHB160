@@ -55,6 +55,9 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jTextField19 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        jButton16 = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        rSComboMetro4 = new rojerusan.RSComboMetro();
         jButton6 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -78,6 +81,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jButton10 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         rSTableMetro2 = new rojerusan.RSTableMetro();
+        jButton15 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(246, 225, 225));
         setMaximumSize(new java.awt.Dimension(1500, 1000));
@@ -153,7 +157,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jPanel13.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));
         jPanel13.setPreferredSize(new java.awt.Dimension(1300, 300));
 
-        jLabel17.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(128, 0, 0));
         jLabel17.setText("Danh Sách Khách Hàng");
 
@@ -197,7 +201,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -233,11 +237,11 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel11.setText("Code Khuyến Mại:");
+        jLabel11.setText("Code Khuyến Mãi:");
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel12.setText("Tổng Tiền Khuyến Mại:");
+        jLabel12.setText("Tổng Tiền Khuyến Mãi:");
 
         jTextField12.setEditable(false);
         jTextField12.setBackground(new java.awt.Color(246, 225, 225));
@@ -251,7 +255,6 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             }
         });
 
-        jTextField13.setEditable(false);
         jTextField13.setBackground(new java.awt.Color(246, 225, 225));
         jTextField13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jTextField13.setForeground(new java.awt.Color(128, 0, 0));
@@ -275,6 +278,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             }
         });
 
+        jTextField16.setEditable(false);
         jTextField16.setBackground(new java.awt.Color(246, 225, 225));
         jTextField16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jTextField16.setForeground(new java.awt.Color(128, 0, 0));
@@ -302,7 +306,6 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jLabel13.setForeground(new java.awt.Color(128, 0, 0));
         jLabel13.setText("Tổng Thanh Toán:");
 
-        jTextField18.setEditable(false);
         jTextField18.setBackground(new java.awt.Color(246, 225, 225));
         jTextField18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jTextField18.setForeground(new java.awt.Color(128, 0, 0));
@@ -334,34 +337,65 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(128, 0, 0));
         jLabel15.setText("Tiền Hoàn Lại: ");
 
+        jButton16.setBackground(new java.awt.Color(246, 225, 225));
+        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search-13-24.png"))); // NOI18N
+        jButton16.setBorder(null);
+
+        jLabel21.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(128, 0, 0));
+        jLabel21.setText("Phương Thức TT:");
+
+        rSComboMetro4.setBackground(new java.awt.Color(246, 225, 225));
+        rSComboMetro4.setForeground(new java.awt.Color(128, 0, 0));
+        rSComboMetro4.setColorArrow(new java.awt.Color(128, 0, 0));
+        rSComboMetro4.setColorBorde(new java.awt.Color(128, 0, 0));
+        rSComboMetro4.setColorFondo(new java.awt.Color(246, 225, 225));
+        rSComboMetro4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        rSComboMetro4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSComboMetro4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
                     .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
+                            .addComponent(jLabel7)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel21))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jDateChooser10, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel10Layout.createSequentialGroup()
+                                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(rSComboMetro4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                        .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
-                            .addComponent(jLabel15))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser10, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel15))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -370,38 +404,45 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jDateChooser10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jDateChooser10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(rSComboMetro4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
 
         jButton6.setBackground(new java.awt.Color(246, 225, 225));
@@ -556,7 +597,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jPanel11.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));
         jPanel11.setPreferredSize(new java.awt.Dimension(1300, 300));
 
-        jLabel16.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(128, 0, 0));
         jLabel16.setText("Quét mã vạch sản phẩm");
 
@@ -567,14 +608,14 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel16)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel16)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         jPanel12.setBackground(new java.awt.Color(246, 225, 225));
@@ -589,7 +630,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Ma Sản Phẩm", "Tên Sản Phẩm", "Danh Mục", "Màu Sắc", "Kích Thước ", "Số Lượng Bán", "Thành Tiền"
+                "Mã Sản Phẩm", "Tên Sản Phẩm", "Danh Mục", "Màu Sắc", "Kích Thước ", "Số Lượng Bán", "Thành Tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -614,7 +655,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         rSTableMetro3.setFuenteHead(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jScrollPane3.setViewportView(rSTableMetro3);
 
-        jLabel20.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(128, 0, 0));
         jLabel20.setText("Chi Tiết Hoá Đơn");
 
@@ -633,15 +674,16 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel15.setBackground(new java.awt.Color(246, 225, 225));
         jPanel15.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));
         jPanel15.setPreferredSize(new java.awt.Dimension(1300, 300));
 
-        jLabel18.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(128, 0, 0));
         jLabel18.setText("Danh Sách Sản Phẩm");
 
@@ -691,7 +733,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Ma Sản Phẩm", "Tên Sản Phẩm", "Danh Mục", "Màu Sắc", "Kích Thước ", "Số Lượng", "Đơn Giá"
+                "Mã Sản Phẩm", "Tên Sản Phẩm", "Danh Mục", "Màu Sắc", "Kích Thước ", "Số Lượng", "Đơn Giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -716,6 +758,10 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         rSTableMetro2.setFuenteHead(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jScrollPane2.setViewportView(rSTableMetro2);
 
+        jButton15.setBackground(new java.awt.Color(246, 225, 225));
+        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search-13-24.png"))); // NOI18N
+        jButton15.setBorder(null);
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -725,12 +771,15 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(32, 32, 32)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
@@ -749,9 +798,10 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -774,7 +824,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 992, Short.MAX_VALUE)
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -784,9 +834,9 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
                 .addGap(29, 29, 29))
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 1011, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -854,10 +904,16 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void rSComboMetro4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSComboMetro4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSComboMetro4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -875,6 +931,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -904,6 +961,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField9;
+    private rojerusan.RSComboMetro rSComboMetro4;
     private rojerusan.RSTableMetro rSTableMetro1;
     private rojerusan.RSTableMetro rSTableMetro2;
     private rojerusan.RSTableMetro rSTableMetro3;

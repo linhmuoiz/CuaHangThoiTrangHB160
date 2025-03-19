@@ -17,6 +17,7 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         initComponents();
+        showPanel(new QuanLyBanHangJpanel());
     }
 
     private void showPanel(JPanel panel) {
@@ -38,24 +39,24 @@ public class MainForm extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        PanelHoaDon = new javax.swing.JPanel();
+        panelBanHang = new javax.swing.JPanel();
+        labelBanHang = new javax.swing.JLabel();
+        panelHoaDon = new javax.swing.JPanel();
         labelHoaDon = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        panelSanPham = new javax.swing.JPanel();
+        labelSanPham = new javax.swing.JLabel();
+        panelKhuyenMai = new javax.swing.JPanel();
+        labelKhuyenMai = new javax.swing.JLabel();
+        panelThongKe = new javax.swing.JPanel();
+        labelThongKe = new javax.swing.JLabel();
         panelNhanVien = new javax.swing.JPanel();
-        JlNhanVien = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        labelNhanVien = new javax.swing.JLabel();
+        panelDoiMatKhau = new javax.swing.JPanel();
+        labelDoiMatKhau = new javax.swing.JLabel();
+        panelDangXuat = new javax.swing.JPanel();
+        labelDangXuat = new javax.swing.JLabel();
         PanelDanhMuc = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        labelDanhMuc = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,44 +103,52 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(43, 43, 43))
         );
 
-        jPanel4.setBackground(new java.awt.Color(246, 225, 225));
-        jPanel4.setPreferredSize(new java.awt.Dimension(300, 118));
-        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelBanHang.setBackground(new java.awt.Color(246, 225, 225));
+        panelBanHang.setPreferredSize(new java.awt.Dimension(300, 118));
+        panelBanHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBanHangMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel4MouseEntered(evt);
+                panelBanHangMouseEntered(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/shopping-cart-48.png"))); // NOI18N
-        jLabel1.setText("  Bán Hàng");
+        labelBanHang.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
+        labelBanHang.setForeground(new java.awt.Color(128, 0, 0));
+        labelBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/shopping-cart-48.png"))); // NOI18N
+        labelBanHang.setText("  Bán Hàng");
+        labelBanHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelBanHangMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelBanHangLayout = new javax.swing.GroupLayout(panelBanHang);
+        panelBanHang.setLayout(panelBanHangLayout);
+        panelBanHangLayout.setHorizontalGroup(
+            panelBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBanHangLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel1)
+                .addComponent(labelBanHang)
                 .addGap(50, 50, 50))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+        panelBanHangLayout.setVerticalGroup(
+            panelBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBanHangLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(labelBanHang)
                 .addGap(35, 35, 35))
         );
 
-        PanelHoaDon.setBackground(new java.awt.Color(246, 225, 225));
-        PanelHoaDon.setPreferredSize(new java.awt.Dimension(300, 75));
-        PanelHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelHoaDon.setBackground(new java.awt.Color(246, 225, 225));
+        panelHoaDon.setPreferredSize(new java.awt.Dimension(300, 75));
+        panelHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PanelHoaDonMouseClicked(evt);
+                panelHoaDonMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                PanelHoaDonMouseEntered(evt);
+                panelHoaDonMouseEntered(evt);
             }
         });
 
@@ -153,115 +162,131 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout PanelHoaDonLayout = new javax.swing.GroupLayout(PanelHoaDon);
-        PanelHoaDon.setLayout(PanelHoaDonLayout);
-        PanelHoaDonLayout.setHorizontalGroup(
-            PanelHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelHoaDonLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelHoaDonLayout = new javax.swing.GroupLayout(panelHoaDon);
+        panelHoaDon.setLayout(panelHoaDonLayout);
+        panelHoaDonLayout.setHorizontalGroup(
+            panelHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHoaDonLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(labelHoaDon)
                 .addGap(50, 50, 50))
         );
-        PanelHoaDonLayout.setVerticalGroup(
-            PanelHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelHoaDonLayout.createSequentialGroup()
+        panelHoaDonLayout.setVerticalGroup(
+            panelHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHoaDonLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelHoaDon)
                 .addGap(35, 35, 35))
         );
 
-        jPanel7.setBackground(new java.awt.Color(246, 225, 225));
-        jPanel7.setPreferredSize(new java.awt.Dimension(300, 75));
-        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelSanPham.setBackground(new java.awt.Color(246, 225, 225));
+        panelSanPham.setPreferredSize(new java.awt.Dimension(300, 75));
+        panelSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelSanPhamMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel7MouseEntered(evt);
+                panelSanPhamMouseEntered(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/product-48.png"))); // NOI18N
-        jLabel6.setText("  Sản Phẩm");
+        labelSanPham.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
+        labelSanPham.setForeground(new java.awt.Color(128, 0, 0));
+        labelSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/product-48.png"))); // NOI18N
+        labelSanPham.setText("  Sản Phẩm");
+        labelSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelSanPhamMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelSanPhamLayout = new javax.swing.GroupLayout(panelSanPham);
+        panelSanPham.setLayout(panelSanPhamLayout);
+        panelSanPhamLayout.setHorizontalGroup(
+            panelSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSanPhamLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel6)
+                .addComponent(labelSanPham)
                 .addGap(32, 32, 32))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+        panelSanPhamLayout.setVerticalGroup(
+            panelSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSanPhamLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
+                .addComponent(labelSanPham)
                 .addGap(47, 47, 47))
         );
 
-        jPanel9.setBackground(new java.awt.Color(246, 225, 225));
-        jPanel9.setPreferredSize(new java.awt.Dimension(300, 75));
-        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelKhuyenMai.setBackground(new java.awt.Color(246, 225, 225));
+        panelKhuyenMai.setPreferredSize(new java.awt.Dimension(300, 75));
+        panelKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel9MouseEntered(evt);
+                panelKhuyenMaiMouseEntered(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sale-48.png"))); // NOI18N
-        jLabel8.setText("  Khuyến Mại");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        labelKhuyenMai.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
+        labelKhuyenMai.setForeground(new java.awt.Color(128, 0, 0));
+        labelKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sale-48.png"))); // NOI18N
+        labelKhuyenMai.setText("  Khuyến Mại");
+        labelKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                labelKhuyenMaiMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelKhuyenMaiLayout = new javax.swing.GroupLayout(panelKhuyenMai);
+        panelKhuyenMai.setLayout(panelKhuyenMaiLayout);
+        panelKhuyenMaiLayout.setHorizontalGroup(
+            panelKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelKhuyenMaiLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel8)
+                .addComponent(labelKhuyenMai)
                 .addGap(17, 17, 17))
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+        panelKhuyenMaiLayout.setVerticalGroup(
+            panelKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelKhuyenMaiLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
+                .addComponent(labelKhuyenMai)
                 .addGap(35, 35, 35))
         );
 
-        jPanel10.setBackground(new java.awt.Color(246, 225, 225));
-        jPanel10.setPreferredSize(new java.awt.Dimension(300, 75));
-        jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelThongKe.setBackground(new java.awt.Color(246, 225, 225));
+        panelThongKe.setPreferredSize(new java.awt.Dimension(300, 75));
+        panelThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelThongKeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel10MouseEntered(evt);
+                panelThongKeMouseEntered(evt);
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/statistics-48.png"))); // NOI18N
-        jLabel9.setText("  Thống Kê");
+        labelThongKe.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
+        labelThongKe.setForeground(new java.awt.Color(128, 0, 0));
+        labelThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/statistics-48.png"))); // NOI18N
+        labelThongKe.setText("  Thống Kê");
+        labelThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelThongKeMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelThongKeLayout = new javax.swing.GroupLayout(panelThongKe);
+        panelThongKe.setLayout(panelThongKeLayout);
+        panelThongKeLayout.setHorizontalGroup(
+            panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelThongKeLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel9)
+                .addComponent(labelThongKe)
                 .addGap(44, 44, 44))
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+        panelThongKeLayout.setVerticalGroup(
+            panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelThongKeLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
+                .addComponent(labelThongKe)
                 .addGap(35, 35, 35))
         );
 
@@ -276,13 +301,13 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        JlNhanVien.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
-        JlNhanVien.setForeground(new java.awt.Color(128, 0, 0));
-        JlNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user-48.png"))); // NOI18N
-        JlNhanVien.setText("  Nhân Viên");
-        JlNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+        labelNhanVien.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
+        labelNhanVien.setForeground(new java.awt.Color(128, 0, 0));
+        labelNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user-48.png"))); // NOI18N
+        labelNhanVien.setText("  Nhân Viên");
+        labelNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JlNhanVienMouseClicked(evt);
+                labelNhanVienMouseClicked(evt);
             }
         });
 
@@ -292,87 +317,98 @@ public class MainForm extends javax.swing.JFrame {
             panelNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNhanVienLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(JlNhanVien)
+                .addComponent(labelNhanVien)
                 .addGap(35, 35, 35))
         );
         panelNhanVienLayout.setVerticalGroup(
             panelNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNhanVienLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(JlNhanVien)
+                .addComponent(labelNhanVien)
                 .addGap(35, 35, 35))
         );
 
-        jPanel12.setBackground(new java.awt.Color(246, 225, 225));
-        jPanel12.setPreferredSize(new java.awt.Dimension(300, 75));
-        jPanel12.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelDoiMatKhau.setBackground(new java.awt.Color(246, 225, 225));
+        panelDoiMatKhau.setPreferredSize(new java.awt.Dimension(300, 75));
+        panelDoiMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelDoiMatKhauMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel12MouseEntered(evt);
+                panelDoiMatKhauMouseEntered(evt);
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/padlock-48.png"))); // NOI18N
-        jLabel11.setText("  Đổi Mật khẩu");
+        labelDoiMatKhau.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
+        labelDoiMatKhau.setForeground(new java.awt.Color(128, 0, 0));
+        labelDoiMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/padlock-48.png"))); // NOI18N
+        labelDoiMatKhau.setText("  Đổi Mật khẩu");
+        labelDoiMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelDoiMatKhauMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelDoiMatKhauLayout = new javax.swing.GroupLayout(panelDoiMatKhau);
+        panelDoiMatKhau.setLayout(panelDoiMatKhauLayout);
+        panelDoiMatKhauLayout.setHorizontalGroup(
+            panelDoiMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDoiMatKhauLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel11)
+                .addComponent(labelDoiMatKhau)
                 .addGap(35, 35, 35))
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+        panelDoiMatKhauLayout.setVerticalGroup(
+            panelDoiMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDoiMatKhauLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11)
+                .addComponent(labelDoiMatKhau)
                 .addGap(35, 35, 35))
         );
 
-        jPanel13.setBackground(new java.awt.Color(246, 225, 225));
-        jPanel13.setPreferredSize(new java.awt.Dimension(300, 75));
+        panelDangXuat.setBackground(new java.awt.Color(246, 225, 225));
+        panelDangXuat.setPreferredSize(new java.awt.Dimension(300, 75));
 
-        jLabel12.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/door-5-48.png"))); // NOI18N
-        jLabel12.setText("  Đăng Xuất");
+        labelDangXuat.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
+        labelDangXuat.setForeground(new java.awt.Color(128, 0, 0));
+        labelDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/door-5-48.png"))); // NOI18N
+        labelDangXuat.setText("  Đăng Xuất");
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelDangXuatLayout = new javax.swing.GroupLayout(panelDangXuat);
+        panelDangXuat.setLayout(panelDangXuatLayout);
+        panelDangXuatLayout.setHorizontalGroup(
+            panelDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDangXuatLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel12)
+                .addComponent(labelDangXuat)
                 .addGap(65, 65, 65))
         );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+        panelDangXuatLayout.setVerticalGroup(
+            panelDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDangXuatLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12)
+                .addComponent(labelDangXuat)
                 .addGap(35, 35, 35))
         );
 
         PanelDanhMuc.setBackground(new java.awt.Color(246, 225, 225));
         PanelDanhMuc.setPreferredSize(new java.awt.Dimension(300, 75));
         PanelDanhMuc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelDanhMucMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 PanelDanhMucMouseEntered(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/t-shirt-48.png"))); // NOI18N
-        jLabel5.setText("  Danh Mục");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        labelDanhMuc.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
+        labelDanhMuc.setForeground(new java.awt.Color(128, 0, 0));
+        labelDanhMuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/t-shirt-48.png"))); // NOI18N
+        labelDanhMuc.setText("  Danh Mục");
+        labelDanhMuc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                labelDanhMucMouseClicked(evt);
             }
         });
 
@@ -382,14 +418,14 @@ public class MainForm extends javax.swing.JFrame {
             PanelDanhMucLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDanhMucLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel5)
+                .addComponent(labelDanhMuc)
                 .addGap(50, 50, 50))
         );
         PanelDanhMucLayout.setVerticalGroup(
             PanelDanhMucLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDanhMucLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addComponent(labelDanhMuc)
                 .addGap(35, 35, 35))
         );
 
@@ -397,17 +433,17 @@ public class MainForm extends javax.swing.JFrame {
         MenuPanel.setLayout(MenuPanelLayout);
         MenuPanelLayout.setHorizontalGroup(
             MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(PanelHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelBanHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(MenuPanelLayout.createSequentialGroup()
                 .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(PanelDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -416,23 +452,23 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(MenuPanelLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PanelHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PanelDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -465,34 +501,34 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseEntered
+    private void panelBanHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBanHangMouseEntered
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_jPanel4MouseEntered
+    }//GEN-LAST:event_panelBanHangMouseEntered
 
-    private void PanelHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelHoaDonMouseEntered
+    private void panelHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelHoaDonMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_PanelHoaDonMouseEntered
+    }//GEN-LAST:event_panelHoaDonMouseEntered
 
-    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
+    private void panelSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSanPhamMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel7MouseEntered
+    }//GEN-LAST:event_panelSanPhamMouseEntered
 
-    private void jPanel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseEntered
+    private void panelKhuyenMaiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelKhuyenMaiMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel9MouseEntered
+    }//GEN-LAST:event_panelKhuyenMaiMouseEntered
 
-    private void jPanel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseEntered
+    private void panelThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelThongKeMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel10MouseEntered
+    }//GEN-LAST:event_panelThongKeMouseEntered
 
     private void panelNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelNhanVienMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_panelNhanVienMouseEntered
 
-    private void jPanel12MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseEntered
+    private void panelDoiMatKhauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDoiMatKhauMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel12MouseEntered
+    }//GEN-LAST:event_panelDoiMatKhauMouseEntered
 
     private void PanelDanhMucMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelDanhMucMouseEntered
         // TODO add your handling code here:
@@ -504,29 +540,75 @@ public class MainForm extends javax.swing.JFrame {
         showPanel(new QuanLyNhanVienJPanel());
     }//GEN-LAST:event_panelNhanVienMouseClicked
 
-    private void JlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JlNhanVienMouseClicked
+    private void labelNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelNhanVienMouseClicked
         // TODO add your handling code here:
         showPanel(new QuanLyNhanVienJPanel());
-    }//GEN-LAST:event_JlNhanVienMouseClicked
+    }//GEN-LAST:event_labelNhanVienMouseClicked
 
-    private void PanelHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelHoaDonMouseClicked
+    private void panelHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelHoaDonMouseClicked
         // TODO add your handling code here:
         showPanel(new QuanLyHoaDonJpanel());
-    }//GEN-LAST:event_PanelHoaDonMouseClicked
+    }//GEN-LAST:event_panelHoaDonMouseClicked
 
     private void labelHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelHoaDonMouseClicked
         // TODO add your handling code here:
         showPanel(new QuanLyHoaDonJpanel());
     }//GEN-LAST:event_labelHoaDonMouseClicked
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void labelDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelDanhMucMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel5MouseClicked
+        showPanel(new QuanLyDanhMucJpanel());
+    }//GEN-LAST:event_labelDanhMucMouseClicked
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void labelKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelKhuyenMaiMouseClicked
         // TODO add your handling code here:
         showPanel(new QuanLyKhuyenMaiJpanel());
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }//GEN-LAST:event_labelKhuyenMaiMouseClicked
+
+    private void panelBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBanHangMouseClicked
+        // TODO add your handling code here:
+        showPanel(new QuanLyBanHangJpanel());
+    }//GEN-LAST:event_panelBanHangMouseClicked
+
+    private void labelBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelBanHangMouseClicked
+        // TODO add your handling code here:
+        showPanel(new QuanLyBanHangJpanel());
+    }//GEN-LAST:event_labelBanHangMouseClicked
+
+    private void panelSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSanPhamMouseClicked
+        // TODO add your handling code here:
+        showPanel(new QuanLySanPhamJpanel());
+    }//GEN-LAST:event_panelSanPhamMouseClicked
+
+    private void labelSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSanPhamMouseClicked
+        // TODO add your handling code here:
+        showPanel(new QuanLySanPhamJpanel());
+    }//GEN-LAST:event_labelSanPhamMouseClicked
+
+    private void panelThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelThongKeMouseClicked
+        // TODO add your handling code here:
+        showPanel(new QuanLyThongKeJpanel());
+    }//GEN-LAST:event_panelThongKeMouseClicked
+
+    private void labelThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelThongKeMouseClicked
+        // TODO add your handling code here:
+        showPanel(new QuanLyThongKeJpanel());
+    }//GEN-LAST:event_labelThongKeMouseClicked
+
+    private void labelDoiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelDoiMatKhauMouseClicked
+        // TODO add your handling code here:
+        showPanel(new DoiMatKhauJpanel());
+    }//GEN-LAST:event_labelDoiMatKhauMouseClicked
+
+    private void panelDoiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDoiMatKhauMouseClicked
+        // TODO add your handling code here:
+        showPanel(new DoiMatKhauJpanel());
+    }//GEN-LAST:event_panelDoiMatKhauMouseClicked
+
+    private void PanelDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelDanhMucMouseClicked
+        // TODO add your handling code here:
+        showPanel(new QuanLyDanhMucJpanel());
+    }//GEN-LAST:event_PanelDanhMucMouseClicked
 
     /**
      * @param args the command line arguments
@@ -565,28 +647,28 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel JlNhanVien;
     private javax.swing.JPanel MenuPanel;
     private javax.swing.JPanel PanelDanhMuc;
-    private javax.swing.JPanel PanelHoaDon;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel labelBanHang;
+    private javax.swing.JLabel labelDangXuat;
+    private javax.swing.JLabel labelDanhMuc;
+    private javax.swing.JLabel labelDoiMatKhau;
     private javax.swing.JLabel labelHoaDon;
+    private javax.swing.JLabel labelKhuyenMai;
+    private javax.swing.JLabel labelNhanVien;
+    private javax.swing.JLabel labelSanPham;
+    private javax.swing.JLabel labelThongKe;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel panelBanHang;
+    private javax.swing.JPanel panelDangXuat;
+    private javax.swing.JPanel panelDoiMatKhau;
+    private javax.swing.JPanel panelHoaDon;
+    private javax.swing.JPanel panelKhuyenMai;
     private javax.swing.JPanel panelNhanVien;
+    private javax.swing.JPanel panelSanPham;
+    private javax.swing.JPanel panelThongKe;
     // End of variables declaration//GEN-END:variables
 }

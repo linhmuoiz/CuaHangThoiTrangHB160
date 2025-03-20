@@ -248,6 +248,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jTextField12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jTextField12.setForeground(new java.awt.Color(128, 0, 0));
         jTextField12.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(128, 0, 0)));
+        jTextField12.setCaretColor(new java.awt.Color(255, 255, 255));
         jTextField12.setMinimumSize(new java.awt.Dimension(300, 30));
         jTextField12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -691,7 +692,6 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jLabel19.setForeground(new java.awt.Color(128, 0, 0));
         jLabel19.setText("Mã Sản Phẩm: ");
 
-        jTextField15.setEditable(false);
         jTextField15.setBackground(new java.awt.Color(246, 225, 225));
         jTextField15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jTextField15.setForeground(new java.awt.Color(128, 0, 0));

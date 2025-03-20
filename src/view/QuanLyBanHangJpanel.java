@@ -83,7 +83,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         rSTableMetro2 = new rojerusan.RSTableMetro();
         jButton15 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(246, 225, 225));
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1500, 1000));
         setMinimumSize(new java.awt.Dimension(1500, 1000));
         setPreferredSize(new java.awt.Dimension(1500, 1000));

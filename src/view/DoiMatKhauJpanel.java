@@ -36,7 +36,7 @@ public class DoiMatKhauJpanel extends javax.swing.JPanel {
         jTextField7 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(246, 225, 225));
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1500, 1000));
         setMinimumSize(new java.awt.Dimension(1500, 1000));
         setPreferredSize(new java.awt.Dimension(1500, 1000));
@@ -82,7 +82,7 @@ public class DoiMatKhauJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(246, 225, 225));
+        jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jButton6.setForeground(new java.awt.Color(128, 0, 0));
         jButton6.setText("Đổi Mật Khẩu");

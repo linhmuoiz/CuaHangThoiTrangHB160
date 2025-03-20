@@ -47,7 +47,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         rSTableMetro1 = new rojerusan.RSTableMetro();
         jLabel2 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(246, 225, 225));
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1500, 1000));
         setMinimumSize(new java.awt.Dimension(1500, 1000));
         setName(""); // NOI18N
@@ -120,7 +120,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(128, 0, 0));
         jLabel17.setText("Đến:");
 
-        jButton6.setBackground(new java.awt.Color(246, 225, 225));
+        jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jButton6.setForeground(new java.awt.Color(128, 0, 0));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filled-filter-32.png"))); // NOI18N
@@ -132,7 +132,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(246, 225, 225));
+        jButton7.setBackground(new java.awt.Color(255, 255, 255));
         jButton7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jButton7.setForeground(new java.awt.Color(128, 0, 0));
         jButton7.setText("Cài Lại");
@@ -143,7 +143,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(246, 225, 225));
+        jButton8.setBackground(new java.awt.Color(255, 255, 255));
         jButton8.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jButton8.setForeground(new java.awt.Color(128, 0, 0));
         jButton8.setText("Xuất");

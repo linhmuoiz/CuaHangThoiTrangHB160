@@ -75,7 +75,7 @@ public class DangNhapJdialog extends javax.swing.JDialog {
         jPasswordField1.setForeground(new java.awt.Color(128, 0, 0));
         jPasswordField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(128, 0, 0)));
 
-        jButton6.setBackground(new java.awt.Color(246, 225, 225));
+        jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jButton6.setForeground(new java.awt.Color(128, 0, 0));
         jButton6.setText("Đăng Nhập");
@@ -86,7 +86,7 @@ public class DangNhapJdialog extends javax.swing.JDialog {
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(246, 225, 225));
+        jButton7.setBackground(new java.awt.Color(255, 255, 255));
         jButton7.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jButton7.setForeground(new java.awt.Color(128, 0, 0));
         jButton7.setText("Thoát");

@@ -113,7 +113,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(128, 0, 0));
         jLabel2.setText("Hoá Đơn Chờ");
 
-        jButton8.setBackground(new java.awt.Color(246, 225, 225));
+        jButton8.setBackground(new java.awt.Color(255, 255, 255));
         jButton8.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jButton8.setForeground(new java.awt.Color(128, 0, 0));
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add-48.png"))); // NOI18N
@@ -201,7 +201,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -397,7 +397,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -446,7 +446,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 .addGap(34, 34, 34))
         );
 
-        jButton6.setBackground(new java.awt.Color(246, 225, 225));
+        jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jButton6.setForeground(new java.awt.Color(128, 0, 0));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete-48.png"))); // NOI18N
@@ -496,7 +496,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton11.setBackground(new java.awt.Color(246, 225, 225));
+        jButton11.setBackground(new java.awt.Color(255, 255, 255));
         jButton11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton11.setForeground(new java.awt.Color(128, 0, 0));
         jButton11.setText("Thêm");
@@ -543,10 +543,10 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jButton7.setBackground(new java.awt.Color(246, 225, 225));
+        jButton7.setBackground(new java.awt.Color(255, 255, 255));
         jButton7.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jButton7.setForeground(new java.awt.Color(128, 0, 0));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/banknotes-48.png"))); // NOI18N
@@ -609,14 +609,14 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel16)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel16)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         jPanel12.setBackground(new java.awt.Color(246, 225, 225));
@@ -704,7 +704,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton9.setBackground(new java.awt.Color(246, 225, 225));
+        jButton9.setBackground(new java.awt.Color(255, 255, 255));
         jButton9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton9.setForeground(new java.awt.Color(128, 0, 0));
         jButton9.setText("Thêm");
@@ -715,7 +715,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton10.setBackground(new java.awt.Color(246, 225, 225));
+        jButton10.setBackground(new java.awt.Color(255, 255, 255));
         jButton10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton10.setForeground(new java.awt.Color(128, 0, 0));
         jButton10.setText("Làm Mới");
@@ -802,7 +802,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                             .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -825,7 +825,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE)
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -835,9 +835,9 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
                 .addGap(29, 29, 29))
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 1011, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

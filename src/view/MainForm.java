@@ -5,6 +5,7 @@
 package view;
 
 import javax.swing.JPanel;
+import utils.XImage;
 
 /**
  *
@@ -18,6 +19,8 @@ public class MainForm extends javax.swing.JFrame {
     public MainForm() {
         initComponents();
         showPanel(new QuanLyBanHangJpanel());
+        init();
+        
     }
 
     private void showPanel(JPanel panel) {
@@ -60,6 +63,7 @@ public class MainForm extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cửa Hàng Thời Trang HB160");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1800, 1000));
         setSize(new java.awt.Dimension(0, 0));
@@ -644,6 +648,12 @@ public class MainForm extends javax.swing.JFrame {
 
             }
         });
+    }
+    
+    private void init(){
+        this.setIconImage(XImage.getAppIcon()); //set icon
+        this.setLocationRelativeTo(null);
+        new DangNhapJdialog(this, true).setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

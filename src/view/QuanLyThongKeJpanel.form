@@ -54,7 +54,7 @@
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="rSComboMetro4" min="-2" pref="321" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="321" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="279" max="-2" attributes="0"/>
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -359,7 +359,13 @@
           <Color blue="0" green="0" red="80" type="rgb"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="5">
+            <StringItem index="0" value="T&#x1ea5;t C&#x1ea3;"/>
+            <StringItem index="1" value="Ng&#xe0;y N&#xe0;y"/>
+            <StringItem index="2" value="Th&#xe1;ng N&#xe0;y"/>
+            <StringItem index="3" value="N&#x103;m N&#xe0;y"/>
+            <StringItem index="4" value=" "/>
+          </StringArray>
         </Property>
         <Property name="colorArrow" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="80" type="rgb"/>

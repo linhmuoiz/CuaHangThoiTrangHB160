@@ -129,7 +129,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jPanel7" min="-2" pref="350" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -364,7 +364,13 @@
               <Color blue="0" green="0" red="80" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="5">
+                <StringItem index="0" value="&#xd0;&#x1ecf;"/>
+                <StringItem index="1" value="Xanh"/>
+                <StringItem index="2" value="V&#xe0;ng"/>
+                <StringItem index="3" value="&#xd0;en"/>
+                <StringItem index="4" value="Tr&#x1eaf;ng"/>
+              </StringArray>
             </Property>
             <Property name="colorArrow" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="80" type="rgb"/>
@@ -403,7 +409,10 @@
               <Color blue="0" green="0" red="80" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="2">
+                <StringItem index="0" value="&#x110;ang Ho&#x1ea1;t &#x110;&#xf4;ng"/>
+                <StringItem index="1" value="Kh&#xf4;ng Ho&#x1ea1;t &#x110;&#x1ed9;ng"/>
+              </StringArray>
             </Property>
             <Property name="colorArrow" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="80" type="rgb"/>
@@ -442,7 +451,13 @@
               <Color blue="0" green="0" red="80" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="5">
+                <StringItem index="0" value="S"/>
+                <StringItem index="1" value="M"/>
+                <StringItem index="2" value="L"/>
+                <StringItem index="3" value="XL"/>
+                <StringItem index="4" value="XXL"/>
+              </StringArray>
             </Property>
             <Property name="colorArrow" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="80" type="rgb"/>
@@ -646,10 +661,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButton9" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="28" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="395" max="-2" attributes="0"/>

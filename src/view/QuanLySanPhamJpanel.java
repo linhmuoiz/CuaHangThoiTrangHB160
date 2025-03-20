@@ -132,6 +132,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
         rSComboMetro3.setBackground(new java.awt.Color(246, 225, 225));
         rSComboMetro3.setForeground(new java.awt.Color(128, 0, 0));
+        rSComboMetro3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ðỏ", "Xanh", "Vàng", "Ðen", "Trắng" }));
         rSComboMetro3.setColorArrow(new java.awt.Color(128, 0, 0));
         rSComboMetro3.setColorBorde(new java.awt.Color(128, 0, 0));
         rSComboMetro3.setColorFondo(new java.awt.Color(246, 225, 225));
@@ -148,6 +149,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
         rSComboMetro4.setBackground(new java.awt.Color(246, 225, 225));
         rSComboMetro4.setForeground(new java.awt.Color(128, 0, 0));
+        rSComboMetro4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang Hoạt Đông", "Không Hoạt Động" }));
         rSComboMetro4.setColorArrow(new java.awt.Color(128, 0, 0));
         rSComboMetro4.setColorBorde(new java.awt.Color(128, 0, 0));
         rSComboMetro4.setColorFondo(new java.awt.Color(246, 225, 225));
@@ -164,6 +166,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
         rSComboMetro5.setBackground(new java.awt.Color(246, 225, 225));
         rSComboMetro5.setForeground(new java.awt.Color(128, 0, 0));
+        rSComboMetro5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "S", "M", "L", "XL", "XXL" }));
         rSComboMetro5.setColorArrow(new java.awt.Color(128, 0, 0));
         rSComboMetro5.setColorBorde(new java.awt.Color(128, 0, 0));
         rSComboMetro5.setColorFondo(new java.awt.Color(246, 225, 225));
@@ -274,7 +277,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 4, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -388,10 +391,11 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel23)
+                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
         );

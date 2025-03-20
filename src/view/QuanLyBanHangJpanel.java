@@ -347,6 +347,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
 
         rSComboMetro4.setBackground(new java.awt.Color(246, 225, 225));
         rSComboMetro4.setForeground(new java.awt.Color(128, 0, 0));
+        rSComboMetro4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TIền Mặt", "Chuyển Khoản" }));
         rSComboMetro4.setColorArrow(new java.awt.Color(128, 0, 0));
         rSComboMetro4.setColorBorde(new java.awt.Color(128, 0, 0));
         rSComboMetro4.setColorFondo(new java.awt.Color(246, 225, 225));

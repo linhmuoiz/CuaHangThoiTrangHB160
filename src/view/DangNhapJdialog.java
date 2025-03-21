@@ -40,7 +40,7 @@ public class DangNhapJdialog extends javax.swing.JDialog {
         txtSdt = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
-        jButton6 = new javax.swing.JButton();
+        btnDangNhap = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -82,13 +82,13 @@ public class DangNhapJdialog extends javax.swing.JDialog {
         txtPass.setForeground(new java.awt.Color(128, 0, 0));
         txtPass.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(128, 0, 0)));
 
-        jButton6.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(128, 0, 0));
-        jButton6.setText("Đăng Nhập");
-        jButton6.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnDangNhap.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        btnDangNhap.setForeground(new java.awt.Color(128, 0, 0));
+        btnDangNhap.setText("Đăng Nhập");
+        btnDangNhap.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnDangNhapActionPerformed(evt);
             }
         });
 
@@ -126,7 +126,7 @@ public class DangNhapJdialog extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -144,7 +144,7 @@ public class DangNhapJdialog extends javax.swing.JDialog {
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
+                    .addComponent(btnDangNhap)
                     .addComponent(btnThoat))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -195,17 +195,19 @@ public class DangNhapJdialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSdtActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+
         boolean legitValid = this.validField();
         if (legitValid == true){
-            //Do something cool =))))
             NhanVienDAO nvDAO = new NhanVienDAO();
             boolean isLogged;
             isLogged = nvDAO.checkLogin(sdt, pass);
             if (isLogged == true){
-                System.out.println("Logged in");
+//                System.out.println("Logged in");
                 this.dispose();
+                MainForm main = new MainForm();
+                main.setLocationRelativeTo(null); // Căn giữa
+                main.setVisible(true); // Hiển thị giao diện chính
             }
             else{
                 JOptionPane.showMessageDialog(rootPane, "Tài khoản hoặc mật khẩu sai");
@@ -214,7 +216,7 @@ public class DangNhapJdialog extends javax.swing.JDialog {
         else{
             JOptionPane.showMessageDialog(rootPane, "Vui lòng không để trống các ô đầu vào");
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         System.exit(0);
@@ -269,8 +271,8 @@ public class DangNhapJdialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDangNhap;
     private javax.swing.JButton btnThoat;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

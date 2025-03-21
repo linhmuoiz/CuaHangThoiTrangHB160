@@ -17,9 +17,9 @@ public class MainForm extends javax.swing.JFrame {
      * Creates new form MainForm
      */
     public MainForm() {
+        init();
         initComponents();
         showPanel(new QuanLyBanHangJpanel());
-        init();
         
     }
 

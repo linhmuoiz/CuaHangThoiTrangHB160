@@ -205,9 +205,6 @@ public class DangNhapJdialog extends javax.swing.JDialog {
             if (isLogged == true){
 //                System.out.println("Logged in");
                 this.dispose();
-                MainForm main = new MainForm();
-                main.setLocationRelativeTo(null); // Căn giữa
-                main.setVisible(true); // Hiển thị giao diện chính
             }
             else{
                 JOptionPane.showMessageDialog(rootPane, "Tài khoản hoặc mật khẩu sai");

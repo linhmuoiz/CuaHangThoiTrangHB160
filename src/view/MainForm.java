@@ -503,6 +503,7 @@ public class MainForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelBanHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBanHangMouseEntered
@@ -652,7 +653,6 @@ public class MainForm extends javax.swing.JFrame {
     
     private void init(){
         this.setIconImage(XImage.getAppIcon()); //set icon
-        this.setLocationRelativeTo(null);
         new DangNhapJdialog(this, true).setVisible(true);
     }
 

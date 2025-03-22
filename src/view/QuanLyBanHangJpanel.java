@@ -967,4 +967,5 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     private rojerusan.RSTableMetro rSTableMetro3;
     private rojerusan.RSTableMetro rSTableMetro4;
     // End of variables declaration//GEN-END:variables
+
 }

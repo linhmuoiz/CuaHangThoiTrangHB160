@@ -41,7 +41,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             sanPham.getMaMS(),
             sanPham.getMaKT()
         };
-        model.addRow(rowData);
+        model.addRow(rowData) ;
     }
 }
     /**

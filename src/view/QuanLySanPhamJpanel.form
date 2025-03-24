@@ -30,17 +30,16 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="1018" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="862" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="103" alignment="1" groupAlignment="1" attributes="0">
                       <Component id="jPanel15" alignment="0" max="32767" attributes="0"/>
                       <Component id="jPanel6" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="862" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
@@ -129,7 +128,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jPanel7" min="-2" pref="350" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -375,13 +374,7 @@
               <Color blue="0" green="0" red="80" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="&#xd0;&#x1ecf;"/>
-                <StringItem index="1" value="Xanh"/>
-                <StringItem index="2" value="V&#xe0;ng"/>
-                <StringItem index="3" value="&#xd0;en"/>
-                <StringItem index="4" value="Tr&#x1eaf;ng"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
             <Property name="colorArrow" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="80" type="rgb"/>
@@ -462,13 +455,7 @@
               <Color blue="0" green="0" red="80" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="S"/>
-                <StringItem index="1" value="M"/>
-                <StringItem index="2" value="L"/>
-                <StringItem index="3" value="XL"/>
-                <StringItem index="4" value="XXL"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
             <Property name="colorArrow" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="80" type="rgb"/>
@@ -693,7 +680,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="rojerusan.RSTableMetro" name="rSTableMetro1">
+            <Component class="rojerusan.RSTableMetro" name="tblDanhSach">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e1" green="e1" red="f6" type="rgb"/>

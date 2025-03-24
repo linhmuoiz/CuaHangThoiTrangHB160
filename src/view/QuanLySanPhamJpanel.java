@@ -4,11 +4,6 @@
  */
 package view;
 
-import dao.SanPhamDAO;
-import enity.SanPhamDanhMucMauSacKichThuocDTO;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author admim
@@ -20,30 +15,8 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
      */
     public QuanLySanPhamJpanel() {
         initComponents();
-        FillTable();
     }
-    private void FillTable() {
-    SanPhamDAO sanPhamDAO = new SanPhamDAO();
-    List<SanPhamDanhMucMauSacKichThuocDTO> sanPhamLst = sanPhamDAO.readSanPham();
-    DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
 
-    model.setRowCount(0); 
-    for (SanPhamDanhMucMauSacKichThuocDTO sanPham : sanPhamLst) {
-        System.out.println("Adding product: " + sanPham.getTenSp()); 
-
-        Object[] rowData = {
-            sanPham.getID(),
-            sanPham.getTenSp(),
-            sanPham.getGia(),
-            sanPham.getSoLuong(),
-            sanPham.getTrangThai(),
-            sanPham.getMaDM(),
-            sanPham.getMaMS(),
-            sanPham.getMaKT()
-        };
-        model.addRow(rowData);
-    }
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,7 +51,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblDanhSach = new rojerusan.RSTableMetro();
+        rSTableMetro1 = new rojerusan.RSTableMetro();
         jLabel23 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
@@ -305,7 +278,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 4, Short.MAX_VALUE))
+                        .addGap(0, 10, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -365,9 +338,9 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         jPanel15.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));
         jPanel15.setPreferredSize(new java.awt.Dimension(1300, 400));
 
-        tblDanhSach.setBackground(new java.awt.Color(246, 225, 225));
-        tblDanhSach.setForeground(new java.awt.Color(255, 255, 255));
-        tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
+        rSTableMetro1.setBackground(new java.awt.Color(246, 225, 225));
+        rSTableMetro1.setForeground(new java.awt.Color(255, 255, 255));
+        rSTableMetro1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -375,17 +348,17 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                 "Mã Sản Phẩm", "Tên Sản Phẩm", "Đơn Giá", "Số Lượng", "Trạng Thái", "Danh Mục", "Màu Sắc", "Kích THước"
             }
         ));
-        tblDanhSach.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
-        tblDanhSach.setColorBordeFilas(new java.awt.Color(128, 0, 0));
-        tblDanhSach.setColorBordeHead(new java.awt.Color(246, 225, 225));
-        tblDanhSach.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
-        tblDanhSach.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
-        tblDanhSach.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
-        tblDanhSach.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
-        tblDanhSach.setColorForegroundHead(new java.awt.Color(246, 225, 225));
-        tblDanhSach.setColorSelBackgound(new java.awt.Color(128, 0, 0));
-        tblDanhSach.setColorSelForeground(new java.awt.Color(246, 225, 225));
-        jScrollPane1.setViewportView(tblDanhSach);
+        rSTableMetro1.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
+        rSTableMetro1.setColorBordeFilas(new java.awt.Color(128, 0, 0));
+        rSTableMetro1.setColorBordeHead(new java.awt.Color(246, 225, 225));
+        rSTableMetro1.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
+        rSTableMetro1.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
+        rSTableMetro1.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
+        rSTableMetro1.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
+        rSTableMetro1.setColorForegroundHead(new java.awt.Color(246, 225, 225));
+        rSTableMetro1.setColorSelBackgound(new java.awt.Color(128, 0, 0));
+        rSTableMetro1.setColorSelForeground(new java.awt.Color(246, 225, 225));
+        jScrollPane1.setViewportView(rSTableMetro1);
 
         jLabel23.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(128, 0, 0));
@@ -444,14 +417,15 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addGap(1018, 1018, 1018))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 862, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jPanel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel22)
-                            .addComponent(jLabel2))
-                        .addGap(862, 862, 862)))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(112, 112, 112))
         );
         layout.setVerticalGroup(
@@ -547,6 +521,6 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
     private rojerusan.RSComboMetro rSComboMetro3;
     private rojerusan.RSComboMetro rSComboMetro4;
     private rojerusan.RSComboMetro rSComboMetro5;
-    private rojerusan.RSTableMetro tblDanhSach;
+    private rojerusan.RSTableMetro rSTableMetro1;
     // End of variables declaration//GEN-END:variables
 }

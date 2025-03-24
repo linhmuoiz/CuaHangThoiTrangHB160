@@ -36,7 +36,7 @@ public class SanPhamDAO {
                          "JOIN KichThuoc AS KT ON SP.MaKT = KT.MaKT " +
                          "ORDER BY SP.ID;";
 
-            System.out.println("Executing SQL Query: " + sql); // Gỡ lỗi: In câu truy vấn
+            System.out.println("Executing SQL Query: " + sql); 
 
             PreparedStatement ppStm = conn.prepareStatement(sql);
             ResultSet rs = ppStm.executeQuery();
@@ -53,16 +53,16 @@ public class SanPhamDAO {
 
                 SanPhamDanhMucMauSacKichThuocDTO sanPhamDTO = new SanPhamDanhMucMauSacKichThuocDTO(maSP, TenSP, Gia, SoLuong, TrangThai, MaDM, MaMS, MaKT);
                 sanPhamLst.add(sanPhamDTO);
-                System.out.println("Added Product: " + sanPhamDTO.getTenSp()); // Gỡ lỗi: In tên sản phẩm đã thêm
+                System.out.println("Added Product: " + sanPhamDTO.getTenSp()); 
             }
 
-            System.out.println("Total Products Retrieved: " + sanPhamLst.size()); // Gỡ lỗi: In tổng số sản phẩm
+            System.out.println("Total Products Retrieved: " + sanPhamLst.size()); 
             return sanPhamLst;
 
         } catch (Exception e) {
             System.err.println("Error reading products from the database:");
-            e.printStackTrace(); // In toàn bộ dấu vết ngăn xếp lỗi
-            return sanPhamLst; // Trả về danh sách trống hoặc xử lý lỗi thích hợp
+            e.printStackTrace();
+            return sanPhamLst;
         }
     }
 }

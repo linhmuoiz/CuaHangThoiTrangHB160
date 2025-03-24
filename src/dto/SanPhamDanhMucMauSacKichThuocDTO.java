@@ -18,11 +18,12 @@ public class SanPhamDanhMucMauSacKichThuocDTO {
     String TenDM;
     String TenMS;
     String TenKT;
+    String HinhAnh;
 
     public SanPhamDanhMucMauSacKichThuocDTO() {
     }
 
-    public SanPhamDanhMucMauSacKichThuocDTO(int ID, String TenSp, double Gia, int SoLuong, String TrangThai, String TenDM, String TenMS, String TenKT) {
+    public SanPhamDanhMucMauSacKichThuocDTO(int ID, String TenSp, double Gia, int SoLuong, String TrangThai, String TenDM, String TenMS, String TenKT, String HinhAnh) {
         this.ID = ID;
         this.TenSp = TenSp;
         this.Gia = Gia;
@@ -31,7 +32,10 @@ public class SanPhamDanhMucMauSacKichThuocDTO {
         this.TenDM = TenDM;
         this.TenMS = TenMS;
         this.TenKT = TenKT;
+        this.HinhAnh = HinhAnh;
     }
+
+    
 
     
 
@@ -67,6 +71,10 @@ public class SanPhamDanhMucMauSacKichThuocDTO {
         return TenKT;
     }
 
+    public String getHinhAnh() {
+        return HinhAnh;
+    }
+
     
 
     public void setID(int ID) {
@@ -99,6 +107,10 @@ public class SanPhamDanhMucMauSacKichThuocDTO {
 
     public void setTenKT(String TenKT) {
         this.TenKT = TenKT;
+    }
+
+    public void setHinhAnh(String HinhAnh) {
+        this.HinhAnh = HinhAnh;
     }
 
     

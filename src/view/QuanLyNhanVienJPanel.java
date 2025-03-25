@@ -4,6 +4,11 @@
  */
 package view;
 
+import dao.NhanVienDAO;
+import enity.NhanVien;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -16,8 +21,25 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
      */
     public QuanLyNhanVienJPanel() {
         initComponents();
+        readNhanVien();
     }
-    
+    private void readNhanVien() {
+        NhanVienDAO nhanVienDAO = new NhanVienDAO();
+        List<NhanVien> nhanVienLst = nhanVienDAO.readNhanVien();
+        
+        DefaultTableModel tableNhanVien = (DefaultTableModel) this.rSTableMetro1.getModel();
+        tableNhanVien.setRowCount(0);
+        
+        for (NhanVien nhanVien : nhanVienLst) {
+            tableNhanVien.addRow(new Object[] {
+                nhanVien.getId(),
+                nhanVien.getTenNV(),
+                nhanVien.getGioiTinh(),
+                nhanVien.getSDT(),
+                nhanVien.getDiaChi()
+            });
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

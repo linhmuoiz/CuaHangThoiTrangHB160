@@ -27,7 +27,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         NhanVienDAO nhanVienDAO = new NhanVienDAO();
         List<NhanVien> nhanVienLst = nhanVienDAO.readNhanVien();
         
-        DefaultTableModel tableNhanVien = (DefaultTableModel) this.rSTableMetro1.getModel();
+        DefaultTableModel tableNhanVien = (DefaultTableModel) this.tblNhanVien.getModel();
         tableNhanVien.setRowCount(0);
         
         for (NhanVien nhanVien : nhanVienLst) {
@@ -79,7 +79,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        rSTableMetro1 = new rojerusan.RSTableMetro();
+        tblNhanVien = new rojerusan.RSTableMetro();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jTextField5 = new javax.swing.JTextField();
@@ -410,9 +410,9 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        rSTableMetro1.setBackground(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setForeground(new java.awt.Color(255, 255, 255));
-        rSTableMetro1.setModel(new javax.swing.table.DefaultTableModel(
+        tblNhanVien.setBackground(new java.awt.Color(246, 225, 225));
+        tblNhanVien.setForeground(new java.awt.Color(255, 255, 255));
+        tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -420,15 +420,15 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 "Mã Nhân Viên", "Tên Nhân Viên", "Giới Tính", "Số Điện Thoại", "Địa chỉ"
             }
         ));
-        rSTableMetro1.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorBordeFilas(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorBordeHead(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorForegroundHead(new java.awt.Color(246, 225, 225));
-        jScrollPane1.setViewportView(rSTableMetro1);
+        tblNhanVien.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
+        tblNhanVien.setColorBordeFilas(new java.awt.Color(128, 0, 0));
+        tblNhanVien.setColorBordeHead(new java.awt.Color(246, 225, 225));
+        tblNhanVien.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
+        tblNhanVien.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
+        tblNhanVien.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
+        tblNhanVien.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
+        tblNhanVien.setColorForegroundHead(new java.awt.Color(246, 225, 225));
+        jScrollPane1.setViewportView(tblNhanVien);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -829,7 +829,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
-    private rojerusan.RSTableMetro rSTableMetro1;
     private rojerusan.RSTableMetroBeanInfo rSTableMetroBeanInfo1;
+    private rojerusan.RSTableMetro tblNhanVien;
     // End of variables declaration//GEN-END:variables
 }

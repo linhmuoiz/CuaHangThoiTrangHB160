@@ -4,8 +4,11 @@
  */
 package dao;
 
+import enity.NhanVien;
 import utils.KetNoiDB;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Thuy SCTV
@@ -27,6 +30,31 @@ public class NhanVienDAO {
         catch(Exception e){
             e.printStackTrace();
             return false;
+        }
+    }
+    // HienThiNhanVien
+    public List<NhanVien> readNhanVien() {
+        String sql = "SELECT * FROM NhanVien;";
+        List<NhanVien> nhanVienLst = new ArrayList<NhanVien>();
+        
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String TenNV = rs.getString("TenNV");
+                String SDT = rs.getString("SDT");
+                String GioiTinh = rs.getString("GioiTinh");
+                String DiaChi = rs.getString("DiaChi");
+                
+                NhanVien nhanVien = new NhanVien(ID, TenNV, SDT, GioiTinh, DiaChi);
+                nhanVienLst.add(nhanVien);
+            }
+            return nhanVienLst;
+        }
+        catch (SQLException e) {
+            return nhanVienLst;
         }
     }
 }

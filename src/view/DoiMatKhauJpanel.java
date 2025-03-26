@@ -4,6 +4,9 @@
  */
 package view;
 
+import dao.NhanVienDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author admim
@@ -162,7 +165,28 @@ public class DoiMatKhauJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        String matKhauHienTai = jTextField7.getText();
+        String matKhauMoi = new String(jPasswordField1.getPassword());
+        String xacNhanMatKhau = new String(jPasswordField2.getPassword());
+        
+        if (matKhauHienTai.isEmpty() || matKhauMoi.isEmpty() || xacNhanMatKhau.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu mới và xác nhận không khớp!");
+            return;
+        }
+
+        if (!matKhauMoi.equals(xacNhanMatKhau)) {
+            JOptionPane.showMessageDialog(this, "Không được để trống bất kỳ trường nào!");
+            return;
+        }
+
+        NhanVienDAO nhanVienDAO = new NhanVienDAO();
+        int ketQua = nhanVienDAO.updateMatKhauDN(matKhauHienTai, matKhauMoi);
+        
+        if (ketQua == 1) {
+            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
+        } else {
+            JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng!");
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
 

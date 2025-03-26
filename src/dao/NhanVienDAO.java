@@ -9,6 +9,7 @@ import utils.KetNoiDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import utils.GlobalState;
 /**
  *
  * @author Thuy SCTV
@@ -74,6 +75,23 @@ public class NhanVienDAO {
         }
         catch (SQLException e) {
             e.printStackTrace();
+            return 0;
+        }
+    }
+    public int updateMatKhauDN(String matKhauHienTai, String matKhauMoi) {
+        String sql = "UPDATE NhanVien SET MatKhauDN = ? WHERE SDT = ? AND MatKhauDN = ?;";
+        
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
+            
+            ps.setString(1, matKhauMoi);
+            ps.setString(2, GlobalState.SDT);
+            ps.setString(3, matKhauHienTai);
+            
+            int ketQua = ps.executeUpdate();
+            return ketQua;
+        }
+        catch (SQLException e) {
             return 0;
         }
     }

@@ -62,4 +62,50 @@ public class DanhMucDAO {
             return DanhMucLst;
         }
     }
+    
+    public int ThemDanhMuc(DanhMuc danhMuc){
+        try (Connection conn = KetNoiDB.getConnectDB()){
+            String sql = "INSERT INTO DanhMuc (TenDM) VALUES (?)";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            
+            ppStm.setString(1, danhMuc.getTenDM());
+            
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+             System.out.println("Lỗi");
+            return 0;
+        }
+    }
+    
+    public int SuaDanhMuc(DanhMuc danhMuc){
+        try (Connection conn = KetNoiDB.getConnectDB()){
+            String sql = "UPDATE DanhMuc SET TenDM = ? WHERE MaDM = ?";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            
+            ppStm.setString(1, danhMuc.getTenDM());
+            ppStm.setInt(2, danhMuc.getID());
+            
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+             System.out.println("Lỗi");
+            return 0;
+        }
+    }
+    
+    public int XoaDanhMuc(int MaDM){
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "DELETE FROM DanhMuc Where MaDM = ?";
+            PreparedStatement ppStm = conn.prepareCall(sql);
+            
+            ppStm.setInt(1, MaDM);
+            
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+            System.out.println("Lỗi");
+            return 0;
+        }
+    }
 }

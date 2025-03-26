@@ -5,6 +5,7 @@
 package dao;
 
 import dto.SanPhamDanhMucMauSacKichThuocDTO;
+import enity.SanPham;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class SanPhamDAO {
                 String TenKT = rs.getString("KichThuoc");
 //                int MaKT = rs.getInt("MaKT");
 
-                SanPhamDanhMucMauSacKichThuocDTO sanPhamDTO = new SanPhamDanhMucMauSacKichThuocDTO(maSP, TenSP, Gia, SoLuong, TrangThai, TenDM, TenMS, TenKT);
+                SanPhamDanhMucMauSacKichThuocDTO sanPhamDTO = new SanPhamDanhMucMauSacKichThuocDTO(maSP, TenSP, Gia, SoLuong, TrangThai, TenDM, TenMS, TenKT, " ");
                 sanPhamLst.add(sanPhamDTO);
             }
 
@@ -109,7 +110,7 @@ public class SanPhamDAO {
                 String TenKT = rs.getString("KichThuoc");
 //                int MaKT = rs.getInt("MaKT");
 
-                SanPhamDanhMucMauSacKichThuocDTO sanPhamDTO = new SanPhamDanhMucMauSacKichThuocDTO(maSP, TenSP, Gia, SoLuong, TrangThai, TenDM, TenMS, TenKT);
+                SanPhamDanhMucMauSacKichThuocDTO sanPhamDTO = new SanPhamDanhMucMauSacKichThuocDTO(maSP, TenSP, Gia, SoLuong, TrangThai, TenDM, TenMS, TenKT, "");
                 sanPhamLst.add(sanPhamDTO);
             }
 
@@ -119,5 +120,80 @@ public class SanPhamDAO {
             e.printStackTrace();
             return sanPhamLst;
         }
+    }
+    
+    public int ThemSanPham(SanPhamDanhMucMauSacKichThuocDTO sanPham){
+        try (Connection conn = KetNoiDB.getConnectDB()){
+            String sql = "INSERT INTO SanPham (TenSP, Gia, SoLuong, TrangThai, MaDM, MaMS, MaKT, HinhAnh) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            
+            ppStm.setString(1, sanPham.getTenSp());
+            ppStm.setDouble(2, sanPham.getGia());
+            ppStm.setInt(3, sanPham.getSoLuong());
+            ppStm.setString(4, sanPham.getTrangThai());
+            ppStm.setInt(5, getMaDM(sanPham.getTenDM(), conn)); //Thiết lập tham số thứ 5 (MaDM) bằng cách gọi hàm getMaDM với tên danh mục và kết nối CSDL
+            ppStm.setInt(6, getMaMS(sanPham.getTenMS(), conn));
+            ppStm.setInt(7, getMaKT(sanPham.getTenKT(), conn));
+            ppStm.setString(8, sanPham.getHinhAnh());
+            
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+             System.out.println("Lỗi");
+            return 0;
+           
+        }
+    }
+    
+    
+    private int getMaDM (String TenDM, Connection conn) {   // Phương thức lấy MaDM từ TenDM
+        int MaDM = 0; // Khởi tạo MaDM
+        try {
+            String sql = "SELECT MaDM FROM DanhMuc WHERE TenDM = ?"; // Truy vấn SQL SELECT để lấy MaDM
+            PreparedStatement ppStm = conn.prepareStatement(sql);   // Tạo PreparedStatement từ truy vấn SQL
+            ppStm.setString(1, TenDM);// Thiết lập tham số 1 (TenDM)
+            ResultSet rs = ppStm.executeQuery(); // Thực thi truy vấn SELECT và lấy ResultSet
+            if (rs.next()) {  // Kiểm tra xem có kết quả không
+                MaDM = rs.getInt("MaDM");// Lấy giá trị MaDM từ ResultSet
+            }
+        } catch (SQLException e) {
+            System.err.println("Error getting MaDM from database:"); // In ra thông báo lỗi nếu có lỗi SQL
+            e.printStackTrace();  // In rFa stack trace của lỗi
+        }
+        return MaDM;  // Trả về MaDM
+    }
+    
+    private int getMaMS(String TenMS, Connection conn){
+        int MaMS = 0;
+        try {
+            String sql = "SELECT MaMS FROM MauSac WHERE TenMS = ?";
+            PreparedStatement ppStm = conn.prepareStatement(sql); 
+            ppStm.setString(1, TenMS);
+            ResultSet rs = ppStm.executeQuery();
+            if(rs.next()){
+                MaMS = rs.getInt("MaMS");
+            }
+        } catch (Exception e) {
+            System.err.println("Error getting MaDM from database:"); 
+            e.printStackTrace(); 
+        }
+        return MaMS;
+    }
+    
+    private int getMaKT(String TenKT, Connection conn){
+        int MaKT = 0;
+        try {
+            String sql = "SELECT MaKT FROM KichThuoc WHERE TenKT = ?";
+            PreparedStatement ppStm = conn.prepareStatement(sql); 
+            ppStm.setString(1, TenKT);
+            ResultSet rs = ppStm.executeQuery();
+            if(rs.next()){
+                MaKT = rs.getInt("MaKT");
+            }
+        } catch (Exception e) {
+            System.err.println("Error getting MaDM from database:"); 
+            e.printStackTrace(); 
+        }
+        return MaKT;
     }
 }

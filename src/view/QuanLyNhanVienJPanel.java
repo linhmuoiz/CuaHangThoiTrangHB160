@@ -7,6 +7,7 @@ package view;
 import dao.NhanVienDAO;
 import enity.NhanVien;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -751,6 +752,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        this.jButton6ActionPerformed(evt);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -770,7 +772,28 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+       String TenNV = jTextField3.getText();
+        String SDT = jTextField2.getText();
+        String MatKhauDN = new String(jPasswordField1.getPassword());
+        String DiaChi = jTextField4.getText();
+        String GioiTinh = jRadioButton1.isSelected() ? "Nam" : "Nữ";
+        
+        if (TenNV.isBlank() || SDT.isBlank() || MatKhauDN.isBlank() || DiaChi.isBlank() || GioiTinh.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Không được để trống bất kỳ trường nào!");
+            return;
+        }
+        
+        NhanVien nhanVien = new NhanVien(TenNV, SDT, MatKhauDN, DiaChi, GioiTinh);
+        
+        NhanVienDAO nhanVienDAO = new NhanVienDAO();
+        int ketQua = nhanVienDAO.createNhanVien(nhanVien);
+        
+        if (ketQua == 1) {
+            JOptionPane.showMessageDialog(this, "Thanh cong");
+            readNhanVien();
+        } else {
+            JOptionPane.showMessageDialog(this, "That bai");
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

@@ -57,4 +57,24 @@ public class NhanVienDAO {
             return nhanVienLst;
         }
     }
+    public int createNhanVien(NhanVien nhanVien) {
+        String sql = "INSERT INTO NhanVien VALUES (?, ?, ?, ?, ?);";
+        
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
+            
+            ps.setString(1, nhanVien.getTenNV());
+            ps.setString(2, nhanVien.getSDT());
+            ps.setString(3, nhanVien.getMatKhauDN());
+            ps.setString(4, nhanVien.getDiaChi());
+            ps.setString(5, nhanVien.getGioiTinh());
+            
+            int ketQua = ps.executeUpdate();
+            return ketQua;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

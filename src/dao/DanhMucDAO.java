@@ -40,4 +40,26 @@ public class DanhMucDAO {
             return TenDanhMucLst;
         }
     }
+    
+    public List<DanhMuc> readDanhMuc(){
+        List<DanhMuc> DanhMucLst = new ArrayList<>();
+        try (Connection conn = KetNoiDB.getConnectDB()){
+            String sql = "SELECT * FROM DanhMuc";
+            System.out.println("Executing SQL Query: " + sql);
+            
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            ResultSet rs = ppStm.executeQuery();
+            
+            while(rs.next()){
+                int MaDM = rs.getInt("MaDM");
+                String TenDM = rs.getString("TenDM");
+                
+                DanhMuc danhMuc = new DanhMuc(MaDM, TenDM);
+                DanhMucLst.add(danhMuc);
+            }
+            return DanhMucLst;
+        } catch (Exception e) {
+            return DanhMucLst;
+        }
+    }
 }

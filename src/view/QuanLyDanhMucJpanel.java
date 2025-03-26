@@ -4,6 +4,11 @@
  */
 package view;
 
+import dao.DanhMucDAO;
+import enity.DanhMuc;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author admim
@@ -14,8 +19,25 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
      * Creates new form QuanLyDanhMucJpanel
      */public QuanLyDanhMucJpanel(){
             initComponents();
+            fillTable();
          }
-
+     private void fillTable(){
+         DanhMucDAO danhMucDAO = new DanhMucDAO();
+         List<DanhMuc> danhMucLst = danhMucDAO.readDanhMuc();
+         
+         DefaultTableModel model = (DefaultTableModel) tblDanhMuc.getModel();
+         model.setRowCount(0);
+         
+         for (DanhMuc danhMuc : danhMucLst) {
+             System.out.println("Adding product: " + danhMuc.getTenDM());
+             
+             Object[] rowdata = {
+                 danhMuc.getID(),
+                 danhMuc.getTenDM()
+             };
+             model.addRow(rowdata);
+         }
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,14 +49,14 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
 
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        txtTenDanhMuc = new javax.swing.JTextField();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        rSTableMetro1 = new rojerusan.RSTableMetro();
+        tblDanhMuc = new rojerusan.RSTableMetro();
         jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -50,45 +72,45 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
         jLabel14.setForeground(new java.awt.Color(128, 0, 0));
         jLabel14.setText("Tên Danh Mục:");
 
-        jTextField8.setBackground(new java.awt.Color(246, 225, 225));
-        jTextField8.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jTextField8.setForeground(new java.awt.Color(128, 0, 0));
-        jTextField8.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(128, 0, 0)));
-        jTextField8.setMinimumSize(new java.awt.Dimension(300, 30));
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        txtTenDanhMuc.setBackground(new java.awt.Color(246, 225, 225));
+        txtTenDanhMuc.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        txtTenDanhMuc.setForeground(new java.awt.Color(128, 0, 0));
+        txtTenDanhMuc.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(128, 0, 0)));
+        txtTenDanhMuc.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtTenDanhMuc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                txtTenDanhMucActionPerformed(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
-        jButton6.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(128, 0, 0));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add-user-3-48.png"))); // NOI18N
-        jButton6.setText("Thêm ");
-        jButton6.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setBackground(new java.awt.Color(255, 255, 255));
+        btnThem.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        btnThem.setForeground(new java.awt.Color(128, 0, 0));
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add-user-3-48.png"))); // NOI18N
+        btnThem.setText("Thêm ");
+        btnThem.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(255, 255, 255));
-        jButton8.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(128, 0, 0));
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/available-updates-48.png"))); // NOI18N
-        jButton8.setText("Sửa");
-        jButton8.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
+        btnSua.setBackground(new java.awt.Color(255, 255, 255));
+        btnSua.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        btnSua.setForeground(new java.awt.Color(128, 0, 0));
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/available-updates-48.png"))); // NOI18N
+        btnSua.setText("Sửa");
+        btnSua.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
 
-        jButton7.setBackground(new java.awt.Color(255, 255, 255));
-        jButton7.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(128, 0, 0));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete-48.png"))); // NOI18N
-        jButton7.setText("Xoá");
-        jButton7.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnXoa.setBackground(new java.awt.Color(255, 255, 255));
+        btnXoa.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        btnXoa.setForeground(new java.awt.Color(128, 0, 0));
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete-48.png"))); // NOI18N
+        btnXoa.setText("Xoá");
+        btnXoa.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnXoaActionPerformed(evt);
             }
         });
 
@@ -100,16 +122,16 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(197, 197, 197)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(100, 100, 100)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(102, 102, 102)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtTenDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(264, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -118,12 +140,12 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTenDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton8)
-                    .addComponent(jButton7))
+                    .addComponent(btnThem)
+                    .addComponent(btnSua)
+                    .addComponent(btnXoa))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -135,9 +157,9 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));
         jPanel4.setPreferredSize(new java.awt.Dimension(1300, 400));
 
-        rSTableMetro1.setBackground(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setForeground(new java.awt.Color(255, 255, 255));
-        rSTableMetro1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDanhMuc.setBackground(new java.awt.Color(246, 225, 225));
+        tblDanhMuc.setForeground(new java.awt.Color(255, 255, 255));
+        tblDanhMuc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -145,15 +167,15 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
                 "Mã Danh Mục", "Tên Danh Mục"
             }
         ));
-        rSTableMetro1.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorBordeFilas(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorBordeHead(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorForegroundHead(new java.awt.Color(246, 225, 225));
-        jScrollPane1.setViewportView(rSTableMetro1);
+        tblDanhMuc.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
+        tblDanhMuc.setColorBordeFilas(new java.awt.Color(128, 0, 0));
+        tblDanhMuc.setColorBordeHead(new java.awt.Color(246, 225, 225));
+        tblDanhMuc.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
+        tblDanhMuc.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
+        tblDanhMuc.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
+        tblDanhMuc.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
+        tblDanhMuc.setColorForegroundHead(new java.awt.Color(246, 225, 225));
+        jScrollPane1.setViewportView(tblDanhMuc);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -202,30 +224,30 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void txtTenDanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenDanhMucActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_txtTenDanhMucActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnThemActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnXoaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField8;
-    private rojerusan.RSTableMetro rSTableMetro1;
+    private rojerusan.RSTableMetro tblDanhMuc;
+    private javax.swing.JTextField txtTenDanhMuc;
     // End of variables declaration//GEN-END:variables
 }

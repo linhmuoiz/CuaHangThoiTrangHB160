@@ -23,7 +23,6 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
     public QuanLyHoaDonJpanel() {
         initComponents();
         readHoaDon();
-        readChiTietHD();
     }
     private void readHoaDon() {
         HoaDonDAO hoaDonDAO = new HoaDonDAO();
@@ -46,7 +45,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         }
     }
     
-    private void readChiTietHD() {
+    private void readChiTietHD(int id_HoaDon) {
         ChiTietHDDAO chiTietHDDAO = new ChiTietHDDAO();
         List<ChiTietHDDTO> chiTietHDLst = chiTietHDDAO.readChiTietHD();
         
@@ -62,8 +61,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
                 chiTietHD.getTenKT(),
                 chiTietHD.getSoLuong(),
                 chiTietHD.getGia(),
-                chiTietHD.getGioiGiamGia(),
-                (chiTietHD.getGia() * chiTietHD.getSoLuong() * chiTietHD.getGioiGiamGia()) / 100
+                (chiTietHD.getGia() * chiTietHD.getSoLuong())
             });
         }
     }
@@ -148,7 +146,6 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(128, 0, 0));
         jLabel17.setText("Đến:");
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jButton6.setForeground(new java.awt.Color(128, 0, 0));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filled-filter-32.png"))); // NOI18N
@@ -160,7 +157,6 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(255, 255, 255));
         jButton7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jButton7.setForeground(new java.awt.Color(128, 0, 0));
         jButton7.setText("Cài Lại");
@@ -182,7 +178,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Hoá Đơn", "Tên Khách Hàng", "Số Điênh Thoại", "Hình Thức Thanh Toán", "Tổng Tiền", "Tên Nhân Viên", "Ngày Tạo", "Trạng Thái"
+                "Mã Hoá Đơn", "Tên Khách Hàng", "Số Điện Thoại", "Hình Thức Thanh Toán", "Tổng Tiền", "Tên Nhân Viên", "Ngày Tạo", "Trạng Thái"
             }
         ));
         tblDanhMuc.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
@@ -193,6 +189,11 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         tblDanhMuc.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
         tblDanhMuc.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
         tblDanhMuc.setColorForegroundHead(new java.awt.Color(246, 225, 225));
+        tblDanhMuc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDanhMucMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDanhMuc);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -281,7 +282,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Sản Phẩm", "Tên Sản Phẩm", "Danh Mục", "Màu", "Kích Thước", "Số Lượng", "Giá Bán", "Giảm Giá", "Tổng Tiền"
+                "Mã Sản Phẩm", "Tên Sản Phẩm", "Danh Mục", "Màu", "Kích Thước", "Số Lượng", "Giá Bán", "Tổng Tiền"
             }
         ));
         tblDanhMuc1.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
@@ -325,7 +326,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1304, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1304, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1304, Short.MAX_VALUE))
                         .addGap(109, 109, 109))))
         );
         layout.setVerticalGroup(
@@ -357,7 +358,19 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        jTextField7.setText("");
+        DefaultTableModel Tmodel = (DefaultTableModel) tblDanhMuc1.getModel();
+        Tmodel.setRowCount(0);
+        tblDanhMuc1.setModel(Tmodel);
+        
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void tblDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhMucMouseClicked
+        // TODO add your handling code here:
+        int currentRow = tblDanhMuc.getSelectedRow();
+        int currIdx = (int) tblDanhMuc.getValueAt(currentRow, 0);
+        this.readChiTietHD(currIdx);
+    }//GEN-LAST:event_tblDanhMucMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

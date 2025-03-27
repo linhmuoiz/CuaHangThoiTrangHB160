@@ -163,7 +163,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         cboKichThuoc = new rojerusan.RSComboMetro();
         btnThem = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         lblHinhAnh = new javax.swing.JLabel();
@@ -307,15 +307,15 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(255, 255, 255));
-        jButton8.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(128, 0, 0));
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/available-updates-48.png"))); // NOI18N
-        jButton8.setText("Sửa");
-        jButton8.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnSua.setBackground(new java.awt.Color(255, 255, 255));
+        btnSua.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        btnSua.setForeground(new java.awt.Color(128, 0, 0));
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/available-updates-48.png"))); // NOI18N
+        btnSua.setText("Sửa");
+        btnSua.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnSuaActionPerformed(evt);
             }
         });
 
@@ -381,7 +381,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnThemAnh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
@@ -410,7 +410,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGap(30, 30, 30)
-                                        .addComponent(jButton8))
+                                        .addComponent(btnSua))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -682,24 +682,83 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimKiemActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+        String TenSP = txtTenSanPham.getText();
+        String Gia = txtGia.getText();
+        String SoLuong = txtSoLuong.getText();
+        String TrangThai = (String) cboTrangThai.getSelectedItem();
+        String DanhMuc = (String) cboDanhMuc.getSelectedItem();
+        String MauSac = (String) cboMauSac.getSelectedItem();
+        String KichThuoc = (String) cboKichThuoc.getSelectedItem();
+        
+        int dongDangChon = tblDanhSach.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        int ID = (int) model.getValueAt(dongDangChon, 0);
+        
+        
+        if (TenSP.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên Sản Phẩm Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (Gia.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Giá Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (SoLuong.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Số Lượng Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        double giaDouble = 0;
+        try {
+            giaDouble = Double.parseDouble(Gia);
+            if (giaDouble < 0 || giaDouble == 0) {
+                JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Lại");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Giá phải là một số thực hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int SLint = 0;
+        try {
+            SLint = Integer.parseInt(SoLuong);
+            if (SLint <= 0) {
+                JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên dương lớn hơn 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        SanPhamDanhMucMauSacKichThuocDTO sanPham = new SanPhamDanhMucMauSacKichThuocDTO();
+        sanPham.setID(ID);
+        sanPham.setTenSp(TenSP);
+        sanPham.setGia(giaDouble);
+        sanPham.setSoLuong(SLint);
+        sanPham.setTrangThai(TrangThai);
+        sanPham.setTenDM(DanhMuc);
+        sanPham.setTenMS(MauSac);
+        sanPham.setTenKT(KichThuoc);
+        sanPham.setHinhAnh(imagePath);
+
+        SanPhamDAO sanPhamDAO = new SanPhamDAO();
+        int ketQua = sanPhamDAO.SuaSanPham(sanPham);
+
+        if (ketQua == 1) {
+            JOptionPane.showMessageDialog(this, "Sửa Sản Phẩm Thành Công");
+            XoaNoiDungNhapLieu();
+            FillTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Sửa Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThemAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemAnhActionPerformed
         // TODO add your handling code here:
-//        JFileChooser fileChooser = new JFileChooser();
-//        FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("Image files", "jpg", "jpeg", "png", "gif");
-//        fileChooser.setFileFilter(imageFilter);
-//
-//        int returnVal = fileChooser.showOpenDialog(this);
-//
-//        if (returnVal == JFileChooser.APPROVE_OPTION) {
-//            File selectedFile = fileChooser.getSelectedFile();
-//            imagePath = selectedFile.getAbsolutePath();
-//            displayImage(imagePath);
-//        }
-
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("Image files", "jpg", "jpeg", "png", "gif");
         fileChooser.setFileFilter(imageFilter);
@@ -774,8 +833,6 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         String DanhMuc = model.getValueAt(dongDangChon, 5).toString();
         String MauSac = model.getValueAt(dongDangChon, 6).toString();
         String KichThuoc = model.getValueAt(dongDangChon, 7).toString();
-//        String HinhAnh = model.getValueAt(dongDangChon, 8).toString();
-//        System.out.println("Hình ẢNh" + HinhAnh);
 
         txtTenSanPham.setText(TenSanPham);
         txtGia.setText(String.valueOf(Gia));
@@ -792,6 +849,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThemAnh;
     private javax.swing.JButton btnTimKiem;
@@ -800,7 +858,6 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
     private rojerusan.RSComboMetro cboMauSac;
     private rojerusan.RSComboMetro cboTrangThai;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;

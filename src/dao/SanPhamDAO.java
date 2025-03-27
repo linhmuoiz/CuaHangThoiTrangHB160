@@ -200,6 +200,30 @@ public class SanPhamDAO {
         }
     }
     
+    public int SuaSanPham(SanPhamDanhMucMauSacKichThuocDTO sanPham){
+        try (Connection conn = KetNoiDB.getConnectDB()){
+            String sql = "UPDATE SanPham SET TenSP = ?, Gia = ?, SoLuong = ?, TrangThai = ?, MaDM = ?, MaMS = ?, MaKT = ?, HinhAnh = ? WHERE ID = ?";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            
+            ppStm.setString(1, sanPham.getTenSp());
+            ppStm.setDouble(2, sanPham.getGia());
+            ppStm.setInt(3, sanPham.getSoLuong());
+            ppStm.setString(4, sanPham.getTrangThai());
+            ppStm.setInt(5, getMaDM(sanPham.getTenDM(), conn)); //Thiết lập tham số thứ 5 (MaDM) bằng cách gọi hàm getMaDM với tên danh mục và kết nối CSDL
+            ppStm.setInt(6, getMaMS(sanPham.getTenMS(), conn));
+            ppStm.setInt(7, getMaKT(sanPham.getTenKT(), conn));
+            ppStm.setString(8, sanPham.getHinhAnh());
+            ppStm.setInt(9, sanPham.getID());
+            
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+             System.out.println("Lỗi");
+            return 0;
+           
+        }
+    }
+    
     
     private int getMaDM (String TenDM, Connection conn) {   // Phương thức lấy MaDM từ TenDM
         int MaDM = 0; // Khởi tạo MaDM

@@ -92,7 +92,7 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         jLabel48 = new javax.swing.JLabel();
         cboGoiGiamGia = new rojerusan.RSComboMetro();
         btnThem = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -357,15 +357,15 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton19.setBackground(new java.awt.Color(255, 255, 255));
-        jButton19.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jButton19.setForeground(new java.awt.Color(128, 0, 0));
-        jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete-48.png"))); // NOI18N
-        jButton19.setText("Xoá");
-        jButton19.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
+        btnXoa.setBackground(new java.awt.Color(255, 255, 255));
+        btnXoa.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        btnXoa.setForeground(new java.awt.Color(128, 0, 0));
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete-48.png"))); // NOI18N
+        btnXoa.setText("Xoá");
+        btnXoa.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19jButton10ActionPerformed(evt);
+                btnXoajButton10ActionPerformed(evt);
             }
         });
 
@@ -401,7 +401,7 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
                                     .addGap(18, 18, 18)
                                     .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel7Layout.createSequentialGroup()
                                     .addComponent(jLabel47)
                                     .addGap(38, 38, 38)
@@ -446,7 +446,7 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSua)
                     .addComponent(btnThem)
-                    .addComponent(jButton19))
+                    .addComponent(btnXoa))
                 .addGap(32, 32, 32))
         );
 
@@ -526,9 +526,23 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTimActionPerformed
 
-    private void jButton19jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19jButton10ActionPerformed
+    private void btnXoajButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoajButton10ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton19jButton10ActionPerformed
+        int dongDangChon = tblDanhSach.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        int MaKM = (int) model.getValueAt(dongDangChon, 0);
+        
+        KhuyenMaiDAO khuyenMaiDao = new KhuyenMaiDAO();
+        int ketQua = khuyenMaiDao.XoaKhuyenMai(MaKM);
+        
+        if (ketQua == 1) {
+            JOptionPane.showMessageDialog(this, "Xoá Khuyến Mãi Thành Công");
+            fillTable();
+            XoaNoiDungNhapLieu();
+        } else {
+            JOptionPane.showMessageDialog(this, "Xoá Khuyến Mãi Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnXoajButton10ActionPerformed
 
     private void btnThemjButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemjButton9ActionPerformed
         // TODO add your handling code here:
@@ -703,12 +717,12 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTim;
     private javax.swing.JButton btnTimKiem;
+    private javax.swing.JButton btnXoa;
     private rojerusan.RSComboMetro cboGoiGiamGia;
     private com.toedter.calendar.JDateChooser dcNgayBatDau;
     private com.toedter.calendar.JDateChooser dcNgayBatDauSearch;
     private com.toedter.calendar.JDateChooser dcNgayKetThuc;
     private com.toedter.calendar.JDateChooser dcNgayKetThucSearch;
-    private javax.swing.JButton jButton19;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;

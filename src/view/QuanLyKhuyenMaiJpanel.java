@@ -6,7 +6,10 @@ package view;
 
 import dao.KhuyenMaiDAO;
 import enity.KhuyenMai;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -60,10 +63,10 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         btnTimKiem = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        dcNgayBatDauSearch = new com.toedter.calendar.JDateChooser();
         jLabel19 = new javax.swing.JLabel();
-        jDateChooser8 = new com.toedter.calendar.JDateChooser();
-        jButton16 = new javax.swing.JButton();
+        dcNgayKetThucSearch = new com.toedter.calendar.JDateChooser();
+        btnTim = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblDanhSach = new rojerusan.RSTableMetro();
         jPanel7 = new javax.swing.JPanel();
@@ -71,9 +74,9 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         jLabel43 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         jTextField26 = new javax.swing.JTextField();
-        jDateChooser10 = new com.toedter.calendar.JDateChooser();
+        dcNgayKetThuc = new com.toedter.calendar.JDateChooser();
         jLabel46 = new javax.swing.JLabel();
-        jDateChooser11 = new com.toedter.calendar.JDateChooser();
+        dcNgayBatDau = new com.toedter.calendar.JDateChooser();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
         rSComboMetro6 = new rojerusan.RSComboMetro();
@@ -150,23 +153,25 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         jLabel18.setForeground(new java.awt.Color(128, 0, 0));
         jLabel18.setText("Ngày Bắt Đầu:");
 
-        jDateChooser3.setBackground(new java.awt.Color(246, 225, 225));
+        dcNgayBatDauSearch.setBackground(new java.awt.Color(246, 225, 225));
+        dcNgayBatDauSearch.setDateFormatString("yyyy-MM-dd");
 
         jLabel19.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(128, 0, 0));
         jLabel19.setText("Ngày Kết Thúc: ");
 
-        jDateChooser8.setBackground(new java.awt.Color(246, 225, 225));
+        dcNgayKetThucSearch.setBackground(new java.awt.Color(246, 225, 225));
+        dcNgayKetThucSearch.setDateFormatString("yyyy-MM-dd");
 
-        jButton16.setBackground(new java.awt.Color(255, 255, 255));
-        jButton16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton16.setForeground(new java.awt.Color(128, 0, 0));
-        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search-13-24.png"))); // NOI18N
-        jButton16.setText("Tìm");
-        jButton16.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
+        btnTim.setBackground(new java.awt.Color(255, 255, 255));
+        btnTim.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnTim.setForeground(new java.awt.Color(128, 0, 0));
+        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search-13-24.png"))); // NOI18N
+        btnTim.setText("Tìm");
+        btnTim.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+                btnTimActionPerformed(evt);
             }
         });
 
@@ -177,11 +182,11 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dcNgayBatDauSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dcNgayKetThucSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,13 +200,13 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel18)
                 .addGap(18, 18, 18)
-                .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dcNgayBatDauSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel19)
                 .addGap(25, 25, 25)
-                .addComponent(jDateChooser8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dcNgayKetThucSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton16)
+                .addComponent(btnTim)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -227,7 +232,8 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         tblDanhSach.setColorForegroundHead(new java.awt.Color(246, 225, 225));
         tblDanhSach.setColorSelBackgound(new java.awt.Color(128, 0, 0));
         tblDanhSach.setColorSelForeground(new java.awt.Color(246, 225, 225));
-        tblDanhSach.setFuenteFilas(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        tblDanhSach.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        tblDanhSach.setFuenteFilas(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         tblDanhSach.setFuenteHead(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jScrollPane4.setViewportView(tblDanhSach);
 
@@ -291,14 +297,14 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
             }
         });
 
-        jDateChooser10.setBackground(new java.awt.Color(246, 225, 225));
+        dcNgayKetThuc.setBackground(new java.awt.Color(246, 225, 225));
 
         jLabel46.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel46.setForeground(new java.awt.Color(128, 0, 0));
         jLabel46.setText("Ngày Kết Thúc");
 
-        jDateChooser11.setBackground(new java.awt.Color(246, 225, 225));
-        jDateChooser11.setForeground(new java.awt.Color(128, 0, 0));
+        dcNgayBatDau.setBackground(new java.awt.Color(246, 225, 225));
+        dcNgayBatDau.setForeground(new java.awt.Color(128, 0, 0));
 
         jLabel47.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(128, 0, 0));
@@ -376,13 +382,13 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
                                 .addGroup(jPanel7Layout.createSequentialGroup()
                                     .addComponent(jLabel47)
                                     .addGap(38, 38, 38)
-                                    .addComponent(jDateChooser11, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dcNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(164, 164, 164)
                                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel7Layout.createSequentialGroup()
                                             .addGap(249, 249, 249)
-                                            .addComponent(jDateChooser10, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(dcNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -409,10 +415,10 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel47)
-                    .addComponent(jDateChooser11, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dcNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jDateChooser10, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dcNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton20)
@@ -458,9 +464,44 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimKiemActionPerformed
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton16ActionPerformed
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Định dạng mong muốn
+
+        Date ngayBatDau = dcNgayBatDauSearch.getDate();  // Lấy đối tượng Date
+        Date ngayKetThuc = dcNgayKetThucSearch.getDate(); // Lấy đối tượng Date
+
+        if (ngayBatDau == null || ngayKetThuc == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày bắt đầu và ngày kết thúc.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try { // Thêm khối try-catch xung quanh việc định dạng ngày tháng và truy cập DB
+            String ngayBatDauFormatted = dateFormat.format(ngayBatDau);
+            String ngayKetThucFormatted = dateFormat.format(ngayKetThuc);
+
+            KhuyenMaiDAO khuyenMaiDAO = new KhuyenMaiDAO();
+            List<KhuyenMai> khuyenMaiLst = khuyenMaiDAO.TimKiemSanPhamTheoNgay(ngayBatDauFormatted, ngayKetThucFormatted);
+
+            DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+            model.setRowCount(0);
+
+            for (KhuyenMai khuyenMai : khuyenMaiLst) {
+                Object[] rowdata = {
+                    khuyenMai.getMaKM(),
+                    khuyenMai.getTenKM(),
+                    khuyenMai.getCodeGiamGia(),
+                    khuyenMai.getGoiGiamGia(),
+                    khuyenMai.getNgayBatDau(),
+                    khuyenMai.getNgayKetThuc()
+                };
+                model.addRow(rowdata);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi trong quá trình tìm kiếm: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);  // Hiển thị lỗi cho người dùng
+            e.printStackTrace(); // In lỗi ra console để gỡ lỗi
+        }
+    }//GEN-LAST:event_btnTimActionPerformed
 
     private void jButton19jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19jButton10ActionPerformed
         // TODO add your handling code here:
@@ -506,15 +547,15 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTim;
     private javax.swing.JButton btnTimKiem;
-    private javax.swing.JButton jButton16;
+    private com.toedter.calendar.JDateChooser dcNgayBatDau;
+    private com.toedter.calendar.JDateChooser dcNgayBatDauSearch;
+    private com.toedter.calendar.JDateChooser dcNgayKetThuc;
+    private com.toedter.calendar.JDateChooser dcNgayKetThucSearch;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
-    private com.toedter.calendar.JDateChooser jDateChooser10;
-    private com.toedter.calendar.JDateChooser jDateChooser11;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
-    private com.toedter.calendar.JDateChooser jDateChooser8;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;

@@ -5,7 +5,6 @@
 package dao;
 
 import enity.KhuyenMai;
-import enity.SanPham;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
@@ -77,6 +76,38 @@ public class KhuyenMaiDAO {
             }
             return khuyenMaiLst;
         } catch (SQLException e) { 
+            System.err.println("Lỗi TimKiemKhuyenMai: " + e.getMessage());
+            e.printStackTrace();
+            return khuyenMaiLst;
+        }
+    }
+    
+    public List<KhuyenMai>  TimKiemSanPhamTheoNgay(String ngayBatDau, String ngayKetThuc){
+        List<KhuyenMai> khuyenMaiLst = new ArrayList<>();
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "SELECT * FROM KhuyenMai WHERE NgayBD >= ? AND NgayKT <= ?";
+            
+            System.out.println("Executing SQL Query: " + sql);
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            
+            ppStm.setString(1, ngayBatDau);
+            ppStm.setString(2, ngayKetThuc);
+            
+            ResultSet rs = ppStm.executeQuery();
+            
+            while (rs.next()) {
+                int MaKM = rs.getInt("MaKM");
+                String TenKM = rs.getString("TenKM");
+                String CodeGiamGia = rs.getString("CodeGiamGia");
+                int GoiGiamGia = rs.getInt("GoiGiamGia");
+                String NgayBatDau = rs.getString("NgayBD");
+                String NgayKetThuc = rs.getString("NgayKT");
+
+                KhuyenMai khuyenMai = new KhuyenMai(MaKM, TenKM, CodeGiamGia, GoiGiamGia, NgayBatDau, NgayKetThuc);
+                khuyenMaiLst.add(khuyenMai);
+            }
+            return khuyenMaiLst;
+        } catch (Exception e) {
             System.err.println("Lỗi TimKiemKhuyenMai: " + e.getMessage());
             e.printStackTrace();
             return khuyenMaiLst;

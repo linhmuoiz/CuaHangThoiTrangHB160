@@ -235,11 +235,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jDateChooser3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jDateChooser8" alignment="1" max="32767" attributes="0"/>
+                          <Component id="dcNgayBatDauSearch" alignment="0" max="32767" attributes="0"/>
+                          <Component id="dcNgayKetThucSearch" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jButton16" min="-2" pref="112" max="-2" attributes="0"/>
+                              <Component id="btnTim" min="-2" pref="112" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -259,13 +259,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jDateChooser3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dcNgayBatDauSearch" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="jDateChooser8" min="-2" max="-2" attributes="0"/>
+                      <Component id="dcNgayKetThucSearch" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton16" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnTim" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -283,11 +283,12 @@
                 <Property name="text" type="java.lang.String" value="Ng&#xe0;y B&#x1eaf;t &#x110;&#x1ea7;u:"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser3">
+            <Component class="com.toedter.calendar.JDateChooser" name="dcNgayBatDauSearch">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e1" green="e1" red="f6" type="rgb"/>
                 </Property>
+                <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel19">
@@ -301,14 +302,15 @@
                 <Property name="text" type="java.lang.String" value="Ng&#xe0;y K&#x1ebf;t Th&#xfa;c: "/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser8">
+            <Component class="com.toedter.calendar.JDateChooser" name="dcNgayKetThucSearch">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e1" green="e1" red="f6" type="rgb"/>
                 </Property>
+                <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton16">
+            <Component class="javax.swing.JButton" name="btnTim">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -332,7 +334,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton16ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTimActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -386,8 +388,11 @@
                 <Property name="colorSelForeground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e1" green="e1" red="f6" type="rgb"/>
                 </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="11" style="1"/>
+                </Property>
                 <Property name="fuenteFilas" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0"/>
+                  <Font name="Tahoma" size="11" style="1"/>
                 </Property>
                 <Property name="fuenteHead" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="12" style="0"/>
@@ -440,13 +445,13 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                      <Component id="jDateChooser11" min="-2" pref="299" max="-2" attributes="0"/>
+                                      <Component id="dcNgayBatDau" min="-2" pref="299" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel46" alignment="0" min="-2" pref="219" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="249" pref="249" max="-2" attributes="0"/>
-                                              <Component id="jDateChooser10" min="-2" pref="299" max="-2" attributes="0"/>
+                                              <Component id="dcNgayKetThuc" min="-2" pref="299" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -485,10 +490,10 @@
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
-                      <Component id="jDateChooser11" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="dcNgayBatDau" min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel46" max="32767" attributes="0"/>
-                          <Component id="jDateChooser10" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="dcNgayKetThuc" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="34" max="32767" attributes="0"/>
@@ -577,7 +582,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField26jTextField14ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser10">
+        <Component class="com.toedter.calendar.JDateChooser" name="dcNgayKetThuc">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="e1" red="f6" type="rgb"/>
@@ -595,7 +600,7 @@
             <Property name="text" type="java.lang.String" value="Ng&#xe0;y K&#x1ebf;t Th&#xfa;c"/>
           </Properties>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser11">
+        <Component class="com.toedter.calendar.JDateChooser" name="dcNgayBatDau">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="e1" red="f6" type="rgb"/>

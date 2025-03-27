@@ -28,6 +28,11 @@ public class MainForm extends javax.swing.JFrame {
         mainPanel.add(panel);
         mainPanel.validate();
     }
+    private boolean showPasswordDialog() {
+    DoiMatKhauJdialog passwordDialog = new DoiMatKhauJdialog(this, true);
+    passwordDialog.setVisible(true);
+    return passwordDialog.isAuthenticated(); // Nếu đúng mật khẩu trả về true, nếu sai hoặc huỷ trả về false
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -528,7 +533,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_panelThongKeMouseEntered
 
     private void panelNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelNhanVienMouseEntered
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_panelNhanVienMouseEntered
 
     private void panelDoiMatKhauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDoiMatKhauMouseEntered
@@ -542,12 +547,20 @@ public class MainForm extends javax.swing.JFrame {
 
     private void panelNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelNhanVienMouseClicked
         // TODO add your handling code here:
-        showPanel(new QuanLyNhanVienJPanel());
+        if (showPasswordDialog()) { 
+        showPanel(new QuanLyNhanVienJPanel()); 
+    } else {
+        showPanel(new QuanLyBanHangJpanel());
+    }
     }//GEN-LAST:event_panelNhanVienMouseClicked
 
     private void labelNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelNhanVienMouseClicked
         // TODO add your handling code here:
-        showPanel(new QuanLyNhanVienJPanel());
+        if (showPasswordDialog()) { 
+        showPanel(new QuanLyNhanVienJPanel()); // Nếu đúng mật khẩu, hiển thị panel quản lý nhân viên
+    } else {
+        showPanel(new QuanLyBanHangJpanel()); // Nếu sai mật khẩu hoặc nhấn Hủy, quay về panel bán hàng
+    }
     }//GEN-LAST:event_labelNhanVienMouseClicked
 
     private void panelHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelHoaDonMouseClicked

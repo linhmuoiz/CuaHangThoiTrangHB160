@@ -734,6 +734,9 @@
                   <Color blue="e1" green="e1" red="f6" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblDanhSachMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

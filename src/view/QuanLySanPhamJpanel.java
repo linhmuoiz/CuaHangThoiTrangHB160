@@ -13,7 +13,10 @@ import enity.DanhMuc;
 import enity.KichThuoc;
 import enity.MauSac;
 import java.awt.Image;
+import java.awt.MediaTracker;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -39,6 +42,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         lblHinhAnh.setText("Chọn Ảnh");
     }
     private String imagePath;
+    private String showImage;
 
     private void FillTable() {
         SanPhamDAO sanPhamDAO = new SanPhamDAO();
@@ -57,7 +61,8 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                 sanPham.getTrangThai(),
                 sanPham.getTenDM(),
                 sanPham.getTenMS(),
-                sanPham.getTenKT()
+                sanPham.getTenKT(),
+                sanPham.getHinhAnh()
             };
             model.addRow(rowData);
         }
@@ -91,15 +96,35 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
     }
 
     private void displayImage(String imagePath) {
-        ImageIcon imageIcon = new ImageIcon(imagePath); // Tạo ImageIcon từ đường dẫn
-        int width = 480;   // Kích thước chiều ngang cố định (480 pixels)
-        int height = 340;  // Kích thước chiều dọc cố định (340 pixels)
+        try {
+            // 1. Lấy đường dẫn tuyệt đối đến thư mục dự án
+            String projectPath = System.getProperty("user.dir");
 
-        // Thay đổi kích thước hình ảnh để vừa với kích thước cố định
-        Image image = imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH); // Resize image to fit JLabel
-        ImageIcon scaledImageIcon = new ImageIcon(image); // Tạo ImageIcon mới từ ảnh đã resize
-        lblHinhAnh.setIcon(scaledImageIcon); // Đặt ảnh đã resize vào JLabel
-        lblHinhAnh.setText(""); // Xóa chữ mặc định trên JLabel (nếu có)
+            // 2. Tạo đường dẫn tuyệt đối đầy đủ đến hình ảnh
+            String absoluteImagePath = projectPath + "\\src\\icon\\" + imagePath;
+
+            // 3. Tạo ImageIcon từ đường dẫn tuyệt đối
+            ImageIcon imageIcon = new ImageIcon(absoluteImagePath);
+
+            //Kiểm tra xem ảnh có load được không
+            if (imageIcon == null || imageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+                System.out.println("Không load được ảnh, đường dẫn không hợp lệ");
+                System.out.println(absoluteImagePath);
+            }
+
+            // 4. Thay đổi kích thước hình ảnh để vừa với kích thước JLabel
+            int width = 480;
+            int height = 340;
+            Image image = imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon scaledImageIcon = new ImageIcon(image);
+
+            // 5. Đặt ảnh đã resize vào JLabel
+            lblHinhAnh.setIcon(scaledImageIcon);
+            lblHinhAnh.setText("");
+        } catch (Exception e) {
+            System.out.println("Không load được, lỗi: " + e.getMessage());
+            System.out.println(imagePath); //In ra đường dẫn để debug
+        }
     }
 
     private void XoaNoiDungNhapLieu() {
@@ -310,7 +335,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         jPanel7.setBackground(new java.awt.Color(246, 225, 225));
         jPanel7.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));
         jPanel7.setPreferredSize(new java.awt.Dimension(1300, 400));
-        jPanel7.setLayout(new java.awt.GridLayout());
+        jPanel7.setLayout(new java.awt.GridLayout(1, 0));
 
         lblHinhAnh.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jPanel7.add(lblHinhAnh);
@@ -457,6 +482,11 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         tblDanhSach.setColorForegroundHead(new java.awt.Color(246, 225, 225));
         tblDanhSach.setColorSelBackgound(new java.awt.Color(128, 0, 0));
         tblDanhSach.setColorSelForeground(new java.awt.Color(246, 225, 225));
+        tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDanhSachMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDanhSach);
 
         jLabel23.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -599,7 +629,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
         double giaDouble = 0;
         try {
-            giaDouble = Double.parseDouble(Gia); 
+            giaDouble = Double.parseDouble(Gia);
             if (giaDouble < 0 || giaDouble == 0) {
                 JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Lại");
                 return;
@@ -608,10 +638,10 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Giá phải là một số thực hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         int SLint = 0;
         try {
-            SLint = Integer.parseInt(SoLuong); 
+            SLint = Integer.parseInt(SoLuong);
             if (SLint <= 0) {
                 JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên dương lớn hơn 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -620,7 +650,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         SanPhamDanhMucMauSacKichThuocDTO sanPham = new SanPhamDanhMucMauSacKichThuocDTO();
         sanPham.setTenSp(TenSP);
         sanPham.setGia(giaDouble);
@@ -659,6 +689,18 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
     private void btnThemAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemAnhActionPerformed
         // TODO add your handling code here:
+//        JFileChooser fileChooser = new JFileChooser();
+//        FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("Image files", "jpg", "jpeg", "png", "gif");
+//        fileChooser.setFileFilter(imageFilter);
+//
+//        int returnVal = fileChooser.showOpenDialog(this);
+//
+//        if (returnVal == JFileChooser.APPROVE_OPTION) {
+//            File selectedFile = fileChooser.getSelectedFile();
+//            imagePath = selectedFile.getAbsolutePath();
+//            displayImage(imagePath);
+//        }
+
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("Image files", "jpg", "jpeg", "png", "gif");
         fileChooser.setFileFilter(imageFilter);
@@ -667,7 +709,26 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            imagePath = selectedFile.getAbsolutePath();
+            String absolutePath = selectedFile.getAbsolutePath();
+
+            // 1. Lấy đường dẫn tuyệt đối đến thư mục dự án (thay đổi phần này phù hợp với dự án của bạn)
+            String projectPath = System.getProperty("user.dir"); // Thường thì user.dir sẽ trỏ đến thư mục dự án
+
+            // 2. Tạo đường dẫn tuyệt đối đến thư mục icon
+            String iconFolderPath = projectPath + "\\src\\icon\\"; //hoặc "/src/icon/" tuỳ hệ điều hành
+
+            // 3. Tạo đường dẫn tương đối
+            try {
+                File iconFolderFile = new File(iconFolderPath);
+                String relativePath = iconFolderFile.toURI().relativize(new File(absolutePath).toURI()).getPath();
+                imagePath = relativePath; // Lưu đường dẫn tương đối
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi chuyển đổi đường dẫn: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             displayImage(imagePath);
         }
     }//GEN-LAST:event_btnThemAnhActionPerformed
@@ -696,6 +757,39 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             model.addRow(rowData);
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void tblDanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMouseClicked
+        // TODO add your handling code here:
+        int dongDangChon = tblDanhSach.getSelectedRow();
+
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        SanPhamDAO sanPhamDAO = new SanPhamDAO();
+        int ID = (int) tblDanhSach.getValueAt(dongDangChon, 0);
+        imagePath = sanPhamDAO.getHinhAnhSanPham(ID);
+
+        String TenSanPham = model.getValueAt(dongDangChon, 1).toString();
+        System.out.println("TenSP: " + TenSanPham);
+        String Gia = model.getValueAt(dongDangChon, 2).toString();
+        String SoLuong = model.getValueAt(dongDangChon, 3).toString();
+        String TrangThai = model.getValueAt(dongDangChon, 4).toString();
+        String DanhMuc = model.getValueAt(dongDangChon, 5).toString();
+        String MauSac = model.getValueAt(dongDangChon, 6).toString();
+        String KichThuoc = model.getValueAt(dongDangChon, 7).toString();
+//        String HinhAnh = model.getValueAt(dongDangChon, 8).toString();
+//        System.out.println("Hình ẢNh" + HinhAnh);
+
+        txtTenSanPham.setText(TenSanPham);
+        txtGia.setText(String.valueOf(Gia));
+        txtSoLuong.setText(String.valueOf(SoLuong));
+        cboTrangThai.setSelectedItem(TrangThai);
+        cboDanhMuc.setSelectedItem(DanhMuc);
+        cboMauSac.setSelectedItem(MauSac);
+        cboKichThuoc.setSelectedItem(KichThuoc);
+
+        System.out.println("Đường dẫn hiển thị ảnh :" + imagePath);
+        displayImage(imagePath);
+
+    }//GEN-LAST:event_tblDanhSachMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

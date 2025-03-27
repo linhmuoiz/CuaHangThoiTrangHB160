@@ -49,9 +49,10 @@ public class SanPhamDAO {
                 String TenDM = rs.getString("DanhMuc");
                 String TenMS = rs.getString("MauSac");
                 String TenKT = rs.getString("KichThuoc");
+//                String HinhAnh = rs.getString("HinhAnh");
 //                int MaKT = rs.getInt("MaKT");
 
-                SanPhamDanhMucMauSacKichThuocDTO sanPhamDTO = new SanPhamDanhMucMauSacKichThuocDTO(maSP, TenSP, Gia, SoLuong, TrangThai, TenDM, TenMS, TenKT, " ");
+                SanPhamDanhMucMauSacKichThuocDTO sanPhamDTO = new SanPhamDanhMucMauSacKichThuocDTO(maSP, TenSP, Gia, SoLuong, TrangThai, TenDM, TenMS, TenKT,null);
                 sanPhamLst.add(sanPhamDTO);
             }
 
@@ -63,7 +64,27 @@ public class SanPhamDAO {
             return sanPhamLst;
         }
     }
+    
+    public String getHinhAnhSanPham(int ID){
+        String HinhAnh = null;
+        try (Connection conn = KetNoiDB.getConnectDB())  {
+            String sql = "SELECT HinhAnh FROM SanPham WHERE ID = ?";
+            System.out.println("Executing SQL Query: " + sql);
 
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            ppStm.setInt(1, ID);
+            ResultSet rs = ppStm.executeQuery();
+            
+            while(rs.next()){
+                HinhAnh = rs.getString("HinhAnh");
+            }
+        } catch (Exception e) {
+            System.err.println("Error reading products from the database:");
+            e.printStackTrace();
+        }
+        return HinhAnh;
+    }
+    
     public List<SanPhamDanhMucMauSacKichThuocDTO> TimKiemSanPham(String TimKiem) {
         List<SanPhamDanhMucMauSacKichThuocDTO> sanPhamLst = new ArrayList<>();
         try (Connection conn = KetNoiDB.getConnectDB()) {
@@ -116,7 +137,7 @@ public class SanPhamDAO {
 
             return sanPhamLst;
         } catch (Exception e) {
-            System.err.println("Error reading products from the database:");
+            System.err.println("Error search  products from the database:");
             e.printStackTrace();
             return sanPhamLst;
         }

@@ -6,6 +6,8 @@ package view;
 
 import dao.KhuyenMaiDAO;
 import enity.KhuyenMai;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -244,6 +246,11 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         tblDanhSach.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         tblDanhSach.setFuenteFilas(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         tblDanhSach.setFuenteHead(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDanhSachMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblDanhSach);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -307,6 +314,7 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         });
 
         dcNgayKetThuc.setBackground(new java.awt.Color(246, 225, 225));
+        dcNgayKetThuc.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         jLabel46.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel46.setForeground(new java.awt.Color(128, 0, 0));
@@ -314,6 +322,7 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
 
         dcNgayBatDau.setBackground(new java.awt.Color(246, 225, 225));
         dcNgayBatDau.setForeground(new java.awt.Color(128, 0, 0));
+        dcNgayBatDau.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         jLabel47.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(128, 0, 0));
@@ -534,13 +543,13 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         // Thêm validation NgayKT <= NgayBD
         if (ngayBatDau != null && ngayKetThuc != null && ngayKetThuc.before(ngayBatDau)) {
             JOptionPane.showMessageDialog(this, "Ngày kết thúc phải sau hoặc bằng ngày bắt đầu.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; 
+            return;
         }
 
         //Kiểm tra dữ liệu null
         if (ngayBatDau == null || ngayKetThuc == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày bắt đầu và ngày kết thúc.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; 
+            return;
         }
 
         if (TenKM.isEmpty() || codeGG.isEmpty()) {
@@ -599,6 +608,34 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
             model.addRow(rowdata);
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void tblDanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMouseClicked
+        // TODO add your handling code here:
+        int dongDangChon = tblDanhSach.getSelectedRow();
+
+        String TenKM = tblDanhSach.getValueAt(dongDangChon, 1).toString();
+        String CodeKM = tblDanhSach.getValueAt(dongDangChon, 2).toString();
+        String GoiGG = tblDanhSach.getValueAt(dongDangChon, 3).toString();
+        String ngayBatDauStr = tblDanhSach.getValueAt(dongDangChon, 4).toString();
+        String ngayKetThucStr = tblDanhSach.getValueAt(dongDangChon, 5).toString();
+
+        txtKhuyenMai.setText(TenKM);
+        txtCodeGiamGia.setText(CodeKM);
+        cboGoiGiamGia.setSelectedItem(GoiGG);
+        
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date ngayBatDau = dateFormat.parse(ngayBatDauStr);
+            Date ngayKetThuc = dateFormat.parse(ngayKetThucStr);
+
+            dcNgayBatDau.setDate(ngayBatDau);
+            dcNgayKetThuc.setDate(ngayKetThuc);
+
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi định dạng ngày tháng: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_tblDanhSachMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

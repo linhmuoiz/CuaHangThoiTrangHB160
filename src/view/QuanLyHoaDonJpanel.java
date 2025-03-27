@@ -27,8 +27,6 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        rSTableMetro2 = new rojerusan.RSTableMetro();
         jTextField7 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -40,10 +38,12 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblDanhMuc = new rojerusan.RSTableMetro();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        rSTableMetro1 = new rojerusan.RSTableMetro();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblDanhMuc1 = new rojerusan.RSTableMetro();
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -54,28 +54,6 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(246, 225, 225));
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));
         jPanel2.setPreferredSize(new java.awt.Dimension(1300, 400));
-
-        rSTableMetro2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mã Hoá Đơn", "Tên Khách Hàng ", "Số Điện Thoại", "Tổng Tiền", "Hình Thức Thanh Toán", "Tên Nhân Viên", "Ngày Tạo", "Trạng Thái"
-            }
-        ));
-        rSTableMetro2.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
-        rSTableMetro2.setColorBordeFilas(new java.awt.Color(128, 0, 0));
-        rSTableMetro2.setColorBordeHead(new java.awt.Color(246, 225, 225));
-        rSTableMetro2.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
-        rSTableMetro2.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
-        rSTableMetro2.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
-        rSTableMetro2.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
-        rSTableMetro2.setColorSelBackgound(new java.awt.Color(128, 0, 0));
-        rSTableMetro2.setColorSelForeground(new java.awt.Color(246, 225, 225));
-        rSTableMetro2.setMinimumSize(new java.awt.Dimension(60, 20));
-        rSTableMetro2.setMultipleSeleccion(false);
-        rSTableMetro2.setPreferredSize(new java.awt.Dimension(300, 40));
-        jScrollPane2.setViewportView(rSTableMetro2);
 
         jTextField7.setBackground(new java.awt.Color(246, 225, 225));
         jTextField7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -146,45 +124,62 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search-13-24.png"))); // NOI18N
         jButton16.setBorder(null);
 
+        tblDanhMuc.setBackground(new java.awt.Color(246, 225, 225));
+        tblDanhMuc.setForeground(new java.awt.Color(255, 255, 255));
+        tblDanhMuc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã Hoá Đơn", "Tên Khách Hàng", "Số Điênh Thoại", "Hình Thức Thanh Toán", "Tổng Tiền", "Tên Nhân Viên", "Ngày Tạo", "Trạng Thái"
+            }
+        ));
+        tblDanhMuc.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
+        tblDanhMuc.setColorBordeFilas(new java.awt.Color(128, 0, 0));
+        tblDanhMuc.setColorBordeHead(new java.awt.Color(246, 225, 225));
+        tblDanhMuc.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
+        tblDanhMuc.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
+        tblDanhMuc.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
+        tblDanhMuc.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
+        tblDanhMuc.setColorForegroundHead(new java.awt.Color(246, 225, 225));
+        jScrollPane2.setViewportView(tblDanhMuc);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rSComboMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel14))
-                            .addComponent(jLabel17))
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rSComboMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 22, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
-                .addContainerGap())
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel14))
+                    .addComponent(jLabel17))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane2)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -210,14 +205,14 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
                                     .addComponent(rSComboMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel15)))
                             .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(37, 37, 37))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 28)); // NOI18N
@@ -228,37 +223,35 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));
         jPanel3.setPreferredSize(new java.awt.Dimension(1300, 400));
 
-        rSTableMetro1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDanhMuc1.setBackground(new java.awt.Color(246, 225, 225));
+        tblDanhMuc1.setForeground(new java.awt.Color(255, 255, 255));
+        tblDanhMuc1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã Sản Phẩm", "Tên Sản Phẩm", "Danh Mục", "Màu ", "Kích Thước", "Số Lượng", "Giá Bán", "Giảm Giá", "Tổng Tiền"
+                "Mã Sản Phẩm", "Tên Sản Phẩm", "Danh Mục", "Màu", "Kích Thước", "Số Lượng", "Giá Bán", "Giảm Giá", "Tổng Tiền"
             }
         ));
-        rSTableMetro1.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorBordeFilas(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorBordeHead(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorSelBackgound(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorSelForeground(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setMinimumSize(new java.awt.Dimension(60, 20));
-        rSTableMetro1.setMultipleSeleccion(false);
-        rSTableMetro1.setPreferredSize(new java.awt.Dimension(300, 40));
-        jScrollPane1.setViewportView(rSTableMetro1);
+        tblDanhMuc1.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
+        tblDanhMuc1.setColorBordeFilas(new java.awt.Color(128, 0, 0));
+        tblDanhMuc1.setColorBordeHead(new java.awt.Color(246, 225, 225));
+        tblDanhMuc1.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
+        tblDanhMuc1.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
+        tblDanhMuc1.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
+        tblDanhMuc1.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
+        tblDanhMuc1.setColorForegroundHead(new java.awt.Color(246, 225, 225));
+        jScrollPane3.setViewportView(tblDanhMuc1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane3)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
         );
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 28)); // NOI18N
@@ -281,7 +274,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1304, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1304, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1304, Short.MAX_VALUE))
                         .addGap(109, 109, 109))))
         );
         layout.setVerticalGroup(
@@ -330,11 +323,11 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField7;
     private rojerusan.RSComboMetro rSComboMetro2;
-    private rojerusan.RSTableMetro rSTableMetro1;
-    private rojerusan.RSTableMetro rSTableMetro2;
+    private rojerusan.RSTableMetro tblDanhMuc;
+    private rojerusan.RSTableMetro tblDanhMuc1;
     // End of variables declaration//GEN-END:variables
 }

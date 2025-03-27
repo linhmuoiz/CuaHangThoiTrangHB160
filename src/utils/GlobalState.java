@@ -11,4 +11,12 @@ package utils;
 public class GlobalState {
     public static String SDT = null;
     public static String MatKhauDN = null;
+    
+        public static int MaSPChon = 0;
+    public static int SoLuongSPChon = 1;
+    public static double GiaSanPhamChon = 0;
+    
+    public static int MaNV = 0;
+    
+    public static int MaKH = 0;
 }

@@ -15,6 +15,8 @@ import javax.swing.table.DefaultTableModel;/**
  */
 import enity.HoaDon;
 import enity.KhachHang;
+import javax.swing.JOptionPane;
+import utils.GlobalState;
 public class QuanLyBanHangJpanel extends javax.swing.JPanel {
 
     /**
@@ -968,7 +970,26 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-
+String TenKH = jTextField9.getText();
+        String SDT = jTextField10.getText();
+        
+        KhachHangDAO khachHangDAO = new KhachHangDAO();
+        KhachHang ketQua = khachHangDAO.findKhachHang(TenKH, SDT);
+        
+        if (ketQua == null) {
+            KhachHang khachHang = new KhachHang(TenKH, SDT);
+            int khachHangMoi = khachHangDAO.createKhachHang(khachHang);
+            if (khachHangMoi == 1) {
+                KhachHang idKhachHangMoi = khachHangDAO.findKhachHang(TenKH, SDT);
+                GlobalState.MaKH = idKhachHangMoi.getID();
+                JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm khách hàng thất bại!");
+            }
+        } else {
+            GlobalState.MaKH = ketQua.getID();
+            jTextField9.setText(ketQua.getTenKH());
+        }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void rSComboMetro4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSComboMetro4ActionPerformed

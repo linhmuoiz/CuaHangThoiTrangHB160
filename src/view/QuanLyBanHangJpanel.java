@@ -7,16 +7,17 @@ package view;
 import dao.HoaDonDAO;
 import dao.KhachHangDAO;
 import dao.SanPhamDAO;
+import dto.ChiTietHDDTO;
 import dto.SanPhamDTO;
 import java.util.List;
-import javax.swing.table.DefaultTableModel;/**
- *
- * @author admim
- */
+import javax.swing.table.DefaultTableModel;
 import enity.HoaDon;
 import enity.KhachHang;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import utils.GlobalState;
+
 public class QuanLyBanHangJpanel extends javax.swing.JPanel {
 
     /**
@@ -24,68 +25,65 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
      */
     public QuanLyBanHangJpanel() {
         initComponents();
-                readHoaDonCho();
+        readHoaDonCho();
         readKhachHang();
         readSanPham();
         resetTableChiTietHD();
     }
+
     private void readHoaDonCho() {
         HoaDonDAO hoaDonDAO = new HoaDonDAO();
         List<HoaDon> hoaDonLst = hoaDonDAO.readHoaDonCho();
-        
+
         DefaultTableModel tableHoaDonCho = (DefaultTableModel) this.rSTableMetro1.getModel();
         tableHoaDonCho.setRowCount(0);
-        
+
         for (HoaDon hoaDon : hoaDonLst) {
-            tableHoaDonCho.addRow(new Object[] {
+            tableHoaDonCho.addRow(new Object[]{
                 hoaDon.getID(),
                 hoaDon.getNgayTao(),
-                hoaDon.getTrangThai(),
-            });
+                hoaDon.getTrangThai(),});
         }
     }
-    
+
     private void readKhachHang() {
         KhachHangDAO khachHangDAO = new KhachHangDAO();
         List<KhachHang> khachHangLst = khachHangDAO.readKhachHang();
-        
+
         DefaultTableModel tableKhachHang = (DefaultTableModel) this.rSTableMetro4.getModel();
         tableKhachHang.setRowCount(0);
-        
+
         for (KhachHang khachHang : khachHangLst) {
-            tableKhachHang.addRow(new Object[] {
+            tableKhachHang.addRow(new Object[]{
                 khachHang.getTenKH(),
-                khachHang.getSDT(),
-            });
+                khachHang.getSDT(),});
         }
     }
-    
+
     private void readSanPham() {
         SanPhamDAO sanPhamDAO = new SanPhamDAO();
         List<SanPhamDTO> sanPhamLst = sanPhamDAO.readSanPhamQLY();
-        
+
         DefaultTableModel tableSanPham = (DefaultTableModel) this.rSTableMetro2.getModel();
         tableSanPham.setRowCount(0);
-        
+
         for (SanPhamDTO sanPham : sanPhamLst) {
-            tableSanPham.addRow(new Object[] {
+            tableSanPham.addRow(new Object[]{
                 sanPham.getID(),
                 sanPham.getTenSP(),
                 sanPham.getTenDM(),
                 sanPham.getTenMS(),
                 sanPham.getTenKT(),
                 sanPham.getSoLuong(),
-                sanPham.getGia(),
-            });
+                sanPham.getGia(),});
         }
     }
-    
+
     public void resetTableChiTietHD() {
         DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
         tableSanPhamChon.setRowCount(0);
     }
-
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -417,11 +415,11 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
 
         rSComboMetro4.setBackground(new java.awt.Color(246, 225, 225));
         rSComboMetro4.setForeground(new java.awt.Color(128, 0, 0));
-        rSComboMetro4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TIền Mặt", "Chuyển Khoản" }));
+        rSComboMetro4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiền Mặt", "Chuyển Khoản" }));
         rSComboMetro4.setColorArrow(new java.awt.Color(128, 0, 0));
         rSComboMetro4.setColorBorde(new java.awt.Color(128, 0, 0));
         rSComboMetro4.setColorFondo(new java.awt.Color(246, 225, 225));
-        rSComboMetro4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        rSComboMetro4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         rSComboMetro4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSComboMetro4ActionPerformed(evt);
@@ -723,6 +721,11 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         rSTableMetro3.setColorSelForeground(new java.awt.Color(246, 225, 225));
         rSTableMetro3.setFuenteFilas(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         rSTableMetro3.setFuenteHead(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rSTableMetro3.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                rSTableMetro3PropertyChange(evt);
+            }
+        });
         jScrollPane3.setViewportView(rSTableMetro3);
 
         jLabel20.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
@@ -825,11 +828,21 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         rSTableMetro2.setColorSelForeground(new java.awt.Color(246, 225, 225));
         rSTableMetro2.setFuenteFilas(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         rSTableMetro2.setFuenteHead(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rSTableMetro2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rSTableMetro2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(rSTableMetro2);
 
         jButton15.setBackground(new java.awt.Color(246, 225, 225));
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search-13-24.png"))); // NOI18N
         jButton15.setBorder(null);
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -938,7 +951,10 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField17ActionPerformed
 
     private void jTextField18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField18ActionPerformed
-        // TODO add your handling code here:
+        double TongThanhToan = Double.parseDouble(jTextField17.getText());
+        double TienKhachDua = Double.parseDouble(jTextField18.getText());
+        double TienHoanLai = TienKhachDua - TongThanhToan;
+        jTextField19.setText(String.valueOf(TienHoanLai));
     }//GEN-LAST:event_jTextField18ActionPerformed
 
     private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
@@ -950,11 +966,66 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+          int MaNV = GlobalState.MaNV;
+        int MaKH = GlobalState.MaKH;
+        double ThanhTien = Double.parseDouble(jTextField17.getText());
+        String HinhThucThanhToan = rSComboMetro4.getSelectedItem().toString();
+        Date NgayTao = jDateChooser10.getDate();
+        String TrangThai = "Đã hoàn thành";
+        
+        HoaDon hoaDon = new HoaDon(MaNV, MaKH, ThanhTien, HinhThucThanhToan, NgayTao, TrangThai);
+        
+        HoaDonDAO hoaDonDAO = new HoaDonDAO();
+        int ketQua = hoaDonDAO.createHoaDon(hoaDon);
+        
+        if (ketQua == 1) {
+            JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+        } else {
+            JOptionPane.showMessageDialog(this, "Thanh toán thất bại!");
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+       DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
+        if (tableSanPhamChon.getRowCount() == 0) {
+            return;
+        }
+        
+        int soDongChon = rSTableMetro3.getSelectedRow();
+        String MaSPChon = rSTableMetro3.getValueAt(soDongChon, 0).toString();
+        String SoLuongSPChon = rSTableMetro3.getValueAt(soDongChon, 5).toString();
+        
+        GlobalState.MaSPChon = Integer.parseInt(MaSPChon);
+        GlobalState.SoLuongSPChon = Integer.parseInt(SoLuongSPChon);
+        
+        double ThanhTien = GlobalState.GiaSanPhamChon * GlobalState.SoLuongSPChon;
+        rSTableMetro3.setValueAt(ThanhTien, soDongChon, 6);
+        
+        
+        // Thay đổi Số lượng bán sẽ thay đổi Thông tin hóa đơn
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date NgayThanhLap = java.sql.Date.valueOf(sdf.format(new java.util.Date()));
+        
+        int SoLuongSP = 0;
+        double TongTienSP = 0;
+        double TongTienKhuyenMai = 0;
+        double TongThanhToan = 0;
+        double TienHoanLai = 0;
+        
+        
+        jDateChooser10.setDate(NgayThanhLap);
+        for (int i=0; i<tableSanPhamChon.getRowCount(); i++) {
+            SoLuongSP += Double.parseDouble(tableSanPhamChon.getValueAt(i, 5).toString());
+            TongTienSP += Double.parseDouble(tableSanPhamChon.getValueAt(i, 6).toString());
+        }
+        
+        TongThanhToan = TongTienSP - TongTienKhuyenMai;
+        
+        jTextField12.setText(String.valueOf(SoLuongSP));
+        jTextField14.setText(String.valueOf(TongTienSP));
+        jTextField16.setText(String.valueOf(TongTienKhuyenMai));
+        jTextField17.setText(String.valueOf(TongThanhToan));
+        jTextField19.setText(String.valueOf(TienHoanLai));
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
@@ -962,20 +1033,38 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField15ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+       int MaSP = GlobalState.MaSPChon;
+        
+        SanPhamDAO sanPhamDAO = new SanPhamDAO();
+        List<ChiTietHDDTO> sanPhamChonLst = sanPhamDAO.readSanPhamChon(MaSP);
+        
+        DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
+        
+        for (ChiTietHDDTO sanPham : sanPhamChonLst) {
+            tableSanPhamChon.addRow(new Object[] {
+                GlobalState.MaSPChon,
+                sanPham.getTenSP(),
+                sanPham.getTenDM(),
+                sanPham.getTenMS(),
+                sanPham.getTenKT(),
+                GlobalState.SoLuongSPChon,
+                sanPham.getGia() * GlobalState.SoLuongSPChon,
+            });
+        }
+        
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+        this.resetTableChiTietHD();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-String TenKH = jTextField9.getText();
+        String TenKH = jTextField9.getText();
         String SDT = jTextField10.getText();
-        
+
         KhachHangDAO khachHangDAO = new KhachHangDAO();
         KhachHang ketQua = khachHangDAO.findKhachHang(TenKH, SDT);
-        
+
         if (ketQua == null) {
             KhachHang khachHang = new KhachHang(TenKH, SDT);
             int khachHangMoi = khachHangDAO.createKhachHang(khachHang);
@@ -995,6 +1084,67 @@ String TenKH = jTextField9.getText();
     private void rSComboMetro4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSComboMetro4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rSComboMetro4ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        if (jTextField15.getText().isEmpty()) {
+            readSanPham();
+            return;
+        }
+        
+        int MaSP = Integer.parseInt(jTextField15.getText());
+        
+        SanPhamDAO sanPhamDAO = new SanPhamDAO();
+        List<SanPhamDTO> sanPhamLst = sanPhamDAO.readSanPhamQLY();
+        
+        DefaultTableModel tableSanPham = (DefaultTableModel) this.rSTableMetro2.getModel();
+        tableSanPham.setRowCount(0);
+        
+        for (SanPhamDTO sanPham : sanPhamLst) {
+            if (sanPham.getID() == MaSP) {
+                    tableSanPham.addRow(new Object[] {
+                        sanPham.getID(),
+                        sanPham.getTenSP(),
+                        sanPham.getTenDM(),
+                        sanPham.getTenMS(),
+                        sanPham.getTenKT(),
+                        sanPham.getSoLuong(),
+                        sanPham.getGia(),
+                });
+                return;
+            }
+        }
+        
+        if (tableSanPham.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm!");
+        }
+        
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void rSTableMetro2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSTableMetro2MouseClicked
+        int soDongChon = rSTableMetro2.getSelectedRow();
+        String MaSPChon = rSTableMetro2.getValueAt(soDongChon, 0).toString();
+        String GiaSanPhamChon = rSTableMetro2.getValueAt(soDongChon, 6).toString();
+        
+        GlobalState.MaSPChon = Integer.parseInt(MaSPChon);
+        GlobalState.GiaSanPhamChon = Double.parseDouble(GiaSanPhamChon);
+    }//GEN-LAST:event_rSTableMetro2MouseClicked
+
+    private void rSTableMetro3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rSTableMetro3PropertyChange
+         DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
+        if (tableSanPhamChon.getRowCount() == 0) {
+            return;
+        }
+        
+        int soDongChon = rSTableMetro3.getSelectedRow();
+        String MaSPChon = rSTableMetro3.getValueAt(soDongChon, 0).toString();
+        String SoLuongSPChon = rSTableMetro3.getValueAt(soDongChon, 5).toString();
+        
+        GlobalState.MaSPChon = Integer.parseInt(MaSPChon);
+        GlobalState.SoLuongSPChon = Integer.parseInt(SoLuongSPChon);
+        
+        double ThanhTien = GlobalState.GiaSanPhamChon * GlobalState.SoLuongSPChon;
+        rSTableMetro3.setValueAt(ThanhTien, soDongChon, 6);
+    }//GEN-LAST:event_rSTableMetro3PropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

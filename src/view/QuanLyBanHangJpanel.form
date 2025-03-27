@@ -832,7 +832,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
-                    <StringItem index="0" value="TI&#x1ec1;n M&#x1eb7;t"/>
+                    <StringItem index="0" value="Ti&#x1ec1;n M&#x1eb7;t"/>
                     <StringItem index="1" value="Chuy&#x1ec3;n Kho&#x1ea3;n"/>
                   </StringArray>
                 </Property>
@@ -846,7 +846,7 @@
                   <Color blue="e1" green="e1" red="f6" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="18" style="1"/>
+                  <Font name="Dialog" size="14" style="1"/>
                 </Property>
               </Properties>
               <Events>
@@ -1238,6 +1238,9 @@
                   <Font name="Tahoma" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="rSTableMetro3PropertyChange"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1477,6 +1480,9 @@
                   <Font name="Tahoma" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSTableMetro2MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1492,6 +1498,9 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton15ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dto.ChiTietHDDTO;
 import dto.SanPhamDTO;
 import dto.SanPhamDanhMucMauSacKichThuocDTO;
 import java.sql.*;
@@ -96,6 +97,44 @@ public class SanPhamDAO {
         }
         catch (SQLException e) {
             return sanPhamLst;
+        }
+    }public List<ChiTietHDDTO> readSanPhamChon(int MaSPChon) {
+        String sql = "SELECT \n" +
+                    "    sp.ID, \n" +
+                    "    sp.TenSP, \n" +
+                    "    dm.TenDM, \n" +
+                    "    ms.TenMS, \n" +
+                    "    kt.TenKT, \n" +
+                    "    sp.Gia\n" +
+                    "FROM SanPham sp\n" +
+                    "INNER JOIN DanhMuc dm ON dm.MaDM = sp.MaDM\n" +
+                    "INNER JOIN MauSac ms ON ms.MaMS = sp.MaMS\n" +
+                    "INNER JOIN KichThuoc kt ON kt.MaKT = sp.MaKT\n" +
+                    "WHERE sp.ID = (?);";
+        
+        List<ChiTietHDDTO> sanPhamChonLst = new ArrayList<ChiTietHDDTO>();
+        
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
+            
+            ps.setInt(1, MaSPChon);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int MaSP = rs.getInt("ID");
+                String TenSP = rs.getString("TenSP");
+                String TenDM = rs.getString("TenDM");
+                String TenMS = rs.getString("TenMS");
+                String TenKT = rs.getString("TenKT");
+                double Gia = rs.getDouble("Gia");
+                
+                ChiTietHDDTO sanPhamChon = new ChiTietHDDTO(MaSP, TenSP, TenDM, TenMS, TenKT, Gia);
+                sanPhamChonLst.add(sanPhamChon);
+            }
+            return sanPhamChonLst;
+        }
+        catch (SQLException e) {
+            return sanPhamChonLst;
         }
     }
 

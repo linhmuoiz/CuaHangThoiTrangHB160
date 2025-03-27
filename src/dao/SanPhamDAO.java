@@ -4,8 +4,8 @@
  */
 package dao;
 
+import dto.SanPhamDTO;
 import dto.SanPhamDanhMucMauSacKichThuocDTO;
-import enity.SanPham;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ import utils.KetNoiDB;
  */
 public class SanPhamDAO {
 
+    //read quan ly san pham
     public List<SanPhamDanhMucMauSacKichThuocDTO> readSanPham() {
         List<SanPhamDanhMucMauSacKichThuocDTO> sanPhamLst = new ArrayList<>();
         try (Connection conn = KetNoiDB.getConnectDB()) {
@@ -52,8 +53,8 @@ public class SanPhamDAO {
 //                String HinhAnh = rs.getString("HinhAnh");
 //                int MaKT = rs.getInt("MaKT");
 
-                SanPhamDanhMucMauSacKichThuocDTO sanPhamDTO = new SanPhamDanhMucMauSacKichThuocDTO(maSP, TenSP, Gia, SoLuong, TrangThai, TenDM, TenMS, TenKT,null);
-                sanPhamLst.add(sanPhamDTO);
+                SanPhamDanhMucMauSacKichThuocDTO spdmkt = new SanPhamDanhMucMauSacKichThuocDTO(maSP, TenSP, Gia, SoLuong, TrangThai, TenDM, TenMS, TenKT, TenKT);
+                sanPhamLst.add(spdmkt);
             }
 
             return sanPhamLst;
@@ -65,6 +66,39 @@ public class SanPhamDAO {
         }
     }
     
+    //readSanPham cua Quan ly ban hang tai quay
+    public List<SanPhamDTO> readSanPhamQLY() {
+        String sql = "SELECT ID, TenSP, Gia, SoLuong, TrangThai, dm.TenDM, ms.TenMS, kt.TenKT  \n" +
+                    "FROM SanPham sp\n" +
+                    "INNER JOIN DanhMuc dm ON dm.MaDM = sp.MaDM\n" +
+                    "INNER JOIN MauSac ms ON ms.MaMS = sp.MaMS\n" +
+                    "INNER JOIN KichThuoc kt ON kt.MaKT = sp.MaKT;";
+        List<SanPhamDTO> sanPhamLst = new ArrayList<SanPhamDTO>();
+        
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String TenNV = rs.getString("TenSP");
+                double Gia = rs.getDouble("Gia");
+                int SoLuong = rs.getInt("SoLuong");
+                String TrangThai = rs.getString("TrangThai");
+                String MaDM = rs.getString("TenDM");
+                String MaMS = rs.getString("TenMS");
+                String MaKT = rs.getString("TenKT");
+                
+                SanPhamDTO sanPham = new SanPhamDTO(ID, TenNV, Gia, SoLuong, TrangThai, MaDM, MaMS, MaKT);
+                sanPhamLst.add(sanPham);
+            }
+            return sanPhamLst;
+        }
+        catch (SQLException e) {
+            return sanPhamLst;
+        }
+    }
+
     public String getHinhAnhSanPham(int ID){
         String HinhAnh = null;
         try (Connection conn = KetNoiDB.getConnectDB())  {

@@ -16,7 +16,6 @@ import java.awt.Image;
 import java.awt.MediaTracker;
 import java.io.File;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;

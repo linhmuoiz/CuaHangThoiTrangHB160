@@ -4,10 +4,17 @@
  */
 package view;
 
-/**
+import dao.HoaDonDAO;
+import dao.KhachHangDAO;
+import dao.SanPhamDAO;
+import dto.SanPhamDTO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;/**
  *
  * @author admim
  */
+import enity.HoaDon;
+import enity.KhachHang;
 public class QuanLyBanHangJpanel extends javax.swing.JPanel {
 
     /**
@@ -15,7 +22,67 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
      */
     public QuanLyBanHangJpanel() {
         initComponents();
+                readHoaDonCho();
+        readKhachHang();
+        readSanPham();
+        resetTableChiTietHD();
     }
+    private void readHoaDonCho() {
+        HoaDonDAO hoaDonDAO = new HoaDonDAO();
+        List<HoaDon> hoaDonLst = hoaDonDAO.readHoaDonCho();
+        
+        DefaultTableModel tableHoaDonCho = (DefaultTableModel) this.rSTableMetro1.getModel();
+        tableHoaDonCho.setRowCount(0);
+        
+        for (HoaDon hoaDon : hoaDonLst) {
+            tableHoaDonCho.addRow(new Object[] {
+                hoaDon.getID(),
+                hoaDon.getNgayTao(),
+                hoaDon.getTrangThai(),
+            });
+        }
+    }
+    
+    private void readKhachHang() {
+        KhachHangDAO khachHangDAO = new KhachHangDAO();
+        List<KhachHang> khachHangLst = khachHangDAO.readKhachHang();
+        
+        DefaultTableModel tableKhachHang = (DefaultTableModel) this.rSTableMetro4.getModel();
+        tableKhachHang.setRowCount(0);
+        
+        for (KhachHang khachHang : khachHangLst) {
+            tableKhachHang.addRow(new Object[] {
+                khachHang.getTenKH(),
+                khachHang.getSDT(),
+            });
+        }
+    }
+    
+    private void readSanPham() {
+        SanPhamDAO sanPhamDAO = new SanPhamDAO();
+        List<SanPhamDTO> sanPhamLst = sanPhamDAO.readSanPhamQLY();
+        
+        DefaultTableModel tableSanPham = (DefaultTableModel) this.rSTableMetro2.getModel();
+        tableSanPham.setRowCount(0);
+        
+        for (SanPhamDTO sanPham : sanPhamLst) {
+            tableSanPham.addRow(new Object[] {
+                sanPham.getID(),
+                sanPham.getTenSP(),
+                sanPham.getTenDM(),
+                sanPham.getTenMS(),
+                sanPham.getTenKT(),
+                sanPham.getSoLuong(),
+                sanPham.getGia(),
+            });
+        }
+    }
+    
+    public void resetTableChiTietHD() {
+        DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
+        tableSanPhamChon.setRowCount(0);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -901,7 +968,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void rSComboMetro4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSComboMetro4ActionPerformed

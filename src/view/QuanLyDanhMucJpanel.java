@@ -7,6 +7,7 @@ package view;
 import dao.DanhMucDAO;
 import enity.DanhMuc;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -101,6 +102,11 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/available-updates-48.png"))); // NOI18N
         btnSua.setText("Sửa");
         btnSua.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setBackground(new java.awt.Color(255, 255, 255));
         btnXoa.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -175,6 +181,13 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
         tblDanhMuc.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
         tblDanhMuc.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
         tblDanhMuc.setColorForegroundHead(new java.awt.Color(246, 225, 225));
+        tblDanhMuc.setColorSelBackgound(new java.awt.Color(128, 0, 0));
+        tblDanhMuc.setColorSelForeground(new java.awt.Color(246, 225, 225));
+        tblDanhMuc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDanhMucMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDanhMuc);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -230,11 +243,78 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        String TenDanhMuc = txtTenDanhMuc.getText();
+        
+        if(TenDanhMuc.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Không Được Để Trống Tên", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        DanhMucDAO danhMucDao = new DanhMucDAO();
+        DanhMuc danhMuc = new DanhMuc(0, TenDanhMuc);
+        int ketQua = danhMucDao.ThemDanhMuc(danhMuc);
+        
+        if(ketQua ==1){
+            JOptionPane.showMessageDialog(this, "Thêm Danh Mục Thành Công");
+            txtTenDanhMuc.setText("");
+            fillTable();
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Thêm Danh Mục Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
+        int dongDangChon = tblDanhMuc.getSelectedRow();
+        int MaDanhMuc =(int) tblDanhMuc.getValueAt(dongDangChon, 0);
+        
+        
+        DanhMucDAO danhMucDao = new DanhMucDAO();
+        int ketQua = danhMucDao.XoaDanhMuc(MaDanhMuc);
+        
+        if(ketQua ==1){
+            JOptionPane.showMessageDialog(this, "Xoá Danh Mục Thành Công");
+            txtTenDanhMuc.setText("");
+            fillTable();
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Xoá Danh Mục Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void tblDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhMucMouseClicked
+        // TODO add your handling code here:
+        int dongDangChon = tblDanhMuc.getSelectedRow();
+        
+        String TenDanhMuc = tblDanhMuc.getValueAt(dongDangChon, 1).toString();
+        txtTenDanhMuc.setText(TenDanhMuc);
+    }//GEN-LAST:event_tblDanhMucMouseClicked
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        String TenDanhMuc = txtTenDanhMuc.getText();
+        int dongDangChon = tblDanhMuc.getSelectedRow();
+        int MaDanhMuc =(int) tblDanhMuc.getValueAt(dongDangChon, 0);
+        
+        if(TenDanhMuc.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Không Được Để Trống Tên", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        DanhMucDAO danhMucDao = new DanhMucDAO();
+        DanhMuc danhMuc = new DanhMuc(MaDanhMuc, TenDanhMuc);
+        int ketQua = danhMucDao.SuaDanhMuc(danhMuc);
+        
+        if(ketQua ==1){
+            JOptionPane.showMessageDialog(this, "Sửa Danh Mục Thành Công");
+            txtTenDanhMuc.setText("");
+            fillTable();
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Sửa Danh Mục Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

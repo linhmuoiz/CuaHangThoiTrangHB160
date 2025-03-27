@@ -17,11 +17,34 @@ public class ChiTietHDDTO {
     private String TenKT;
     private int SoLuong;
     private double Gia;
+    private int GioiGiamGia;
 
     public ChiTietHDDTO() {
     }
 
-    public ChiTietHDDTO(int ID, int MaSP, String TenSP, String TenDM, String TenMS, String TenKT, int SoLuong, double Gia) {
+    public ChiTietHDDTO(int ID, String TenSP, String TenDM, String TenMS, String TenKT, double Gia) {
+        this.ID = ID;
+        this.TenSP = TenSP;
+        this.TenDM = TenDM;
+        this.TenMS = TenMS;
+        this.TenKT = TenKT;
+        this.Gia = Gia;
+    }
+    
+    
+
+    public ChiTietHDDTO(int MaSP, String TenSP, String TenDM, String TenMS, String TenKT, int SoLuong, double Gia, int GioiGiamGia) {
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.TenDM = TenDM;
+        this.TenMS = TenMS;
+        this.TenKT = TenKT;
+        this.SoLuong = SoLuong;
+        this.Gia = Gia;
+        this.GioiGiamGia = GioiGiamGia;
+    }
+
+    public ChiTietHDDTO(int ID, int MaSP, String TenSP, String TenDM, String TenMS, String TenKT, int SoLuong, double Gia, int GioiGiamGia) {
         this.ID = ID;
         this.MaSP = MaSP;
         this.TenSP = TenSP;
@@ -30,15 +53,10 @@ public class ChiTietHDDTO {
         this.TenKT = TenKT;
         this.SoLuong = SoLuong;
         this.Gia = Gia;
+        this.GioiGiamGia = GioiGiamGia;
     }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
+    
+    
 
     public int getMaSP() {
         return MaSP;
@@ -96,5 +114,21 @@ public class ChiTietHDDTO {
         this.Gia = Gia;
     }
 
+    public int getGioiGiamGia() {
+        return GioiGiamGia;
+    }
+
+    public void setGioiGiamGia(int GioiGiamGia) {
+        this.GioiGiamGia = GioiGiamGia;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+    
     
 }

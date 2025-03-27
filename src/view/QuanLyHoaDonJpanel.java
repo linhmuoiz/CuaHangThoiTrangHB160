@@ -4,6 +4,13 @@
  */
 package view;
 
+import dao.ChiTietHDDAO;
+import dao.HoaDonDAO;
+import dto.ChiTietHDDTO;
+import dto.HoaDonDTO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author admim
@@ -15,6 +22,50 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
      */
     public QuanLyHoaDonJpanel() {
         initComponents();
+        readHoaDon();
+        readChiTietHD();
+    }
+    private void readHoaDon() {
+        HoaDonDAO hoaDonDAO = new HoaDonDAO();
+        List<HoaDonDTO> hoaDonLst = hoaDonDAO.readHoaDon();
+        
+        DefaultTableModel tableHoaDon = (DefaultTableModel) this.tblDanhMuc.getModel();
+        tableHoaDon.setRowCount(0);
+        
+        for (HoaDonDTO hoaDon : hoaDonLst) {
+            tableHoaDon.addRow(new Object[] {
+                hoaDon.getID(),
+                hoaDon.getTenKH(),
+                hoaDon.getSDT(),
+                hoaDon.getThanhTien(),
+                hoaDon.getHinhThucTT(),
+                hoaDon.getTenNV(),
+                hoaDon.getNgayTao(),
+                hoaDon.getTrangThai()
+            });
+        }
+    }
+    
+    private void readChiTietHD() {
+        ChiTietHDDAO chiTietHDDAO = new ChiTietHDDAO();
+        List<ChiTietHDDTO> chiTietHDLst = chiTietHDDAO.readChiTietHD();
+        
+        DefaultTableModel tableChiTietHD = (DefaultTableModel) this.tblDanhMuc1.getModel();
+        tableChiTietHD.setRowCount(0);
+        
+        for (ChiTietHDDTO chiTietHD : chiTietHDLst) {
+            tableChiTietHD.addRow(new Object[] {
+                chiTietHD.getMaSP(),
+                chiTietHD.getTenSP(),
+                chiTietHD.getTenDM(),
+                chiTietHD.getTenMS(),
+                chiTietHD.getTenKT(),
+                chiTietHD.getSoLuong(),
+                chiTietHD.getGia(),
+                chiTietHD.getGioiGiamGia(),
+                (chiTietHD.getGia() * chiTietHD.getSoLuong() * chiTietHD.getGioiGiamGia()) / 100
+            });
+        }
     }
 
     /**

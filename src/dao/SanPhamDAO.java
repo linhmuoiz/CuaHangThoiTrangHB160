@@ -224,6 +224,20 @@ public class SanPhamDAO {
         }
     }
     
+    public int XoaSanPham (int ID){
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "DELETE FROM SanPham WHERE ID = ?";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            
+            ppStm.setInt(1, ID);
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+            System.out.println("Lỗi");
+            return 0;
+        }
+    }
+    
     
     private int getMaDM (String TenDM, Connection conn) {   // Phương thức lấy MaDM từ TenDM
         int MaDM = 0; // Khởi tạo MaDM

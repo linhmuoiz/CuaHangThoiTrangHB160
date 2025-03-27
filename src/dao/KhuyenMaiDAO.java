@@ -113,4 +113,24 @@ public class KhuyenMaiDAO {
             return khuyenMaiLst;
         }
     }
+    
+    public int TaoKhuyenMai(KhuyenMai khuyenMai){
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "INSERT INTO KhuyenMai (TenKM, CodeGiamGia, GoiGiamGia, NgayBD, NgayKT) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            
+//            ppStm.setInt(1, khuyenMai.getMaKM());
+            ppStm.setString(1, khuyenMai.getTenKM());
+            ppStm.setString(2, khuyenMai.getCodeGiamGia());
+            ppStm.setInt(3, khuyenMai.getGoiGiamGia());
+            ppStm.setString(4, khuyenMai.getNgayBatDau());
+            ppStm.setString(5, khuyenMai.getNgayKetThuc());
+            
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

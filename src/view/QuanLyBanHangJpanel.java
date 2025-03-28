@@ -1072,6 +1072,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 KhachHang idKhachHangMoi = khachHangDAO.findKhachHang(TenKH, SDT);
                 GlobalState.MaKH = idKhachHangMoi.getID();
                 JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+                readKhachHang();
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm khách hàng thất bại!");
             }

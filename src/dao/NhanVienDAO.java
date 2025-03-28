@@ -160,4 +160,33 @@ public class NhanVienDAO {
             return 0;
         }
     }
+    
+    
+    
+    public List<NhanVien> TimKiemNhanVien(String TimKiem){
+        List<NhanVien> nhanVienLst = new ArrayList<>();
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "SELECT * FROM NhanVien WHERE TenNV LIKE ? OR SDT LIKE ?";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            
+            ppStm.setString(1, "%" + TimKiem + "%");
+            ppStm.setString(2, "%" + TimKiem + "%");
+           ResultSet rs = ppStm.executeQuery();
+           
+           while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String tenNV = rs.getString("TenNV");
+                String SDT = rs.getString("SDT");
+                String diaChi = rs.getString("DiaChi");
+                String GioiTinh = rs.getString("GioiTinh");
+                
+                NhanVien nhanVien = new NhanVien(ID, tenNV, SDT, GioiTinh, diaChi);
+                nhanVienLst.add(nhanVien);
+            }
+           return nhanVienLst;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return nhanVienLst;
+        }
+    }
 }

@@ -328,4 +328,31 @@ public class SanPhamDAO {
         }
         return MaKT;
     }
+    // Cập nhật số lượng sản phẩm khi đã thanh toán
+    public int updateSanPham(int ID, int SoLuongDaBan) {
+        String selectSQL = "SELECT SoLuong FROM SanPham WHERE ID = (?)";
+        String updateSQL  = "UPDATE SanPham SET SoLuong = (?) WHERE ID = (?);";
+       
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement psSelect = con.prepareStatement(selectSQL);
+                PreparedStatement psUpdate  = con.prepareStatement(updateSQL);) {
+            
+            psSelect.setInt(1, ID);
+            ResultSet rs = psSelect.executeQuery();
+            
+            if (rs.next()) {
+                int SoLuongHienTai = rs.getInt("SoLuong");
+                int SoLuongMoi = SoLuongHienTai - SoLuongDaBan;
+                
+                psUpdate.setInt(1, SoLuongMoi);
+                psUpdate.setInt(2, ID);
+            }
+
+            int ketQua = psUpdate.executeUpdate();
+            return ketQua;
+        }
+        catch (SQLException e) {
+            return 0;
+        }
+    }
 }

@@ -19,4 +19,8 @@ public class GlobalState {
     public static int MaNV = 0;
     
     public static int MaKH = 0;
+    
+    public static int MaHDChon = 0;
+    
+    public static int MaHDChoChon = 0;
 }

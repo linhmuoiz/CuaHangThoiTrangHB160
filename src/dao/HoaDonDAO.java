@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import dto.HoaDonDTO;
+import enity.HoaDon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,12 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import utils.KetNoiDB;
-import enity.HoaDon;
 
-/**
- *
- * @author Thuy SCTV
- */
 public class HoaDonDAO {
     public List<HoaDonDTO> readHoaDon() {
     String sql = "SELECT hd.ID, kh.TenKH, kh.SDT, hd.ThanhTien, " +
@@ -60,7 +52,7 @@ public class HoaDonDAO {
 }
     
     public List<HoaDon> readHoaDonCho() {
-        String sql = "SELECT ID, NgayTao, TrangThai FROM HoaDon;";
+        String sql = "SELECT ID, NgayTao, TrangThai FROM HoaDon WHERE TrangThai != N'Hủy';";
         List<HoaDon> hoaDonLst = new ArrayList<HoaDon>();
         
         try (Connection con = KetNoiDB.getConnectDB(); 
@@ -83,12 +75,12 @@ public class HoaDonDAO {
     }
     
     public int createHoaDon(HoaDon hoaDon) {
-        String sql = "INSERT INTO HoaDon VALUES ( ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO HoaDon VALUES (?, ?, ?, ?, ?);";
        
         try (Connection con = KetNoiDB.getConnectDB(); 
                 PreparedStatement ps = con.prepareStatement(sql);) {
             
-            
+           
             ps.setInt(1, hoaDon.getMaKH());
             ps.setDouble(2, hoaDon.getThanhTien());
             ps.setString(3, hoaDon.getHinhThucTT());        
@@ -100,8 +92,58 @@ public class HoaDonDAO {
             return ketQua;
         }
         catch (SQLException e) {
-            System.out.println("SQLException");
-            System.out.println(e);
+            return 0;
+        }
+    }
+    
+    public int findHoaDonMoi() {
+        String sql = "SELECT TOP 1 ID FROM HoaDon ORDER BY ID DESC;";
+        
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getInt("ID"); 
+            }
+            return 0;
+        }
+        catch (SQLException e) {
+            return 0;
+        }
+    }
+    
+    public int updateHoaDon(int MaHD, String HinhThucThanhToan, String TrangThai) {
+        String sql = "UPDATE HoaDon SET HinhThucTT = (?), TrangThai = (?) WHERE ID = (?);";
+       
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
+            
+            ps.setString(1, HinhThucThanhToan);
+            ps.setString(2, TrangThai);
+            ps.setInt(3, MaHD);
+            
+            int ketQua = ps.executeUpdate();
+            return ketQua;
+        }
+        catch (SQLException e) {
+            return 0;
+        }
+    }
+    
+    public int updateHoaDonHuy(int MaHD) {
+        String sql = "UPDATE HoaDon SET TrangThai = N'Hủy' WHERE ID = ?;";
+       
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
+            
+            ps.setInt(1, MaHD);
+            
+            int ketQua = ps.executeUpdate();
+            return ketQua;
+        }
+        catch (SQLException e) {
             return 0;
         }
     }

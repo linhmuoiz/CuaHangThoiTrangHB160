@@ -5,6 +5,7 @@
 package dao;
 
 import dto.ChiTietHDDTO;
+import enity.ChiTietHD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,4 +63,50 @@ public class ChiTietHDDAO {
         catch (SQLException e) {
             return chiTietHoaDonLst;
         }
-    }}
+    }
+     public int createChiTietHD(ChiTietHD chiTietHD) {
+        String sql = "INSERT INTO ChiTietHD VALUES (?, ?, ?, ?);";
+       
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
+            
+            ps.setInt(1, chiTietHD.getMaHD());
+            ps.setInt(2, chiTietHD.getMaSP());
+            ps.setInt(3, chiTietHD.getSoLuong());
+            ps.setInt(4, chiTietHD.getMaKM());
+            
+            int ketQua = ps.executeUpdate();
+            return ketQua;
+        }
+        catch (SQLException e) {
+            return 0;
+        }
+    }
+    
+    public List<ChiTietHD> findChiTietHD(int maHoaDon) {
+        String sql = "SELECT * FROM ChiTietHD WHERE MaHD = (?);";
+        List<ChiTietHD> chiTietHDLst = new ArrayList<ChiTietHD>();
+        
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
+            
+            ps.setInt(1, maHoaDon);
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int MaHD = rs.getInt("MaHD");
+                int MaSP = rs.getInt("MaSP");
+                int SoLuong = rs.getInt("SoLuong");
+                int MaKM = rs.getInt("MaKM");
+                
+                ChiTietHD chiTietHD = new ChiTietHD(MaHD, MaSP, SoLuong, MaKM);
+                chiTietHDLst.add(chiTietHD);
+            }
+            return chiTietHDLst;
+        }
+        catch (SQLException e) {
+            return chiTietHDLst;
+        }
+    }
+}

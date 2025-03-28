@@ -168,4 +168,28 @@ public class KhuyenMaiDAO {
             return 0;
         }
     }
+    public KhuyenMai findKhuyenMai(String codeKhuyenMai) {
+        String sql = "SELECT TOP 1 * FROM KhuyenMai "
+                + "WHERE CodeGiamGia = (?) "
+                + "AND NgayBD <= GETDATE() "
+                + "AND NgayKT >= GETDATE();";
+        
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
+            
+            ps.setString(1, codeKhuyenMai);
+            
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int MaKM = rs.getInt("MaKM");
+                int GoiGiamGia = rs.getInt("GoiGiamGia");
+                return new KhuyenMai(MaKM, GoiGiamGia);
+            }
+            return null;
+        }
+        catch (SQLException e) {
+            return null;
+        }
+    }
+
 }

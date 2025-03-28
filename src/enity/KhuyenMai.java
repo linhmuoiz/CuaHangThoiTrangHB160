@@ -18,6 +18,10 @@ public class KhuyenMai {
 
     public KhuyenMai() {
     }
+        public KhuyenMai(int MaKM, int GoiGiamGia) {
+        this.MaKM = MaKM;
+        this.GoiGiamGia = GoiGiamGia;
+    }
 
     public KhuyenMai(int MaKM, String TenKM, String CodeGiamGia, int GoiGiamGia, String NgayBatDau, String NgayKetThuc) {
         this.MaKM = MaKM;

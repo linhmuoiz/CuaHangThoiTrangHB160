@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package enity;
 
-/**
- *
- * @author Thuy SCTV
- */
 public class ChiTietHD {
     private int ID;
     private int MaHD;
@@ -16,6 +8,13 @@ public class ChiTietHD {
     private int MaKM;
 
     public ChiTietHD() {
+    }
+
+    public ChiTietHD(int MaHD, int MaSP, int SoLuong, int MaKM) {
+        this.MaHD = MaHD;
+        this.MaSP = MaSP;
+        this.SoLuong = SoLuong;
+        this.MaKM = MaKM;
     }
 
     public ChiTietHD(int ID, int MaHD, int MaSP, int SoLuong, int MaKM) {

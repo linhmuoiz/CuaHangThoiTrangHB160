@@ -36,9 +36,8 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
                 hoaDon.getID(),
                 hoaDon.getTenKH(),
                 hoaDon.getSDT(),
-                hoaDon.getThanhTien(),
                 hoaDon.getHinhThucTT(),
-                hoaDon.getTenNV(),
+                hoaDon.getThanhTien(),
                 hoaDon.getNgayTao(),
                 hoaDon.getTrangThai()
             });
@@ -178,7 +177,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Hoá Đơn", "Tên Khách Hàng", "Số Điện Thoại", "Hình Thức Thanh Toán", "Tổng Tiền", "Tên Nhân Viên", "Ngày Tạo", "Trạng Thái"
+                "Mã Hoá Đơn", "Tên Khách Hàng", "Số Điện Thoại", "Hình Thức Thanh Toán", "Tổng Tiền", "Ngày Tạo", "Trạng Thái"
             }
         ));
         tblDanhMuc.setColorBackgoundHead(new java.awt.Color(128, 0, 0));

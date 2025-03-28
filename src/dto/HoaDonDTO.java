@@ -16,20 +16,19 @@ public class HoaDonDTO {
     private String SDT;
     private double ThanhTien;
     private String HinhThucTT;
-    private String TenNV;
+    
     private Date NgayTao;
     private String TrangThai;
 
     public HoaDonDTO() {
     }
 
-    public HoaDonDTO(int ID, String TenKH, String SDT, double ThanhTien, String HinhThucTT, String TenNV, Date NgayTao, String TrangThai) {
+    public HoaDonDTO(int ID, String TenKH, String SDT, double ThanhTien, String HinhThucTT, Date NgayTao, String TrangThai) {
         this.ID = ID;
         this.TenKH = TenKH;
         this.SDT = SDT;
         this.ThanhTien = ThanhTien;
         this.HinhThucTT = HinhThucTT;
-        this.TenNV = TenNV;
         this.NgayTao = NgayTao;
         this.TrangThai = TrangThai;
     }
@@ -74,14 +73,6 @@ public class HoaDonDTO {
         this.HinhThucTT = HinhThucTT;
     }
 
-    public String getTenNV() {
-        return TenNV;
-    }
-
-    public void setTenNV(String TenNV) {
-        this.TenNV = TenNV;
-    }
-
     public Date getNgayTao() {
         return NgayTao;
     }
@@ -97,5 +88,5 @@ public class HoaDonDTO {
     public void setTrangThai(String TrangThai) {
         this.TrangThai = TrangThai;
     }
-    
+
 }

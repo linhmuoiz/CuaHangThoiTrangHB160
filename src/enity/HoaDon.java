@@ -3,15 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package enity;
-
 import java.util.Date;
 
-/**
- *
- * @author Thuy SCTV
- */
-public class HoaDon {private int ID;
-    private int MaNV;
+public class HoaDon {
+    private int ID;
     private int MaKH;
     private double ThanhTien;
     private String HinhThucTT;
@@ -21,8 +16,7 @@ public class HoaDon {private int ID;
     public HoaDon() {
     }
 
-    public HoaDon(int MaNV, int MaKH, double ThanhTien, String HinhThucTT, Date NgayTao, String TrangThai) {
-        this.MaNV = MaNV;
+    public HoaDon(int MaKH, double ThanhTien, String HinhThucTT, Date NgayTao, String TrangThai) {
         this.MaKH = MaKH;
         this.ThanhTien = ThanhTien;
         this.HinhThucTT = HinhThucTT;
@@ -38,9 +32,8 @@ public class HoaDon {private int ID;
         this.TrangThai = TrangThai;
     } 
 
-    public HoaDon(int ID, int MaNV, int MaKH, double ThanhTien, String HinhThucTT, Date NgayTao, String TrangThai) {
+    public HoaDon(int ID, int MaKH, double ThanhTien, String HinhThucTT, Date NgayTao, String TrangThai) {
         this.ID = ID;
-        this.MaNV = MaNV;
         this.MaKH = MaKH;
         this.ThanhTien = ThanhTien;
         this.HinhThucTT = HinhThucTT;
@@ -56,13 +49,8 @@ public class HoaDon {private int ID;
         this.ID = ID;
     }
 
-    public int getMaNV() {
-        return MaNV;
-    }
-
-    public void setMaNV(int MaNV) {
-        this.MaNV = MaNV;
-    }
+ 
+  
 
     public int getMaKH() {
         return MaKH;
@@ -103,6 +91,5 @@ public class HoaDon {private int ID;
     public void setTrangThai(String TrangThai) {
         this.TrangThai = TrangThai;
     }
-    
     
 }

@@ -4,6 +4,11 @@
  */
 package view;
 
+import dao.ThongKeDAO;
+import dto.SanPhamBanChayDTO;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
 /**
  *
  * @author admim
@@ -15,8 +20,47 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
      */
     public QuanLyThongKeJpanel() {
         initComponents();
+        tinhDoanhThu();
+        tinhSoHoaDon();
+        tinhSoSanPhamBanRa();
+        tinhTopSanPhamBanChay();
     }
-
+    
+    public void tinhDoanhThu() {
+        // Tổng tiền của tất cả đơn hàng có trạng thái Hoàn thành
+        ThongKeDAO thongKeDAO = new ThongKeDAO();
+        double doanhThu = thongKeDAO.tinhDoanhThu();
+        jLabel2.setText(String.valueOf(doanhThu));
+    }
+    
+    public void tinhSoHoaDon() {
+        // Tổng đơn hàng có trạng thái Hoàn thành
+        ThongKeDAO thongKeDAO = new ThongKeDAO();
+        double soHoaDon = thongKeDAO.tinhSoHoaDon();
+        jLabel5.setText(String.valueOf(soHoaDon));
+    }
+    
+    public void tinhSoSanPhamBanRa() {
+        ThongKeDAO thongKeDAO = new ThongKeDAO();
+        double soSanPhamBanRa = thongKeDAO.tinhSoSanPhamBanRa();
+        jLabel8.setText(String.valueOf(soSanPhamBanRa));
+    }
+    
+    public void tinhTopSanPhamBanChay() {
+        DefaultTableModel tableSanPham = (DefaultTableModel) this.rSTableMetro1.getModel();
+        tableSanPham.setRowCount(0);
+        
+        ThongKeDAO thongKeDAO = new ThongKeDAO();
+        List<SanPhamBanChayDTO> sanPhamLst = thongKeDAO.tinhTopSanPhamBanChay();
+        
+        for (SanPhamBanChayDTO sanPham : sanPhamLst) {
+            tableSanPham.addRow(new Object[] {
+                sanPham.getMaSP(),
+                sanPham.getTenSP(),
+                sanPham.getSoLuongBanRa(),
+            });
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,7 +102,6 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
         jPanel11.setPreferredSize(new java.awt.Dimension(1300, 300));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/shopping-cart-128.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(128, 0, 0));
@@ -73,15 +116,15 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(62, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(61, 61, 61)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,9 +132,11 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel2)))
                 .addGap(27, 27, 27))
         );
 
@@ -108,22 +153,21 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
         jLabel5.setText("0");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/money-2-128.png"))); // NOI18N
-        jLabel6.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(93, 93, 93)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,9 +175,11 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel5)))
                 .addGap(27, 27, 27))
         );
 
@@ -142,7 +188,6 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
         jPanel13.setPreferredSize(new java.awt.Dimension(1300, 300));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/product-128.png"))); // NOI18N
-        jLabel7.setText("jLabel1");
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(128, 0, 0));
@@ -157,15 +202,15 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(102, 102, 102)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,9 +218,11 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel8)))
                 .addGap(27, 27, 27))
         );
 

@@ -153,5 +153,19 @@ public class KhuyenMaiDAO {
             return 0;
         }
     }
-
+    
+    
+    public int XoaKhuyenMai(int MaKM){
+        try (Connection conn = KetNoiDB.getConnectDB())  {
+            String sql = "DELETE FROM KhuyenMai WHERE MaKM = ?";
+            PreparedStatement  ppStm = conn.prepareStatement(sql);
+            
+            ppStm.setInt(1, MaKM);
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

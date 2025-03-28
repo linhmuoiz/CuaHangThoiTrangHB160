@@ -144,7 +144,7 @@ public class NhanVienDAO {
         }
     }
     public int updateMatKhauDN(String matKhauHienTai, String matKhauMoi) {
-        String sql = "UPDATE NhanVien SET MatKhauDN = ? WHERE SDT = ? AND MatKhauDN = ?;";
+        String sql = "UPDATE NhanVien SET MatKhauDN = ? WHERE SDT = ? AND MatKhauDN = ?";
         
         try (Connection con = KetNoiDB.getConnectDB(); 
                 PreparedStatement ps = con.prepareStatement(sql);) {
@@ -154,9 +154,13 @@ public class NhanVienDAO {
             ps.setString(3, matKhauHienTai);
             
             int ketQua = ps.executeUpdate();
+            System.out.println("KetQuaDOIMK: "+ketQua);
+            System.out.println("Global SDT: "+GlobalState.SDT);
+            
             return ketQua;
         }
         catch (SQLException e) {
+            e.printStackTrace();
             return 0;
         }
     }

@@ -181,7 +181,7 @@ public class DoiMatKhauJpanel extends javax.swing.JPanel {
 
         NhanVienDAO nhanVienDAO = new NhanVienDAO();
         int ketQua = nhanVienDAO.updateMatKhauDN(matKhauHienTai, matKhauMoi);
-        
+        System.out.println(""+ketQua);
         if (ketQua == 1) {
             JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
         } else {

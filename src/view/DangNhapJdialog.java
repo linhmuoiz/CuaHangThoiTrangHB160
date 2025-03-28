@@ -6,6 +6,7 @@ package view;
 
 import dao.NhanVienDAO;
 import javax.swing.JOptionPane;
+import utils.GlobalState;
 import utils.XImage;
 
 /**
@@ -204,6 +205,7 @@ public class DangNhapJdialog extends javax.swing.JDialog {
             isLogged = nvDAO.checkLogin(sdt, pass);
             if (isLogged == true){
 //                System.out.println("Logged in");
+                GlobalState.SDT = sdt;
                 this.dispose();
             }
             else{

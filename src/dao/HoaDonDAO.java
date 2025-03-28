@@ -2,6 +2,7 @@ package dao;
 
 import dto.HoaDonDTO;
 import enity.HoaDon;
+import enity.NhanVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -147,4 +148,33 @@ public class HoaDonDAO {
             return 0;
         }
     }
+//    public List<HoaDon> TimKiemHoaDon(String TimKiem){
+//        List<HoaDon> hoaDonLst = new ArrayList<>();
+//        try (Connection conn = KetNoiDB.getConnectDB()) {
+//            String sql = "SELECT * FROM HoaDon WHERE ID LIKE ? OR HinhThucTT LIKE ? OR TrangThai LIKE ? ";
+//            PreparedStatement ppStm = conn.prepareStatement(sql);
+//            
+//            ppStm.setString(1, "%" + TimKiem + "%");
+//            ppStm.setString(2, "%" + TimKiem + "%");
+//            ppStm.setString(3, "%" + TimKiem + "%");
+//           ResultSet rs = ppStm.executeQuery();
+//           
+//           while (rs.next()) {
+//                int ID = rs.getInt("ID");
+//                String tenKH = rs.getString("MaKH");
+//                String SDT = rs.getString("SDT");
+//                String HTTT = rs.getString("DiaChi");
+//                String tongTien = rs.getString("GioiTinh");
+//                String ngayTao = rs.getString("");
+//                
+//                HoaDon hoaDon = 
+//                hoaDonLst.add(hoaDon);
+//            }
+//           return hoaDonLst;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return hoaDonLst;
+//        }
+//    }
+
 }

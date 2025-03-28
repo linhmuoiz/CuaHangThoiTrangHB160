@@ -4,6 +4,11 @@
  */
 package view;
 
+import dao.KhuyenMaiDAO;
+import enity.KhuyenMai;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author admim
@@ -15,6 +20,27 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
      */
     public QuanLyKhuyenMaiJpanel() {
         initComponents();
+        fillTable();
+    }
+    
+    private void fillTable() {
+        KhuyenMaiDAO khuyenMaiDAO = new KhuyenMaiDAO();
+        List<KhuyenMai> khuyenMaiLst = khuyenMaiDAO.readKhuyenMai();
+
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        model.setRowCount(0);
+
+        for (KhuyenMai khuyenMai : khuyenMaiLst) {
+            Object[] rowdata = {
+                khuyenMai.getMaKM(),
+                khuyenMai.getTenKM(),
+                khuyenMai.getCodeGiamGia(),
+                khuyenMai.getGoiGiamGia(),
+                khuyenMai.getNgayBatDau(),
+                khuyenMai.getNgayKetThuc()
+            };
+            model.addRow(rowdata);
+        }
     }
 
     /**
@@ -28,8 +54,6 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
 
         jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        rSTableMetro1 = new rojerusan.RSTableMetro();
         jLabel17 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jTextField9 = new javax.swing.JTextField();
@@ -40,6 +64,8 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         jDateChooser8 = new com.toedter.calendar.JDateChooser();
         jButton16 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblDanhSach = new rojerusan.RSTableMetro();
         jPanel7 = new javax.swing.JPanel();
         jTextField24 = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
@@ -68,37 +94,6 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(246, 225, 225));
         jPanel6.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));
         jPanel6.setPreferredSize(new java.awt.Dimension(1300, 400));
-
-        rSTableMetro1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mã Khuyến Mãi", "Tên Giảm Giá", "Code Giảm Giá", "Gói Giảm Giá", "Ngày Bắt Đầu", "Ngày Két Thúc"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        rSTableMetro1.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorBordeFilas(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorBordeHead(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorSelBackgound(new java.awt.Color(128, 0, 0));
-        rSTableMetro1.setColorSelForeground(new java.awt.Color(246, 225, 225));
-        rSTableMetro1.setFuenteHead(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        rSTableMetro1.setMinimumSize(new java.awt.Dimension(60, 20));
-        rSTableMetro1.setMultipleSeleccion(false);
-        rSTableMetro1.setPreferredSize(new java.awt.Dimension(300, 40));
-        jScrollPane1.setViewportView(rSTableMetro1);
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(128, 0, 0));
@@ -151,14 +146,15 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         jLabel18.setText("Ngày Bắt Đầu:");
 
         jDateChooser3.setBackground(new java.awt.Color(246, 225, 225));
+        jDateChooser3.setDateFormatString("yyyy-MM-dd");
 
         jLabel19.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(128, 0, 0));
         jLabel19.setText("Ngày Kết Thúc: ");
 
         jDateChooser8.setBackground(new java.awt.Color(246, 225, 225));
+        jDateChooser8.setDateFormatString("yyyy-MM-dd");
 
-        jButton16.setBackground(new java.awt.Color(255, 255, 255));
         jButton16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton16.setForeground(new java.awt.Color(128, 0, 0));
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search-13-24.png"))); // NOI18N
@@ -205,13 +201,48 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tblDanhSach.setBackground(new java.awt.Color(246, 225, 225));
+        tblDanhSach.setForeground(new java.awt.Color(255, 255, 255));
+        tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã Khuyến Mã", "Tên Giảm Giá", "Code Giảm Giá", "Gói Giảm Giá", "Ngày Bắt Đầu", "Ngày Kết Thúc"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDanhSach.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
+        tblDanhSach.setColorBordeFilas(new java.awt.Color(128, 0, 0));
+        tblDanhSach.setColorBordeHead(new java.awt.Color(246, 225, 225));
+        tblDanhSach.setColorFilasBackgound1(new java.awt.Color(246, 225, 225));
+        tblDanhSach.setColorFilasBackgound2(new java.awt.Color(246, 225, 225));
+        tblDanhSach.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
+        tblDanhSach.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
+        tblDanhSach.setColorForegroundHead(new java.awt.Color(246, 225, 225));
+        tblDanhSach.setColorSelBackgound(new java.awt.Color(128, 0, 0));
+        tblDanhSach.setColorSelForeground(new java.awt.Color(246, 225, 225));
+        tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDanhSachMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblDanhSach);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,15 +251,15 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         jPanel7.setBackground(new java.awt.Color(246, 225, 225));
@@ -266,6 +297,8 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         });
 
         jDateChooser10.setBackground(new java.awt.Color(246, 225, 225));
+        jDateChooser10.setDateFormatString("yyyy-MM-dd");
+        jDateChooser10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel46.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel46.setForeground(new java.awt.Color(128, 0, 0));
@@ -273,6 +306,8 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
 
         jDateChooser11.setBackground(new java.awt.Color(246, 225, 225));
         jDateChooser11.setForeground(new java.awt.Color(128, 0, 0));
+        jDateChooser11.setDateFormatString("yyyy-MM-dd");
+        jDateChooser11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel47.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(128, 0, 0));
@@ -295,7 +330,6 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton18.setBackground(new java.awt.Color(255, 255, 255));
         jButton18.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jButton18.setForeground(new java.awt.Color(128, 0, 0));
         jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add-user-3-48.png"))); // NOI18N
@@ -307,7 +341,6 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton19.setBackground(new java.awt.Color(255, 255, 255));
         jButton19.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jButton19.setForeground(new java.awt.Color(128, 0, 0));
         jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete-48.png"))); // NOI18N
@@ -319,7 +352,6 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
             }
         });
 
-        jButton20.setBackground(new java.awt.Color(255, 255, 255));
         jButton20.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jButton20.setForeground(new java.awt.Color(128, 0, 0));
         jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/available-updates-48.png"))); // NOI18N
@@ -332,14 +364,14 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130))
+                .addGap(37, 37, 37))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
@@ -358,7 +390,7 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
                         .addComponent(jLabel48)
                         .addGap(18, 18, 18)
                         .addComponent(rSComboMetro6, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -393,7 +425,7 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
                     .addComponent(jButton20)
                     .addComponent(jButton18)
                     .addComponent(jButton19))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 28)); // NOI18N
@@ -456,6 +488,36 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField24jTextField12ActionPerformed
 
+    private void tblDanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMouseClicked
+        // TODO add your handling code here:
+        int dongDangChon = tblDanhSach.getSelectedRow();
+
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        SanPhamDAO sanPhamDAO = new SanPhamDAO();
+        int ID = (int) tblDanhSach.getValueAt(dongDangChon, 0);
+        imagePath = sanPhamDAO.getHinhAnhSanPham(ID);
+
+        String TenSanPham = model.getValueAt(dongDangChon, 1).toString();
+        System.out.println("TenSP: " + TenSanPham);
+        String Gia = model.getValueAt(dongDangChon, 2).toString();
+        String SoLuong = model.getValueAt(dongDangChon, 3).toString();
+        String TrangThai = model.getValueAt(dongDangChon, 4).toString();
+        String DanhMuc = model.getValueAt(dongDangChon, 5).toString();
+        String MauSac = model.getValueAt(dongDangChon, 6).toString();
+        String KichThuoc = model.getValueAt(dongDangChon, 7).toString();
+
+        txtTenSanPham.setText(TenSanPham);
+        txtGia.setText(String.valueOf(Gia));
+        txtSoLuong.setText(String.valueOf(SoLuong));
+        cboTrangThai.setSelectedItem(TrangThai);
+        cboDanhMuc.setSelectedItem(DanhMuc);
+        cboMauSac.setSelectedItem(MauSac);
+        cboKichThuoc.setSelectedItem(KichThuoc);
+
+        System.out.println("Đường dẫn hiển thị ảnh :" + imagePath);
+        displayImage(imagePath);
+    }//GEN-LAST:event_tblDanhSachMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton15;
@@ -481,11 +543,11 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField24;
     private javax.swing.JTextField jTextField26;
     private javax.swing.JTextField jTextField9;
     private rojerusan.RSComboMetro rSComboMetro6;
-    private rojerusan.RSTableMetro rSTableMetro1;
+    private rojerusan.RSTableMetro tblDanhSach;
     // End of variables declaration//GEN-END:variables
 }

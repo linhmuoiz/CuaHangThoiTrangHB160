@@ -18,7 +18,7 @@ import utils.KetNoiDB;
  * @author Admin
  */
 public class ChiTietHDDAO {
-     public List<ChiTietHDDTO> readChiTietHD() {
+     public List<ChiTietHDDTO> readChiTietHD(int MaHD) {
         String sql = "SELECT \n" +
                 "    cthd.MaSP, \n" +
                 "    sp.TenSP, \n" +
@@ -33,12 +33,15 @@ public class ChiTietHDDAO {
                 "INNER JOIN DanhMuc dm ON dm.MaDM = sp.MaDM\n" +
                 "INNER JOIN MauSac ms ON ms.MaMS = sp.MaMS\n" +
                 "INNER JOIN KichThuoc kt ON kt.MaKT = sp.MaKT\n" +
-                "LEFT JOIN KhuyenMai km ON km.MaKM = cthd.MaKM;";
+                "LEFT JOIN KhuyenMai km ON km.MaKM = cthd.MaKM\n" +
+                "WHERE cthd.MaHD = ?;";
         
         List<ChiTietHDDTO> chiTietHoaDonLst = new ArrayList<ChiTietHDDTO>();
         
         try (Connection con = KetNoiDB.getConnectDB(); 
                 PreparedStatement ps = con.prepareStatement(sql);) {
+            
+            ps.setInt(1, MaHD);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -59,5 +62,4 @@ public class ChiTietHDDAO {
         catch (SQLException e) {
             return chiTietHoaDonLst;
         }
-    }
-}
+    }}

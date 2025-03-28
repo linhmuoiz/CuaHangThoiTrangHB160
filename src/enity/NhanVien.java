@@ -9,9 +9,11 @@ package enity;
  * @author Thuy SCTV
  */
 public class NhanVien {
-     private int ID;
+     
+    // 4. Hiển thị toàn bộ danh sách nhân viên vào bảng
+    private int ID;
     //
-    
+
     private String TenNV;
     private String SDT;
     private String MatKhauDN;
@@ -20,9 +22,8 @@ public class NhanVien {
 
     public NhanVien() {
     }
-    
-    // 4. Hiển thị toàn bộ danh sách nhân viên vào bảng
-    public NhanVien(int ID, String TenNV, String SDT, String GioiTinh, String DiaChi) {
+
+    public NhanVien(int ID, String TenNV, String SDT, String MatKhauDN, String DiaChi, String GioiTinh) {
         this.ID = ID;
         this.TenNV = TenNV;
         this.SDT = SDT;
@@ -30,8 +31,14 @@ public class NhanVien {
         this.DiaChi = DiaChi;
         this.GioiTinh = GioiTinh;
     }
-    //
-    
+
+    public NhanVien(int ID, String TenNV, String SDT, String GioiTinh, String DiaChi) {
+        this.ID = ID;
+        this.TenNV = TenNV;
+        this.SDT = SDT;
+        this.GioiTinh = GioiTinh;
+        this.DiaChi = DiaChi;
+    }
 
     public NhanVien(String TenNV, String SDT, String MatKhauDN, String DiaChi, String GioiTinh) {
         this.TenNV = TenNV;
@@ -41,16 +48,13 @@ public class NhanVien {
         this.GioiTinh = GioiTinh;
     }
 
-    // 4. Hiển thị toàn bộ danh sách nhân viên vào bảng
-    public int getId() {
+    public int getID() {
         return ID;
     }
 
-    public void setId(int ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
-    //
-    
 
     public String getTenNV() {
         return TenNV;
@@ -91,6 +95,6 @@ public class NhanVien {
     public void setGioiTinh(String GioiTinh) {
         this.GioiTinh = GioiTinh;
     }
-    
+
     
 }

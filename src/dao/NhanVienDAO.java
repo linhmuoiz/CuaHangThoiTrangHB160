@@ -78,6 +78,71 @@ public class NhanVienDAO {
             return 0;
         }
     }
+    // 4.1 Xóa Nhân viên
+    public int XoaNhanVien(int ID) {
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "DELETE FROM NhanVien WHERE ID = ?";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+
+            ppStm.setInt(1, ID);
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Lỗi");
+            return 0;
+        }
+    }
+
+    // 4.2 Sửa nhân viên 
+    public int SuaNhanVien(NhanVien nhanvien, int id) {
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "UPDATE NhanVien SET TenNV = ?, SDT = ?, MatKhauDN = ?, DiaChi = ?, GioiTinh = ? WHERE ID = ?";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+
+            ppStm.setString(1, nhanvien.getTenNV());
+            ppStm.setString(2, nhanvien.getSDT());
+            ppStm.setString(3, nhanvien.getMatKhauDN());
+            ppStm.setString(4, nhanvien.getDiaChi());
+            ppStm.setString(5, nhanvien.getGioiTinh());
+            ppStm.setInt(6, id);
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+            System.out.println("Lỗi");
+            return 0;
+
+        }
+    }
+
+    public NhanVien getNhanVienById(int id) {
+        String sql = "SELECT * FROM NhanVien WHERE id = ?";
+        int ID = 0;
+        String tenNV = null;
+        String gioi = null;
+        String SDT = null;
+        String diaChi = null;
+        String matKhau = null;
+        try (Connection conn = KetNoiDB.getConnectDB(); // Sử dụng kết nối từ KetNoiDB
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+            // Đặt giá trị cho dấu hỏi trong câu lệnh SQL
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                ID = rs.getInt("id");
+                tenNV = rs.getString("TenNV");
+                gioi = rs.getString("GioiTinh");
+                SDT = rs.getString("SDT");
+                diaChi = rs.getString("DiaChi");
+                matKhau = rs.getString("MatKhauDN");
+            }
+            return new NhanVien(ID, tenNV, SDT, matKhau, diaChi, gioi);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Trả về đối tượng NhanVien nếu tìm thấy, ngược lại trả về null
+            return null;
+        }
+    }
     public int updateMatKhauDN(String matKhauHienTai, String matKhauMoi) {
         String sql = "UPDATE NhanVien SET MatKhauDN = ? WHERE SDT = ? AND MatKhauDN = ?;";
         

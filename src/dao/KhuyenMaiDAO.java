@@ -133,4 +133,25 @@ public class KhuyenMaiDAO {
             return 0;
         }
     }
+    
+    public int SuaKhuyenMai(KhuyenMai khuyenMai){
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "UPDATE KhuyenMai SET TenKM = ?, CodeGiamGia= ?, GoiGiamGia= ?, NgayBD= ?, NgayKT= ? WHERE MaKM = ?";
+            
+            PreparedStatement  ppStm = conn.prepareStatement(sql);
+            
+            ppStm.setString(1, khuyenMai.getTenKM());
+            ppStm.setString(2, khuyenMai.getCodeGiamGia());
+            ppStm.setInt(3, khuyenMai.getGoiGiamGia());
+            ppStm.setString(4, khuyenMai.getNgayBatDau());
+            ppStm.setString(5, khuyenMai.getNgayKetThuc());
+            ppStm.setInt(6, khuyenMai.getMaKM());
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 }

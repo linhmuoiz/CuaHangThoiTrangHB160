@@ -15,6 +15,7 @@ import utils.KetNoiDB;
  * @author Hp
  */
 public class KhuyenMaiDAO {
+
     public List<KhuyenMai> readKhuyenMai() {
         List<KhuyenMai> khuyenMaiLst = new ArrayList<>();
         try (Connection conn = KetNoiDB.getConnectDB()) {
@@ -40,7 +41,7 @@ public class KhuyenMaiDAO {
             return khuyenMaiLst;
         }
     }
-    
+
     public List<KhuyenMai> TimKiemKhuyenMai(String TimKiem) {
         List<KhuyenMai> khuyenMaiLst = new ArrayList<>();
         try (Connection conn = KetNoiDB.getConnectDB()) {
@@ -74,26 +75,26 @@ public class KhuyenMaiDAO {
                 khuyenMaiLst.add(khuyenMai);
             }
             return khuyenMaiLst;
-        } catch (SQLException e) { 
+        } catch (SQLException e) {
             System.err.println("Lỗi TimKiemKhuyenMai: " + e.getMessage());
             e.printStackTrace();
             return khuyenMaiLst;
         }
     }
-        
-        public List<KhuyenMai>  TimKiemSanPhamTheoNgay(String ngayBatDau, String ngayKetThuc){
+
+    public List<KhuyenMai> TimKiemSanPhamTheoNgay(String ngayBatDau, String ngayKetThuc) {
         List<KhuyenMai> khuyenMaiLst = new ArrayList<>();
         try (Connection conn = KetNoiDB.getConnectDB()) {
             String sql = "SELECT * FROM KhuyenMai WHERE NgayBD >= ? AND NgayKT <= ?";
-            
+
             System.out.println("Executing SQL Query: " + sql);
             PreparedStatement ppStm = conn.prepareStatement(sql);
-            
+
             ppStm.setString(1, ngayBatDau);
             ppStm.setString(2, ngayKetThuc);
-            
+
             ResultSet rs = ppStm.executeQuery();
-            
+
             while (rs.next()) {
                 int MaKM = rs.getInt("MaKM");
                 String TenKM = rs.getString("TenKM");
@@ -113,4 +114,23 @@ public class KhuyenMaiDAO {
         }
     }
 
+    public int TaoKhuyenMai(KhuyenMai khuyenMai) {
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "INSERT INTO KhuyenMai (TenKM, CodeGiamGia, GoiGiamGia, NgayBD, NgayKT) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+
+//            ppStm.setInt(1, khuyenMai.getMaKM());
+            ppStm.setString(1, khuyenMai.getTenKM());
+            ppStm.setString(2, khuyenMai.getCodeGiamGia());
+            ppStm.setInt(3, khuyenMai.getGoiGiamGia());
+            ppStm.setString(4, khuyenMai.getNgayBatDau());
+            ppStm.setString(5, khuyenMai.getNgayKetThuc());
+
+            int ketQua = ppStm.executeUpdate();
+            return ketQua;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

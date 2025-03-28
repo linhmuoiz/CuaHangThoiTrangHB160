@@ -449,7 +449,7 @@
                           <EmptySpace min="-2" pref="323" max="-2" attributes="0"/>
                           <Component id="jLabel48" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="cboCodeGiamGia" min="-2" pref="300" max="-2" attributes="0"/>
+                          <Component id="cboGoiGiamGia" min="-2" pref="300" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="163" max="32767" attributes="0"/>
@@ -478,7 +478,7 @@
                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel48" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cboCodeGiamGia" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboGoiGiamGia" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -633,7 +633,7 @@
             <Property name="text" type="java.lang.String" value="G&#xf3;i Gi&#x1ea3;m Gi&#xe1; Theo %:"/>
           </Properties>
         </Component>
-        <Component class="rojerusan.RSComboMetro" name="cboCodeGiamGia">
+        <Component class="rojerusan.RSComboMetro" name="cboGoiGiamGia">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="e1" red="f6" type="rgb"/>
@@ -665,7 +665,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboCodeGiamGiarSComboMetro3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboGoiGiamGiarSComboMetro3ActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton18">

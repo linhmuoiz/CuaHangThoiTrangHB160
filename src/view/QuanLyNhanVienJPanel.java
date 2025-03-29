@@ -763,13 +763,15 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int dongDangChon = tblNhanVien.getSelectedRow();
+        
+        if (dongDangChon != -1){
         String TenNV = jTextField3.getText();
         String DiaChia = jTextField4.getText();
         String SDT = jTextField2.getText();
         String MK = new String(jPasswordField1.getPassword());  // Lấy mật khẩu từ jPasswordField
         String gioiTinh = jRadioButton1.isSelected() ? "Nam" : "Nữ";
 
-        int dongDangChon = tblNhanVien.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         int ID = (int) model.getValueAt(dongDangChon, 0);
         if (TenNV.isBlank()) {
@@ -806,6 +808,10 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Sửa Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để sửa", "Error" ,JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
@@ -837,7 +843,21 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String timKiem = txtTimKiem.getText();
         if (timKiem.isBlank() == true) {
-            JOptionPane.showMessageDialog(btnTimKiem, "Vui lòng không để trống ô tìm kiếm");
+            NhanVienDAO nhanVienDAO = new NhanVienDAO();
+            List<NhanVien> nhanVienLst = nhanVienDAO.readNhanVien();
+
+            DefaultTableModel tableNhanVien = (DefaultTableModel) this.tblNhanVien.getModel();
+            tableNhanVien.setRowCount(0);
+
+            for (NhanVien nhanVien : nhanVienLst) {
+                tableNhanVien.addRow(new Object[]{
+                    nhanVien.getID(),
+                    nhanVien.getTenNV(),
+                    nhanVien.getGioiTinh(),
+                    nhanVien.getSDT(),
+                    nhanVien.getDiaChi()
+                });
+            }
         } else {
             NhanVienDAO nhanVienDAO = new NhanVienDAO();
             List<NhanVien> nhanVienLst = nhanVienDAO.TimKiemNhanVien(timKiem);

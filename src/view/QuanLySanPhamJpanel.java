@@ -677,6 +677,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         int dongDangChon = tblDanhSach.getSelectedRow();
+        if (dongDangChon != -1){
         DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
         int ID = (int) model.getValueAt(dongDangChon, 0);
         
@@ -689,6 +690,10 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Xoá Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để xóa", "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
@@ -697,6 +702,9 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        
+        int dongDangChon = tblDanhSach.getSelectedRow();
+        if (dongDangChon != -1){
         String TenSP = txtTenSanPham.getText();
         String Gia = txtGia.getText();
         String SoLuong = txtSoLuong.getText();
@@ -704,8 +712,6 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         String DanhMuc = (String) cboDanhMuc.getSelectedItem();
         String MauSac = (String) cboMauSac.getSelectedItem();
         String KichThuoc = (String) cboKichThuoc.getSelectedItem();
-        
-        int dongDangChon = tblDanhSach.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
         int ID = (int) model.getValueAt(dongDangChon, 0);
         
@@ -767,6 +773,10 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             FillTable();
         } else {
             JOptionPane.showMessageDialog(this, "Sửa Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để sửa", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 

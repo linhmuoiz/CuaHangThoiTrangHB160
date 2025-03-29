@@ -139,7 +139,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     }
 
     private void sayMessage(String Message) {
-        JOptionPane.showMessageDialog(rSComboMetro4, Message);
+        JOptionPane.showMessageDialog(this, Message);
     }
 
     /**
@@ -1188,8 +1188,8 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         String TenKH = jTextField9.getText();
         String SDT = jTextField10.getText();
 
-        if (TenKH.isBlank() == true || SDT.isBlank() == true) {
-            this.sayMessage("Vui lòng không để trống các ô nhập dũ liệu");
+        if (SDT.isBlank() == true) {
+            this.sayMessage("Vui lòng không để trống các ô nhập SDT");
         } else {
             KhachHangDAO khachHangDAO = new KhachHangDAO();
             KhachHang ketQua = khachHangDAO.findKhachHang(TenKH, SDT);

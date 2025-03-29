@@ -382,6 +382,11 @@ public class MainForm extends javax.swing.JFrame {
         labelDangXuat.setForeground(new java.awt.Color(128, 0, 0));
         labelDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/door-5-48.png"))); // NOI18N
         labelDangXuat.setText("  Đăng Xuất");
+        labelDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelDangXuatMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelDangXuatLayout = new javax.swing.GroupLayout(panelDangXuat);
         panelDangXuat.setLayout(panelDangXuatLayout);
@@ -627,6 +632,13 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         showPanel(new QuanLyDanhMucJpanel());
     }//GEN-LAST:event_PanelDanhMucMouseClicked
+
+    private void labelDangXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelDangXuatMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        MainForm main = new MainForm();
+        main.setVisible(true);
+    }//GEN-LAST:event_labelDangXuatMouseClicked
 
     /**
      * @param args the command line arguments

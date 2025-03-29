@@ -87,51 +87,50 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
         tableSanPhamChon.setRowCount(0);
     }
+
     public void thayDoiThongTinHoaDon() {
         // Thay đổi bảng Chi tiết hóa đơn
         // Thay đổi Số lượng bán sẽ thay đổi Thành Tiền
         DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
-        
+
         if (tableSanPhamChon.getRowCount() == 0) {
             return;
         }
-        
+
         int soDongChon = rSTableMetro3.getSelectedRow();
-        
+
         // Nếu chưa chọn thì khi ấn Thêm sẽ lấy dòng đầu tiên của bảng Chi tiết hóa đơn
         if (soDongChon < 0) {
             soDongChon = 0;
         }
-        
+
         String MaSPChon = rSTableMetro3.getValueAt(soDongChon, 0).toString();
         String SoLuongSPChon = rSTableMetro3.getValueAt(soDongChon, 5).toString();
-        
+
         GlobalState.MaSPChon = Integer.parseInt(MaSPChon);
         GlobalState.SoLuongSPChon = Integer.parseInt(SoLuongSPChon);
-        
+
         double ThanhTien = GlobalState.GiaSanPhamChon * GlobalState.SoLuongSPChon;
         rSTableMetro3.setValueAt(ThanhTien, soDongChon, 6);
-        
-        
+
         // Thay đổi Số lượng bán sẽ thay đổi Thông tin hóa đơn
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date NgayThanhLap = java.sql.Date.valueOf(sdf.format(new java.util.Date()));
-        
+
         int SoLuongSP = 0;
         double TongTienSP = 0.0;
         double TongTienKhuyenMai = 0.0;
         double TongThanhToan = 0.0;
         double TienHoanLai = 0.0;
-        
-        
+
         jDateChooser10.setDate(NgayThanhLap);
-        for (int i=0; i<tableSanPhamChon.getRowCount(); i++) {
+        for (int i = 0; i < tableSanPhamChon.getRowCount(); i++) {
             SoLuongSP += Double.parseDouble(tableSanPhamChon.getValueAt(i, 5).toString());
             TongTienSP += Double.parseDouble(tableSanPhamChon.getValueAt(i, 6).toString());
         }
-        
+
         TongThanhToan = TongTienSP - TongTienKhuyenMai;
-        
+
         jTextField12.setText(String.valueOf(SoLuongSP));
         jTextField14.setText(String.valueOf(TongTienSP));
         jTextField16.setText(String.valueOf(TongTienKhuyenMai));
@@ -139,7 +138,10 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jTextField19.setText(String.valueOf(TienHoanLai));
     }
 
-    
+    private void sayMessage(String Message) {
+        JOptionPane.showMessageDialog(rSComboMetro4, Message);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1030,13 +1032,13 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // Chọn bảng hóa đơn chờ sẽ xóa hóa đơn đó
         int MaHD = GlobalState.MaHDChoChon;
-        
+
         System.out.println("MaHD");
         System.out.println(MaHD);
-        
+
         HoaDonDAO hoaDonDAO = new HoaDonDAO();
         int ketQuaHoaDon = hoaDonDAO.updateHoaDonHuy(MaHD);
-        
+
         if (ketQuaHoaDon == 1) {
             JOptionPane.showMessageDialog(this, "Xóa thành công");
             this.readHoaDonCho();
@@ -1046,21 +1048,21 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-          int MaHD = GlobalState.MaHDChon;
+        int MaHD = GlobalState.MaHDChon;
         String HinhThucThanhToan = rSComboMetro4.getSelectedItem().toString();
         String TrangThai = "Hoàn thành";
-        
+
         HoaDonDAO hoaDonDAO = new HoaDonDAO();
         int ketQua = hoaDonDAO.updateHoaDon(MaHD, HinhThucThanhToan, TrangThai);
-        
+
         ChiTietHDDAO chiTietHDDAO = new ChiTietHDDAO();
         List<ChiTietHD> chiTietHDLst = chiTietHDDAO.findChiTietHD(MaHD);
-        
+
         for (ChiTietHD chiTietHD : chiTietHDLst) {
             SanPhamDAO sanPhamDAO = new SanPhamDAO();
             sanPhamDAO.updateSanPham(chiTietHD.getMaSP(), chiTietHD.getSoLuong());
         }
-        
+
         if (ketQua == 1) {
             this.readSanPham();
             this.readHoaDonCho();
@@ -1071,21 +1073,21 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-           // Tạo hóa đơn
+        // Tạo hóa đơn
         int MaNV = GlobalState.MaNV;
         int MaKH = GlobalState.MaKH;
         double ThanhTien = Double.parseDouble(jTextField17.getText());
         String HinhThucThanhToan = rSComboMetro4.getSelectedItem().toString();
         Date NgayTao = jDateChooser10.getDate();
         String TrangThai = "Đang xử lý";
-        
+
         HoaDon hoaDon = new HoaDon(MaNV, MaKH, ThanhTien, HinhThucThanhToan, NgayTao, TrangThai);
-        
+
         HoaDonDAO hoaDonDAO = new HoaDonDAO();
         int ketQua = hoaDonDAO.createHoaDon(hoaDon);
-        
+
         if (ketQua == 1) {
-            
+
             // Tạo chi tiết hóa đơn
             // Tìm ID hóa đơn vừa tạo
             int MaHDMoi = hoaDonDAO.findHoaDonMoi();
@@ -1094,32 +1096,32 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             int rowCount = tableChiTietHD.getRowCount();
 
             for (int i = 0; i < rowCount; i++) {
-                int MaSP = Integer.parseInt(tableChiTietHD.getValueAt(i, 0).toString());  
-                int SoLuong = Integer.parseInt(tableChiTietHD.getValueAt(i, 5).toString());  
-                
+                int MaSP = Integer.parseInt(tableChiTietHD.getValueAt(i, 0).toString());
+                int SoLuong = Integer.parseInt(tableChiTietHD.getValueAt(i, 5).toString());
+
                 // Trong SQL INSERT INTO 1 mã khuyến mại thế này để nếu không điền mã sẽ là không được khuyến mãi
                 // (N'Không khuyến mãi', '', 0, '2025-01-01', '2030-01-01')
                 KhuyenMaiDAO khuyenMaiDAO = new KhuyenMaiDAO();
-                
+
                 String CodeKhuyenMai = jTextField13.getText();
                 if (CodeKhuyenMai.isEmpty()) {
                     CodeKhuyenMai = "";
                 }
-                
+
                 KhuyenMai khuyenMai = khuyenMaiDAO.findKhuyenMai(CodeKhuyenMai);
-                
+
                 if (khuyenMai == null) {
                     JOptionPane.showMessageDialog(this, "Mã khuyến mãi không tồn tại!");
                     return;
                 }
-                
+
                 double TongTienSP = Double.parseDouble(jTextField14.getText());
                 double TongTienKhuyenMai = (TongTienSP * khuyenMai.getGoiGiamGia()) / 100;
                 double TongTienThanhToan = TongTienSP - TongTienKhuyenMai;
-                
+
                 jTextField16.setText(String.valueOf(TongTienKhuyenMai));
                 jTextField17.setText(String.valueOf(TongTienThanhToan));
-                
+
                 ChiTietHD chiTietHD = new ChiTietHD(MaHDMoi, MaSP, SoLuong, khuyenMai.getMaKM());
                 ChiTietHDDAO chiTietHDDAO = new ChiTietHDDAO();
                 chiTietHDDAO.createChiTietHD(chiTietHD);
@@ -1130,8 +1132,8 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Tạo hóa đơn thất bại!");
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
@@ -1139,31 +1141,36 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField15ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-       int MaSP = GlobalState.MaSPChon;
-        
-        SanPhamDAO sanPhamDAO = new SanPhamDAO();
-        List<ChiTietHDDTO> sanPhamChonLst = sanPhamDAO.readSanPhamChon(MaSP);
-        
-        DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
-        
-        for (ChiTietHDDTO sanPham : sanPhamChonLst) {
-            tableSanPhamChon.addRow(new Object[] {
-                GlobalState.MaSPChon,
-                sanPham.getTenSP(),
-                sanPham.getTenDM(),
-                sanPham.getTenMS(),
-                sanPham.getTenKT(),
-                GlobalState.SoLuongSPChon,
-                sanPham.getGia() * GlobalState.SoLuongSPChon,
-            });
+        int MaSP = GlobalState.MaSPChon;
+
+        switch (MaSP) {
+            case 0:
+                this.sayMessage("Vui lòng chọn một dòng sản phẩm muốn thêm ở bảng dưới");
+                break;
+            default:
+                SanPhamDAO sanPhamDAO = new SanPhamDAO();
+                List<ChiTietHDDTO> sanPhamChonLst = sanPhamDAO.readSanPhamChon(MaSP);
+
+                DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
+
+                for (ChiTietHDDTO sanPham : sanPhamChonLst) {
+                    tableSanPhamChon.addRow(new Object[]{
+                        GlobalState.MaSPChon,
+                        sanPham.getTenSP(),
+                        sanPham.getTenDM(),
+                        sanPham.getTenMS(),
+                        sanPham.getTenKT(),
+                        GlobalState.SoLuongSPChon,
+                        sanPham.getGia() * GlobalState.SoLuongSPChon,});
+                }
+                this.thayDoiThongTinHoaDon();
+                break;
         }
-        this.thayDoiThongTinHoaDon();
-        
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-         this.resetTableChiTietHD();
-        
+        this.resetTableChiTietHD();
+
         jTextField9.setText("");
         jTextField10.setText("");
         jDateChooser10.setDate(null);
@@ -1180,25 +1187,29 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         // Điền SĐT -> Thêm -> Nếu SĐT trùng thì ra luôn Khách Hàng, nếu chưa có thì tạo mới 
         String TenKH = jTextField9.getText();
         String SDT = jTextField10.getText();
-        
-        KhachHangDAO khachHangDAO = new KhachHangDAO();
-        KhachHang ketQua = khachHangDAO.findKhachHang(TenKH, SDT);
-        
-        if (ketQua == null) {
-            KhachHang khachHang = new KhachHang(TenKH, SDT);
-            int khachHangMoi = khachHangDAO.createKhachHang(khachHang);
-            if (khachHangMoi == 1) {
-                KhachHang idKhachHangMoi = khachHangDAO.findKhachHang(TenKH, SDT);
-                GlobalState.MaKH = idKhachHangMoi.getID();
-                JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
-                readKhachHang();
-                // code
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm khách hàng thất bại!");
-            }
+
+        if (TenKH.isBlank() == true || SDT.isBlank() == true) {
+            this.sayMessage("Vui lòng không để trống các ô nhập dũ liệu");
         } else {
-            GlobalState.MaKH = ketQua.getID();
-            jTextField9.setText(ketQua.getTenKH());
+            KhachHangDAO khachHangDAO = new KhachHangDAO();
+            KhachHang ketQua = khachHangDAO.findKhachHang(TenKH, SDT);
+
+            if (ketQua == null) {
+                KhachHang khachHang = new KhachHang(TenKH, SDT);
+                int khachHangMoi = khachHangDAO.createKhachHang(khachHang);
+                if (khachHangMoi == 1) {
+                    KhachHang idKhachHangMoi = khachHangDAO.findKhachHang(TenKH, SDT);
+                    GlobalState.MaKH = idKhachHangMoi.getID();
+                    JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+                    readKhachHang();
+                    // code
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm khách hàng thất bại!");
+                }
+            } else {
+                GlobalState.MaKH = ketQua.getID();
+                jTextField9.setText(ketQua.getTenKH());
+            }
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
@@ -1211,42 +1222,41 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             readSanPham();
             return;
         }
-        
+
         int MaSP = Integer.parseInt(jTextField15.getText());
-        
+
         SanPhamDAO sanPhamDAO = new SanPhamDAO();
         List<SanPhamDTO> sanPhamLst = sanPhamDAO.readSanPhamQLY();
-        
+
         DefaultTableModel tableSanPham = (DefaultTableModel) this.rSTableMetro2.getModel();
         tableSanPham.setRowCount(0);
-        
+
         for (SanPhamDTO sanPham : sanPhamLst) {
             if (sanPham.getID() == MaSP) {
-                    tableSanPham.addRow(new Object[] {
-                        sanPham.getID(),
-                        sanPham.getTenSP(),
-                        sanPham.getTenDM(),
-                        sanPham.getTenMS(),
-                        sanPham.getTenKT(),
-                        sanPham.getSoLuong(),
-                        sanPham.getGia(),
-                });
+                tableSanPham.addRow(new Object[]{
+                    sanPham.getID(),
+                    sanPham.getTenSP(),
+                    sanPham.getTenDM(),
+                    sanPham.getTenMS(),
+                    sanPham.getTenKT(),
+                    sanPham.getSoLuong(),
+                    sanPham.getGia(),});
                 return;
             }
         }
-        
+
         if (tableSanPham.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm!");
         }
-        
+
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void rSTableMetro2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSTableMetro2MouseClicked
-       // TODO add your handling code here:
+        // TODO add your handling code here:
         int soDongChon = rSTableMetro2.getSelectedRow();
         String MaSPChon = rSTableMetro2.getValueAt(soDongChon, 0).toString();
         String GiaSanPhamChon = rSTableMetro2.getValueAt(soDongChon, 6).toString();
-        
+
         GlobalState.MaSPChon = Integer.parseInt(MaSPChon);
         GlobalState.GiaSanPhamChon = Double.parseDouble(GiaSanPhamChon);
     }//GEN-LAST:event_rSTableMetro2MouseClicked
@@ -1256,14 +1266,14 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rSTableMetro3PropertyChange
 
     private void rSTableMetro1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rSTableMetro1PropertyChange
-       
+
 
     }//GEN-LAST:event_rSTableMetro1PropertyChange
 
     private void rSTableMetro1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSTableMetro1MouseClicked
         int soDongChon = rSTableMetro1.getSelectedRow();
         int MaHD = Integer.parseInt(rSTableMetro1.getValueAt(soDongChon, 0).toString());
-        
+
         GlobalState.MaHDChoChon = MaHD;
     }//GEN-LAST:event_rSTableMetro1MouseClicked
 

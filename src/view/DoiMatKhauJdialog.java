@@ -144,14 +144,13 @@ public class DoiMatKhauJdialog extends javax.swing.JDialog {
 
     private void btnNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapActionPerformed
         String correctPassword = "123456"; // Mật khẩu cần xác thực 
-    String inputPassword = new String(jPasswordField1.getPassword());
-
-    if (inputPassword.equals(correctPassword)) {
-        isAuthenticated = true;
-        this.dispose(); // Đóng hộp thoại nếu đúng mật khẩu
-    } else {
-        JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
+        String inputPassword = new String(jPasswordField1.getPassword());
+        if (inputPassword.equals(correctPassword)) {
+            isAuthenticated = true;
+            this.dispose(); // Đóng hộp thoại nếu đúng mật khẩu
+        } else {
+            JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnNhapActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed

@@ -5,11 +5,13 @@
 package view;
 
 import dao.NhanVienDAO;
+import dao.SanPhamDAO;
+import dto.ChiTietHDDTO;
 import enity.NhanVien;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import utils.GlobalState;
 
 /**
  *
@@ -24,15 +26,16 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         initComponents();
         readNhanVien();
     }
+
     private void readNhanVien() {
         NhanVienDAO nhanVienDAO = new NhanVienDAO();
         List<NhanVien> nhanVienLst = nhanVienDAO.readNhanVien();
-        
+
         DefaultTableModel tableNhanVien = (DefaultTableModel) this.tblNhanVien.getModel();
         tableNhanVien.setRowCount(0);
-        
+
         for (NhanVien nhanVien : nhanVienLst) {
-            tableNhanVien.addRow(new Object[] {
+            tableNhanVien.addRow(new Object[]{
                 nhanVien.getID(),
                 nhanVien.getTenNV(),
                 nhanVien.getGioiTinh(),
@@ -683,7 +686,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         int dongDangChon = tblNhanVien.getSelectedRow();
+        int dongDangChon = tblNhanVien.getSelectedRow();
         if (dongDangChon == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn nhân viên muốn xóa", "Thông báo", JOptionPane.WARNING_MESSAGE);
             return;
@@ -727,22 +730,22 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       String TenNV = jTextField3.getText();
+        String TenNV = jTextField3.getText();
         String SDT = jTextField2.getText();
         String MatKhauDN = new String(jPasswordField1.getPassword());
         String DiaChi = jTextField4.getText();
         String GioiTinh = jRadioButton1.isSelected() ? "Nam" : "Nữ";
-        
+
         if (TenNV.isBlank() || SDT.isBlank() || MatKhauDN.isBlank() || DiaChi.isBlank() || GioiTinh.isBlank()) {
             JOptionPane.showMessageDialog(this, "Không được để trống bất kỳ trường nào!");
             return;
         }
-        
+
         NhanVien nhanVien = new NhanVien(TenNV, SDT, MatKhauDN, DiaChi, GioiTinh);
-        
+
         NhanVienDAO nhanVienDAO = new NhanVienDAO();
         int ketQua = nhanVienDAO.createNhanVien(nhanVien);
-        
+
         if (ketQua == 1) {
             JOptionPane.showMessageDialog(this, "Thanh cong");
             readNhanVien();
@@ -760,7 +763,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       String TenNV = jTextField3.getText();
+        String TenNV = jTextField3.getText();
         String DiaChia = jTextField4.getText();
         String SDT = jTextField2.getText();
         String MK = new String(jPasswordField1.getPassword());  // Lấy mật khẩu từ jPasswordField
@@ -833,23 +836,26 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
         String timKiem = txtTimKiem.getText();
-        NhanVienDAO nhanVienDAO = new NhanVienDAO();
-        List<NhanVien> nhanVienLst = nhanVienDAO.TimKiemNhanVien(timKiem);
+        if (timKiem.isBlank() == true) {
+            JOptionPane.showMessageDialog(btnTimKiem, "Vui lòng không để trống ô tìm kiếm");
+        } else {
+            NhanVienDAO nhanVienDAO = new NhanVienDAO();
+            List<NhanVien> nhanVienLst = nhanVienDAO.TimKiemNhanVien(timKiem);
 
-        DefaultTableModel tableNhanVien = (DefaultTableModel) this.tblNhanVien.getModel();
-        tableNhanVien.setRowCount(0);
+            DefaultTableModel tableNhanVien = (DefaultTableModel) this.tblNhanVien.getModel();
+            tableNhanVien.setRowCount(0);
 
-        for (NhanVien nhanVien : nhanVienLst) {
-            tableNhanVien.addRow(new Object[]{
+            for (NhanVien nhanVien : nhanVienLst) {
+                tableNhanVien.addRow(new Object[]{
                     nhanVien.getID(),
                     nhanVien.getTenNV(),
                     nhanVien.getGioiTinh(),
                     nhanVien.getSDT(),
                     nhanVien.getDiaChi()
-            });
-        }
+                });
+            }
     }//GEN-LAST:event_btnTimKiemActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTimKiem;

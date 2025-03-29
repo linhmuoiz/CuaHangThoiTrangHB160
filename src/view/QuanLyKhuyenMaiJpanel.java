@@ -530,12 +530,13 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
     private void btnXoajButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoajButton10ActionPerformed
         // TODO add your handling code here:
         int dongDangChon = tblDanhSach.getSelectedRow();
+        if (dongDangChon != -1){
         DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
         int MaKM = (int) model.getValueAt(dongDangChon, 0);
-        
+
         KhuyenMaiDAO khuyenMaiDao = new KhuyenMaiDAO();
         int ketQua = khuyenMaiDao.XoaKhuyenMai(MaKM);
-        
+
         if (ketQua == 1) {
             JOptionPane.showMessageDialog(this, "Xoá Khuyến Mãi Thành Công");
             fillTable();
@@ -543,7 +544,10 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Xoá Khuyến Mãi Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để xóa", "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnXoajButton10ActionPerformed
 
     private void btnThemjButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemjButton9ActionPerformed
@@ -661,59 +665,63 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
-        String TenKM = txtKhuyenMai.getText();
-        String codeGG = txtCodeGiamGia.getText();
-        String mucGiamGiaStr = (String) cboGoiGiamGia.getSelectedItem(); // Lấy giá trị String
-        int MucGiamGia = Integer.parseInt(mucGiamGiaStr); // Chuyển đổi String thành int
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Định dạng mong muốn
-
-        Date ngayBatDau = dcNgayBatDau.getDate();
-        Date ngayKetThuc = dcNgayKetThuc.getDate();
-
-        String ngayBatDauFormat = dateFormat.format(ngayBatDau);
-        String ngayKetThucFormat = dateFormat.format(ngayKetThuc);
-
-        // Thêm validation NgayKT <= NgayBD
-        if (ngayBatDau != null && ngayKetThuc != null && ngayKetThuc.before(ngayBatDau)) {
-            JOptionPane.showMessageDialog(this, "Ngày kết thúc phải sau hoặc bằng ngày bắt đầu.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        //Kiểm tra dữ liệu null
-        if (ngayBatDau == null || ngayKetThuc == null) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày bắt đầu và ngày kết thúc.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (TenKM.isEmpty() || codeGG.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Không Được Để Trống Các Trường Dữ Liệu", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
-
         int dongDangChon = tblDanhSach.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
-        int ID = (int) model.getValueAt(dongDangChon, 0);
+        if (dongDangChon != -1) {
+            // TODO add your handling code here:
+            String TenKM = txtKhuyenMai.getText();
+            String codeGG = txtCodeGiamGia.getText();
+            String mucGiamGiaStr = (String) cboGoiGiamGia.getSelectedItem(); // Lấy giá trị String
+            int MucGiamGia = Integer.parseInt(mucGiamGiaStr); // Chuyển đổi String thành int
 
-        KhuyenMai khuyenMai = new KhuyenMai();
-        khuyenMai.setMaKM(ID);
-        khuyenMai.setTenKM(TenKM);
-        khuyenMai.setCodeGiamGia(codeGG);
-        khuyenMai.setGoiGiamGia(MucGiamGia);
-        khuyenMai.setNgayBatDau(ngayBatDauFormat);
-        khuyenMai.setNgayKetThuc(ngayKetThucFormat);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Định dạng mong muốn
 
-        KhuyenMaiDAO khuyenMaiDAO = new KhuyenMaiDAO();
-        int ketQua = khuyenMaiDAO.SuaKhuyenMai(khuyenMai);
+            Date ngayBatDau = dcNgayBatDau.getDate();
+            Date ngayKetThuc = dcNgayKetThuc.getDate();
 
-        if (ketQua == 1) {
-            JOptionPane.showMessageDialog(this, "Sửa Khuyến Mãi Thành Công");
-            fillTable();
-            XoaNoiDungNhapLieu();
-        } else {
-            JOptionPane.showMessageDialog(this, "Sửa Khuyến Mãi Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            String ngayBatDauFormat = dateFormat.format(ngayBatDau);
+            String ngayKetThucFormat = dateFormat.format(ngayKetThuc);
+
+            // Thêm validation NgayKT <= NgayBD
+            if (ngayBatDau != null && ngayKetThuc != null && ngayKetThuc.before(ngayBatDau)) {
+                JOptionPane.showMessageDialog(this, "Ngày kết thúc phải sau hoặc bằng ngày bắt đầu.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            //Kiểm tra dữ liệu null
+            if (ngayBatDau == null || ngayKetThuc == null) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày bắt đầu và ngày kết thúc.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (TenKM.isEmpty() || codeGG.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Không Được Để Trống Các Trường Dữ Liệu", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+
+            DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+            int ID = (int) model.getValueAt(dongDangChon, 0);
+
+            KhuyenMai khuyenMai = new KhuyenMai();
+            khuyenMai.setMaKM(ID);
+            khuyenMai.setTenKM(TenKM);
+            khuyenMai.setCodeGiamGia(codeGG);
+            khuyenMai.setGoiGiamGia(MucGiamGia);
+            khuyenMai.setNgayBatDau(ngayBatDauFormat);
+            khuyenMai.setNgayKetThuc(ngayKetThucFormat);
+
+            KhuyenMaiDAO khuyenMaiDAO = new KhuyenMaiDAO();
+            int ketQua = khuyenMaiDAO.SuaKhuyenMai(khuyenMai);
+
+            if (ketQua == 1) {
+                JOptionPane.showMessageDialog(this, "Sửa Khuyến Mãi Thành Công");
+                fillTable();
+                XoaNoiDungNhapLieu();
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa Khuyến Mãi Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
         }
-
+        else{
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để sửa", "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
 

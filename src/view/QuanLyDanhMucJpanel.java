@@ -18,27 +18,30 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
 
     /**
      * Creates new form QuanLyDanhMucJpanel
-     */public QuanLyDanhMucJpanel(){
-            initComponents();
-            fillTable();
-         }
-     private void fillTable(){
-         DanhMucDAO danhMucDAO = new DanhMucDAO();
-         List<DanhMuc> danhMucLst = danhMucDAO.readDanhMuc();
-         
-         DefaultTableModel model = (DefaultTableModel) tblDanhMuc.getModel();
-         model.setRowCount(0);
-         
-         for (DanhMuc danhMuc : danhMucLst) {
-             System.out.println("Adding product: " + danhMuc.getTenDM());
-             
-             Object[] rowdata = {
-                 danhMuc.getID(),
-                 danhMuc.getTenDM()
-             };
-             model.addRow(rowdata);
-         }
-     }
+     */
+    public QuanLyDanhMucJpanel() {
+        initComponents();
+        fillTable();
+    }
+
+    private void fillTable() {
+        DanhMucDAO danhMucDAO = new DanhMucDAO();
+        List<DanhMuc> danhMucLst = danhMucDAO.readDanhMuc();
+
+        DefaultTableModel model = (DefaultTableModel) tblDanhMuc.getModel();
+        model.setRowCount(0);
+
+        for (DanhMuc danhMuc : danhMucLst) {
+            System.out.println("Adding product: " + danhMuc.getTenDM());
+
+            Object[] rowdata = {
+                danhMuc.getID(),
+                danhMuc.getTenDM()
+            };
+            model.addRow(rowdata);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -244,22 +247,21 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         String TenDanhMuc = txtTenDanhMuc.getText();
-        
-        if(TenDanhMuc.isEmpty()){
+
+        if (TenDanhMuc.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Không Được Để Trống Tên", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         DanhMucDAO danhMucDao = new DanhMucDAO();
         DanhMuc danhMuc = new DanhMuc(0, TenDanhMuc);
         int ketQua = danhMucDao.ThemDanhMuc(danhMuc);
-        
-        if(ketQua ==1){
+
+        if (ketQua == 1) {
             JOptionPane.showMessageDialog(this, "Thêm Danh Mục Thành Công");
             txtTenDanhMuc.setText("");
             fillTable();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(this, "Thêm Danh Mục Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -267,52 +269,57 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         int dongDangChon = tblDanhMuc.getSelectedRow();
-        int MaDanhMuc =(int) tblDanhMuc.getValueAt(dongDangChon, 0);
-        
-        
-        DanhMucDAO danhMucDao = new DanhMucDAO();
-        int ketQua = danhMucDao.XoaDanhMuc(MaDanhMuc);
-        
-        if(ketQua ==1){
-            JOptionPane.showMessageDialog(this, "Xoá Danh Mục Thành Công");
-            txtTenDanhMuc.setText("");
-            fillTable();
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Xoá Danh Mục Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        if (dongDangChon != -1) {
+            int MaDanhMuc = (int) tblDanhMuc.getValueAt(dongDangChon, 0);
+
+            DanhMucDAO danhMucDao = new DanhMucDAO();
+            int ketQua = danhMucDao.XoaDanhMuc(MaDanhMuc);
+
+            if (ketQua == 1) {
+                JOptionPane.showMessageDialog(this, "Xoá Danh Mục Thành Công");
+                txtTenDanhMuc.setText("");
+                fillTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "Xoá Danh Mục Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để xóa", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tblDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhMucMouseClicked
         // TODO add your handling code here:
         int dongDangChon = tblDanhMuc.getSelectedRow();
-        
+
         String TenDanhMuc = tblDanhMuc.getValueAt(dongDangChon, 1).toString();
         txtTenDanhMuc.setText(TenDanhMuc);
     }//GEN-LAST:event_tblDanhMucMouseClicked
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        String TenDanhMuc = txtTenDanhMuc.getText();
         int dongDangChon = tblDanhMuc.getSelectedRow();
-        int MaDanhMuc =(int) tblDanhMuc.getValueAt(dongDangChon, 0);
-        
-        if(TenDanhMuc.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Không Được Để Trống Tên", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        DanhMucDAO danhMucDao = new DanhMucDAO();
-        DanhMuc danhMuc = new DanhMuc(MaDanhMuc, TenDanhMuc);
-        int ketQua = danhMucDao.SuaDanhMuc(danhMuc);
-        
-        if(ketQua ==1){
-            JOptionPane.showMessageDialog(this, "Sửa Danh Mục Thành Công");
-            txtTenDanhMuc.setText("");
-            fillTable();
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Sửa Danh Mục Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+
+        if (dongDangChon != -1) {
+            String TenDanhMuc = txtTenDanhMuc.getText();
+            int MaDanhMuc = (int) tblDanhMuc.getValueAt(dongDangChon, 0);
+            if (TenDanhMuc.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Không Được Để Trống Tên", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            DanhMucDAO danhMucDao = new DanhMucDAO();
+            DanhMuc danhMuc = new DanhMuc(MaDanhMuc, TenDanhMuc);
+            int ketQua = danhMucDao.SuaDanhMuc(danhMuc);
+
+            if (ketQua == 1) {
+                JOptionPane.showMessageDialog(this, "Sửa Danh Mục Thành Công");
+                txtTenDanhMuc.setText("");
+                fillTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa Danh Mục Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để sửa", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 

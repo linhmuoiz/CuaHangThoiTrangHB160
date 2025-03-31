@@ -264,16 +264,56 @@ public class SanPhamDAO {
     }
     
     public int XoaSanPham (int ID){
-        try (Connection conn = KetNoiDB.getConnectDB()) {
-            String sql = "DELETE FROM SanPham WHERE ID = ?";
-            PreparedStatement ppStm = conn.prepareStatement(sql);
+        Connection conn = null;
+        PreparedStatement ppStmChiTietHD = null;
+        PreparedStatement ppStmSanPham = null;
+        try  {
+            conn = KetNoiDB.getConnectDB();
+            conn.setAutoCommit(false);
             
-            ppStm.setInt(1, ID);
-            int ketQua = ppStm.executeUpdate();
+            String sqlChitietHD = "DELETE FROM ChiTietHD WHERE MaSP = ?";
+            ppStmChiTietHD = conn.prepareStatement(sqlChitietHD);
+            ppStmChiTietHD.setInt(1, ID);
+            ppStmChiTietHD.executeUpdate();
+            
+            String sqlSanPham = "DELETE FROM SanPham WHERE ID = ?";
+            ppStmSanPham = conn.prepareStatement(sqlSanPham);
+            ppStmSanPham.setInt(1, ID);
+            int ketQua = ppStmSanPham.executeUpdate();
+            
+            conn.commit();
             return ketQua;
         } catch (Exception e) {
-            System.out.println("Lỗi");
+            System.err.println("Lỗi xóa danh mục: " + e.getMessage());
+            e.printStackTrace();
+            
+            if (conn != null) {
+                try {
+                    conn.rollback();
+                    System.out.println("Đã rollback transaction");
+                } catch (SQLException rollbackEx) {
+                    System.err.println("Lỗi rollback: " + rollbackEx.getMessage());
+                    rollbackEx.printStackTrace();
+                }
+            }
             return 0;
+        }
+        finally{
+            try {
+                if(ppStmChiTietHD != null){
+                    ppStmChiTietHD.close();
+                }
+                if (ppStmSanPham != null) {
+                    ppStmSanPham.close();
+                }
+                if (conn != null) {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                }
+            } catch (SQLException closeEx) {
+                System.err.println("Lỗi đóng connection/statement: " + closeEx.getMessage());
+                closeEx.printStackTrace();
+            }
         }
     }
     

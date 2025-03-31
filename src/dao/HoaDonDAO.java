@@ -129,6 +129,7 @@ public class HoaDonDAO {
             return ketQua;
         }
         catch (SQLException e) {
+            e.printStackTrace();
             return 0;
         }
     }

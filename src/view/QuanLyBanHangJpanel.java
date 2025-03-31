@@ -17,9 +17,21 @@ import javax.swing.table.DefaultTableModel;
 import enity.HoaDon;
 import enity.KhachHang;
 import enity.KhuyenMai;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import utils.GlobalState;
 
 public class QuanLyBanHangJpanel extends javax.swing.JPanel {
@@ -140,6 +152,41 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
 
     private void sayMessage(String Message) {
         JOptionPane.showMessageDialog(this, Message);
+    }
+
+    private void generateQR(String amount, int maHD) {
+        String vietqrAPI = "https://img.vietqr.io/image/mbbank-031307002777-compact.png?amount=" + amount + "&addInfo=Khach%20hang%20chuyen%20khoan%20don%20ma%20 " + maHD;
+        try {
+            // Process QR from server :3
+            BufferedImage qrCode = ImageIO.read(new URL(vietqrAPI));
+            if (qrCode == null) {
+                throw new IOException("Lỗi load QR");
+            }
+
+            JPanel buttonPanel = new JPanel();
+            JButton payNowButton = new JButton("Đã xong");
+            payNowButton.setForeground(Color.RED);
+            payNowButton.setFont(new Font("Arial", Font.BOLD, 20));
+
+            buttonPanel.add(payNowButton);
+
+            JFrame frame = new JFrame("QR");
+            payNowButton.addActionListener(e -> {
+                frame.dispose();
+            });
+            frame.setLocationRelativeTo(null);
+            frame.add(buttonPanel, BorderLayout.SOUTH);
+            //Add QR to Panel =))
+            JLabel label = new JLabel(new ImageIcon(qrCode));
+            frame.add(label);
+            frame.pack();
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.setVisible(true);
+        } catch (IOException e) {
+            // Error feedback
+            System.err.println("Lỗi khi tạo QR: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -1051,25 +1098,48 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         int MaHD = GlobalState.MaHDChon;
         String HinhThucThanhToan = rSComboMetro4.getSelectedItem().toString();
         String TrangThai = "Hoàn thành";
+        String amount = jTextField17.getText();
+        if (HinhThucThanhToan.equals("Chuyển Khoản") == true) {
+            this.generateQR(amount, MaHD);
+            HoaDonDAO hoaDonDAO = new HoaDonDAO();
+            int ketQua = hoaDonDAO.updateHoaDon(MaHD, HinhThucThanhToan, TrangThai);
 
-        HoaDonDAO hoaDonDAO = new HoaDonDAO();
-        int ketQua = hoaDonDAO.updateHoaDon(MaHD, HinhThucThanhToan, TrangThai);
+            ChiTietHDDAO chiTietHDDAO = new ChiTietHDDAO();
+            List<ChiTietHD> chiTietHDLst = chiTietHDDAO.findChiTietHD(MaHD);
 
-        ChiTietHDDAO chiTietHDDAO = new ChiTietHDDAO();
-        List<ChiTietHD> chiTietHDLst = chiTietHDDAO.findChiTietHD(MaHD);
+            for (ChiTietHD chiTietHD : chiTietHDLst) {
+                SanPhamDAO sanPhamDAO = new SanPhamDAO();
+                sanPhamDAO.updateSanPham(chiTietHD.getMaSP(), chiTietHD.getSoLuong());
+            }
 
-        for (ChiTietHD chiTietHD : chiTietHDLst) {
-            SanPhamDAO sanPhamDAO = new SanPhamDAO();
-            sanPhamDAO.updateSanPham(chiTietHD.getMaSP(), chiTietHD.getSoLuong());
-        }
-
-        if (ketQua == 1) {
-            this.readSanPham();
-            this.readHoaDonCho();
-            JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+            if (ketQua == 1) {
+                this.readSanPham();
+                this.readHoaDonCho();
+                JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Thanh toán thất bại!");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Thanh toán thất bại!");
+            HoaDonDAO hoaDonDAO = new HoaDonDAO();
+            int ketQua = hoaDonDAO.updateHoaDon(MaHD, HinhThucThanhToan, TrangThai);
+
+            ChiTietHDDAO chiTietHDDAO = new ChiTietHDDAO();
+            List<ChiTietHD> chiTietHDLst = chiTietHDDAO.findChiTietHD(MaHD);
+
+            for (ChiTietHD chiTietHD : chiTietHDLst) {
+                SanPhamDAO sanPhamDAO = new SanPhamDAO();
+                sanPhamDAO.updateSanPham(chiTietHD.getMaSP(), chiTietHD.getSoLuong());
+            }
+
+            if (ketQua == 1) {
+                this.readSanPham();
+                this.readHoaDonCho();
+                JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Thanh toán thất bại!");
+            }
         }
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed

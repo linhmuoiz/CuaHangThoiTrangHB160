@@ -10,6 +10,7 @@ import dao.KhachHangDAO;
 import dao.KhuyenMaiDAO;
 import dao.SanPhamDAO;
 import dto.ChiTietHDDTO;
+import dto.HoaDonDTO;
 import dto.SanPhamDTO;
 import enity.ChiTietHD;
 import java.util.List;
@@ -20,12 +21,11 @@ import enity.KhuyenMai;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -35,6 +35,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import utils.GlobalState;
+import utils.readDetailOrderToForm;
 
 public class QuanLyBanHangJpanel extends javax.swing.JPanel {
 
@@ -551,6 +552,11 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jButton16.setBackground(new java.awt.Color(246, 225, 225));
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search-13-24.png"))); // NOI18N
         jButton16.setBorder(null);
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(128, 0, 0));
@@ -1337,6 +1343,34 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void LoadUp2Form(){
+        DefaultTableModel Tmodel;
+        Tmodel = (DefaultTableModel) rSTableMetro3.getModel();
+        Tmodel.setRowCount(0);
+        
+        readDetailOrderToForm readFunction = new readDetailOrderToForm();
+        HoaDonDTO info = readFunction.readHoaDonByID(GlobalState.MaHDChoChon);
+        //
+        jTextField9.setText(info.getTenKH());
+        jTextField10.setText(info.getSDT());
+        rSComboMetro4.setSelectedItem(info.getHinhThucTT());
+        jDateChooser10.setDate(info.getNgayTao());
+        
+       List<ChiTietHDDTO> lstChiTietDTO = new ArrayList<>();
+       lstChiTietDTO = readFunction.readChiTietHD(GlobalState.MaHDChoChon);
+        for (ChiTietHDDTO chiTietHDDTO : lstChiTietDTO) {
+            Tmodel.addRow(new Object[]{
+                chiTietHDDTO.getMaSP(),
+                chiTietHDDTO.getTenSP(),
+                chiTietHDDTO.getTenDM(),
+                chiTietHDDTO.getTenMS(),
+                chiTietHDDTO.getTenKT(),
+                chiTietHDDTO.getSoLuong(),
+                chiTietHDDTO.getGia() * chiTietHDDTO.getSoLuong()
+            });
+        }
+        this.thayDoiThongTinHoaDon();
+    }
     private void rSComboMetro4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSComboMetro4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rSComboMetro4ActionPerformed
@@ -1396,10 +1430,16 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
 
     private void rSTableMetro1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSTableMetro1MouseClicked
         int soDongChon = rSTableMetro1.getSelectedRow();
-        int MaHD = Integer.parseInt(rSTableMetro1.getValueAt(soDongChon, 0).toString());
-
+        int MaHD = Integer.parseInt((String.valueOf(rSTableMetro1.getValueAt(soDongChon, 0))));
         GlobalState.MaHDChoChon = MaHD;
+        this.LoadUp2Form();
     }//GEN-LAST:event_rSTableMetro1MouseClicked
+
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here
+        
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:

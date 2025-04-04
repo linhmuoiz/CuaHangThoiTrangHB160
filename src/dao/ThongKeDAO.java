@@ -24,6 +24,7 @@ public class ThongKeDAO {
             }
             return 0;
         } catch (SQLException e) {
+            e.printStackTrace();
             return 0;
         }
     }
@@ -40,26 +41,28 @@ public class ThongKeDAO {
             }
             return 0;
         } catch (SQLException e) {
+            e.printStackTrace();
             return 0;
         }
     }
 
     public int tinhSoSanPhamBanRa() {
-        String sql = "SELECT SUM(cthd.SoLuong) AS so_san_pham_ban_ra \n"
-                + "FROM ChiTietHD cthd\n"
-                + "INNER JOIN HoaDon hd ON hd.ID = cthd.MaHD\n"
-                + "WHERE hd.TrangThai = N'Hoàn thành'"
-                + "AND hd.NgayTao = CAST(GETDATE() AS DATE);";
+        String sql = "SELECT SUM(cthd.SoLuong) AS TongSoSanPhamBanRa\n"
+                + "FROM ChiTietHD AS cthd\n"
+                + "INNER JOIN HoaDon AS hd ON hd.ID = cthd.MaHD\n"
+                + "WHERE hd.NgayTao = CAST(GETDATE() AS DATE)\n"
+                + "AND hd.TrangThai = N'Hoàn thành';";
 
         try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement ps = con.prepareStatement(sql);) {
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return rs.getInt("so_san_pham_ban_ra");
+                return rs.getInt("TongSoSanPhamBanRa");
             }
             return 0;
         } catch (SQLException e) {
+            e.printStackTrace();
             return 0;
         }
     }
@@ -92,6 +95,7 @@ public class ThongKeDAO {
             }
             return sanPhamLst;
         } catch (SQLException e) {
+            e.printStackTrace();
             return sanPhamLst;
         }
     }
@@ -105,6 +109,7 @@ public class ThongKeDAO {
                 + "JOIN SanPham AS SP ON CTHD.MaSP = SP.ID\n"
                 + "JOIN HoaDon AS HD ON CTHD.MaHD = HD.ID\n"
                 + "WHERE HD.NgayTao = CAST(GETDATE() AS DATE) \n"
+                + "AND HD.TrangThai = N'Hoàn thành'"
                 + "GROUP BY SP.ID, SP.TenSP\n"
                 + "ORDER BY SP.ID;";
 
@@ -119,7 +124,7 @@ public class ThongKeDAO {
                 String TenSP = rs.getString("TenSanPham");
                 int TongSoLuongBanRa = rs.getInt("TongSoLuongBanRa");
                 double TongTienSanPhamBanRa = rs.getDouble("TongTienSanPhamBanRa");
-                
+
                 DoanhThuChiTietDTO doanhThuChiTietDTO = new DoanhThuChiTietDTO(MaSP, TenSP, TongSoLuongBanRa, TongTienSanPhamBanRa);
                 doanhThuLst.add(doanhThuChiTietDTO);
 //                SanPhamBanChayDTO sanPhamBanChayDTO = new SanPhamBanChayDTO(MaSP, TenSP, SoLuongSanPhamBanRa);

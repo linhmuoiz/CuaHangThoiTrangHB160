@@ -4,6 +4,16 @@
  */
 package view;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import dao.ChiTietHDDAO;
 import dao.HoaDonDAO;
 import dao.KhachHangDAO;
@@ -20,6 +30,7 @@ import enity.KhachHang;
 import enity.KhuyenMai;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -27,6 +38,10 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,10 +49,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import utils.GlobalState;
 import utils.readDetailOrderToForm;
 
-public class QuanLyBanHangJpanel extends javax.swing.JPanel {
+public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable, ThreadFactory{
 
     /**
      * Creates new form QuanLyBanHangJpanel
@@ -48,6 +65,238 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         readKhachHang();
         readSanPham();
         resetTableChiTietHD();
+    }
+    
+    private WebcamPanel camPanel = null;
+    private Webcam webcam = null;
+    private ExecutorService executor = null;
+    private volatile boolean isShowingInputDialog = false;
+
+    private void moWebcam() {
+        // Kiểm tra xem executor (luồng quản lý webcam) đã tồn tại chưa hoặc đã bị tắt chưa
+        if (executor == null || executor.isShutdown()) {
+            // Nếu executor chưa tồn tại hoặc đã bị tắt, tạo một executor mới
+            executor = Executors.newSingleThreadScheduledExecutor(this); // Tạo một executor đơn luồng
+        }
+
+        // Tạo một SwingWorker để khởi tạo webcam trong một luồng nền
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            // Phương thức doInBackground() được thực thi trong một luồng nền
+            @Override
+            protected Void doInBackground() throws Exception {
+                // Khởi tạo webcam ở đây, trong background thread
+                Dimension size = WebcamResolution.QVGA.getSize(); // Lấy kích thước QVGA cho webcam
+                webcam = Webcam.getWebcams().get(0); // Lấy webcam đầu tiên từ danh sách
+                webcam.setViewSize(size); // Đặt kích thước cho webcam
+
+                camPanel = new WebcamPanel(webcam); // Tạo một WebcamPanel để hiển thị hình ảnh từ webcam
+                camPanel.setPreferredSize(size); // Đặt kích thước ưu tiên cho WebcamPanel
+                camPanel.setFPSDisplayed(true); // Hiển thị số khung hình trên giây (FPS) trên WebcamPanel
+                return null; // Không trả về giá trị gì từ tác vụ nền
+            }
+
+            // Phương thức done() được thực thi trên luồng giao diện người dùng (Event Dispatch Thread) sau khi doInBackground() hoàn thành
+            @Override
+            protected void done() {
+                // Cập nhật giao diện người dùng sau khi webcam đã sẵn sàng
+                QRScanPanel.removeAll(); // Xóa tất cả các thành phần con hiện có trong QRScanPanel (để loại bỏ WebcamPanel cũ)
+                QRScanPanel.add(camPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 150)); // Thêm WebcamPanel mới vào QRScanPanel với vị trí và kích thước cố định
+                QRScanPanel.revalidate(); // Yêu cầu QRScanPanel bố trí lại các thành phần con của nó (đảm bảo WebcamPanel được hiển thị đúng cách)
+                QRScanPanel.repaint(); // Yêu cầu QRScanPanel vẽ lại nội dung của nó (đảm bảo hình ảnh từ webcam được hiển thị)
+                executor.execute(QuanLyBanHangJpanel.this); // Bắt đầu luồng quét mã QR (QuanLyBanHangJpanel.this là đối tượng QuanLyBanHangJpanel hiện tại, implement Runnable)
+            }
+        };
+
+        worker.execute(); // Chạy SwingWorker (bắt đầu thực thi doInBackground() trong một luồng nền)
+    }
+
+     public void run() {
+        try {
+            do {
+                try {
+                    Thread.sleep(5); // Tạm dừng luồng 5ms để giảm tải CPU, giúp chương trình mượt mà hơn
+                } catch (InterruptedException ex) {
+                    // Xử lý InterruptedException: được ném ra khi một luồng đang chờ bị gián đoạn.
+                    System.out.println("Webcam thread interrupted. Stopping."); // In ra thông báo lỗi
+                    Thread.currentThread().interrupt(); // Đặt lại cờ ngắt cho luồng hiện tại để các phương thức gọi có thể phản ứng với sự gián đoạn.
+                    return; // Kết thúc phương thức run() để dừng thread
+                }
+
+                Result rs = null; // Khai báo biến rs kiểu Result để lưu trữ kết quả giải mã QR code.
+                BufferedImage image = null; // Khai báo biến image kiểu BufferedImage để lưu trữ hình ảnh từ webcam.
+
+                if (webcam != null && webcam.isOpen()) { // Kiểm tra webcam có tồn tại và đang mở không
+                    if ((image = webcam.getImage()) == null) { // Lấy hình ảnh từ webcam. Nếu không có hình ảnh,
+                        continue; // Bỏ qua các bước còn lại của vòng lặp và tiếp tục vòng lặp tiếp theo.
+                    }
+                }
+
+                if (image == null) { // Kiểm tra nếu hình ảnh vẫn null
+                    continue; // Bỏ qua các bước còn lại của vòng lặp và tiếp tục vòng lặp tiếp theo.
+                }
+                LuminanceSource source = new BufferedImageLuminanceSource(image); // Tạo một đối tượng LuminanceSource từ hình ảnh để chuyển đổi thành dữ liệu có thể đọc được bởi ZXing.
+                BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source)); // Chuyển đổi LuminanceSource thành BinaryBitmap, một ảnh nhị phân mà ZXing có thể giải mã.
+
+                try {
+                    rs = new MultiFormatReader().decode(bitmap); // Cố gắng giải mã BinaryBitmap để tìm QR code.
+                } catch (NotFoundException ex) {
+                    // Logger.getLogger(QuanLyBanHangJpanel.class.getName()).log(Level.SEVERE, null, ex);
+                    //Không cần log vì việc không tìm thấy QR là bình thường
+                    // Xử lý NotFoundException: được ném ra khi không tìm thấy QR code trong hình ảnh.
+                    // Trong trường hợp này, không cần ghi log vì việc không tìm thấy QR code là bình thường.
+                }
+
+                if (rs != null) { // Kiểm tra nếu đã giải mã thành công QR code
+                    String resultText = rs.getText(); // Lấy nội dung của QR code.
+                    SwingUtilities.invokeLater(() -> { // Chạy code trong luồng sự kiện đồ họa để cập nhật giao diện người dùng một cách an toàn.
+                        if (!isShowingInputDialog) { // Kiểm tra xem hộp thoại nhập liệu có đang hiển thị hay không. Biến isShowingInputDialog là một cờ (flag) để tránh việc mở nhiều hộp thoại cùng lúc.
+                            isShowingInputDialog = true; // Đặt cờ thành true trước khi hiển thị hộp thoại để ngăn việc mở thêm hộp thoại khác.
+                            try {
+                                int productID = Integer.parseInt(resultText); // Chuyển đổi nội dung QR code (resultText) thành một số nguyên (productID) - mã sản phẩm.
+                                System.out.println("Đã quét ID sản phẩm: " + productID); // In ra mã sản phẩm đã quét được.
+
+                                SanPhamDAO sanPhamDAO = new SanPhamDAO(); // Tạo một đối tượng SanPhamDAO để truy cập dữ liệu sản phẩm.
+                                List<SanPhamDTO> sanPhamLst = sanPhamDAO.readSanPhamQLY(); // Lấy danh sách tất cả các sản phẩm từ cơ sở dữ liệu.
+
+                                SanPhamDTO sanPhamDaTimThay = null; // Khai báo biến sanPhamDaTimThay để lưu trữ sản phẩm tìm thấy.
+                                for (SanPhamDTO sanPham : sanPhamLst) { // Duyệt qua danh sách sản phẩm để tìm sản phẩm có mã trùng với productID.
+                                    if (sanPham.getID() == productID) { // Nếu tìm thấy sản phẩm có mã trùng với productID,
+                                        sanPhamDaTimThay = sanPham; // Gán sản phẩm đó cho biến sanPhamDaTimThay.
+                                        break; // Thoát khỏi vòng lặp vì đã tìm thấy sản phẩm.
+                                    }
+                                }
+
+                                if (sanPhamDaTimThay == null) { // Nếu không tìm thấy sản phẩm,
+                                    JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm!"); // Hiển thị một thông báo lỗi.
+                                    return; // Thoát khỏi khối mã này.
+                                }
+
+                                String inputslsp = JOptionPane.showInputDialog(camPanel, "Nhập số lượng sản phẩm:"); // Hiển thị một hộp thoại để người dùng nhập số lượng sản phẩm.
+                                if (inputslsp != null && !inputslsp.isEmpty()) { // Kiểm tra nếu người dùng đã nhập số lượng và không nhấn Cancel.
+                                    try {
+                                        int quantity = Integer.parseInt(inputslsp); // Chuyển đổi số lượng đã nhập thành một số nguyên.
+                                        if (quantity > 0) { // Kiểm tra nếu số lượng lớn hơn 0.
+                                            GlobalState.MaSPChon = productID; // Lưu mã sản phẩm đã chọn vào biến toàn cục GlobalState.MaSPChon.
+                                            GlobalState.SoLuongSPChon = quantity; // Lưu số lượng sản phẩm đã chọn vào biến toàn cục GlobalState.SoLuongSPChon.
+                                            double ThanhTien = GlobalState.SoLuongSPChon * sanPhamDaTimThay.getGia(); // Tính thành tiền bằng cách nhân số lượng với giá sản phẩm.
+
+                                            DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel(); // Lấy mô hình bảng (table model) của bảng rSTableMetro3.
+
+                                            tableSanPhamChon.addRow(new Object[]{ // Thêm một hàng mới vào bảng với thông tin sản phẩm đã chọn.
+                                                sanPhamDaTimThay.getID(), // Mã sản phẩm.
+                                                sanPhamDaTimThay.getTenSP(), // Tên sản phẩm.
+                                                sanPhamDaTimThay.getTenDM(), // Tên danh mục.
+                                                sanPhamDaTimThay.getTenMS(), // Tên màu sắc.
+                                                sanPhamDaTimThay.getTenKT(), // Tên kích thước.
+                                                GlobalState.SoLuongSPChon, // Số lượng đã chọn.
+                                                ThanhTien // Thành tiền.
+                                            });
+                                            thayDoiThongTinHoaDonTheoMaQR();
+                                        } else { // Nếu số lượng không lớn hơn 0,
+                                            JOptionPane.showMessageDialog(camPanel, "Số lượng phải lớn hơn 0.", "Lỗi", JOptionPane.ERROR_MESSAGE); // Hiển thị một thông báo lỗi.
+                                        }
+                                    } catch (NumberFormatException e) { // Xử lý NumberFormatException: được ném ra khi không thể chuyển đổi chuỗi thành số.
+                                        JOptionPane.showMessageDialog(camPanel, "Số lượng không hợp lệ. Vui lòng nhập một số.", "Lỗi", JOptionPane.ERROR_MESSAGE); // Hiển thị một thông báo lỗi.
+                                    }
+                                }
+                            } catch (NumberFormatException e) { // Xử lý NumberFormatException: được ném ra khi không thể chuyển đổi nội dung QR code thành số (mã sản phẩm).
+                                JOptionPane.showMessageDialog(camPanel, "Mã QR không hợp lệ. Vui lòng quét một mã QR chứa ID sản phẩm (số).", "Lỗi", JOptionPane.ERROR_MESSAGE); // Hiển thị một thông báo lỗi.
+                            } finally {
+                                isShowingInputDialog = false; // Đặt cờ thành false sau khi hộp thoại đã đóng, cho phép quét mã QR và mở hộp thoại khác. Đảm bảo cờ luôn được đặt lại, ngay cả khi có lỗi xảy ra.
+                            }
+                        }
+                    });
+                }
+            } while (!Thread.currentThread().isInterrupted()); // Kiểm tra cờ ngắt trong điều kiện vòng lặp
+        } catch (Exception e) {
+            System.err.println("Error in webcam thread: " + e.getMessage()); // In ra thông báo lỗi nếu có bất kỳ lỗi nào xảy ra trong quá trình quét QR code.
+            e.printStackTrace(); // In ra dấu vết ngăn xếp của lỗi.
+        } finally {
+            // Đảm bảo đóng webcam trong khối finally
+            dongWebcam(); // Gọi phương thức dongWebcam() để đảm bảo webcam được đóng khi luồng kết thúc, ngay cả khi có lỗi xảy ra.
+        }
+    }
+
+    public void dongWebcam() {
+        if (webcam != null) { // Kiểm tra nếu webcam tồn tại
+
+            if (executor != null && !executor.isShutdown()) { // Kiểm tra nếu executor tồn tại và chưa bị tắt
+
+                executor.shutdownNow(); // Tắt executor một cách mạnh mẽ, ngăn chặn các tác vụ đang chạy.
+                try {
+
+                    executor.awaitTermination(5, TimeUnit.NANOSECONDS); // Chờ tối đa 5 nano giây để executor tắt hoàn toàn.
+                } catch (InterruptedException e) {
+
+                    Thread.currentThread().interrupt(); // Đặt lại cờ ngắt cho luồng hiện tại.
+                    System.err.println("Interrupted while waiting for webcam thread to terminate."); // In ra thông báo lỗi nếu bị gián đoạn trong khi chờ executor tắt.
+                }
+                executor = null; // Đặt executor về null sau khi tắt.
+            }
+
+            if (webcam.isOpen()) { // Kiểm tra nếu webcam đang mở
+                webcam.close(); // Đóng webcam.
+            }
+        }
+
+        // Remove camPanel from QRScanPanel *before* setting it to null
+        if (camPanel != null) { // Kiểm tra nếu camPanel tồn tại
+
+            //Stop the camPanel before removing it
+            camPanel.stop(); // Dừng camPanel trước khi gỡ bỏ nó.
+
+            QRScanPanel.remove(camPanel); // Remove camPanel from QRScanPanel
+            QRScanPanel.revalidate(); // Xác nhận lại bố cục của QRScanPanel.
+            QRScanPanel.repaint(); // Vẽ lại QRScanPanel.
+            camPanel = null; // Set camPanel to null
+        }
+    }
+
+    public Thread newThread(Runnable r) {
+        Thread t = new Thread(r, "My Thread");
+        t.setDaemon(true);
+        return t;
+    }
+    
+    public void thayDoiThongTinHoaDonTheoMaQR() {
+        // Thay đổi bảng Chi tiết hóa đơn
+        // Thay đổi Số lượng bán sẽ thay đổi Thành Tiền
+        DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
+
+        if (tableSanPhamChon.getRowCount() == 0) {
+            return;
+        }
+
+        int soDongChon = rSTableMetro3.getSelectedRow();
+
+        // Nếu chưa chọn thì khi ấn Thêm sẽ lấy dòng đầu tiên của bảng Chi tiết hóa đơn
+        if (soDongChon < 0) {
+            soDongChon = 0;
+        }
+
+        // Thay đổi Số lượng bán sẽ thay đổi Thông tin hóa đơn
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date NgayThanhLap = java.sql.Date.valueOf(sdf.format(new java.util.Date()));
+
+        int SoLuongSP = 0;
+        double TongTienSP = 0.0;
+        double TongTienKhuyenMai = 0.0;
+        double TongThanhToan = 0.0;
+        double TienHoanLai = 0.0;
+
+        jDateChooser10.setDate(NgayThanhLap);
+        for (int i = 0; i < tableSanPhamChon.getRowCount(); i++) {
+            SoLuongSP += Double.parseDouble(tableSanPhamChon.getValueAt(i, 5).toString());
+            TongTienSP += Double.parseDouble(tableSanPhamChon.getValueAt(i, 6).toString());
+        }
+
+        TongThanhToan = TongTienSP - TongTienKhuyenMai;
+
+        jTextField12.setText(String.valueOf(SoLuongSP));
+        jTextField14.setText(String.valueOf(TongTienSP));
+        jTextField16.setText(String.valueOf(TongTienKhuyenMai));
+        jTextField17.setText(String.valueOf(TongThanhToan));
+        jTextField19.setText(String.valueOf(TienHoanLai));
     }
 
     private void readHoaDonCho() {
@@ -412,7 +661,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -614,7 +863,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -760,7 +1009,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jButton7.setBackground(new java.awt.Color(255, 255, 255));
@@ -790,22 +1039,22 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(218, 218, 218))
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(131, 131, 131)
+                .addGap(135, 135, 135)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(6, 6, 6)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -818,16 +1067,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
         jLabel16.setForeground(new java.awt.Color(128, 0, 0));
         jLabel16.setText("Quét mã vạch sản phẩm");
 
-        javax.swing.GroupLayout QRScanPanelLayout = new javax.swing.GroupLayout(QRScanPanel);
-        QRScanPanel.setLayout(QRScanPanelLayout);
-        QRScanPanelLayout.setHorizontalGroup(
-            QRScanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        QRScanPanelLayout.setVerticalGroup(
-            QRScanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
+        QRScanPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton12.setBackground(new java.awt.Color(255, 255, 255));
         jButton12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -861,7 +1101,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 20, Short.MAX_VALUE))
             .addComponent(QRScanPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
@@ -872,7 +1112,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                     .addComponent(jButton12)
                     .addComponent(jButton13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(QRScanPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(QRScanPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
         );
 
         jPanel12.setBackground(new java.awt.Color(246, 225, 225));
@@ -1072,7 +1312,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                             .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1105,9 +1345,9 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 378, Short.MAX_VALUE)
                 .addGap(29, 29, 29))
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1443,10 +1683,12 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
+        moWebcam();
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
+        dongWebcam();
     }//GEN-LAST:event_jButton13ActionPerformed
 
 

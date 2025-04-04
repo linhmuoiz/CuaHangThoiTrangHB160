@@ -24,7 +24,7 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
         tinhDoanhThu();
         tinhSoHoaDon();
         tinhSoSanPhamBanRa();
-        tinhTopSanPhamBanChay();
+        tinhTopSanPhamBanChayTatCa();
         doanhThuChiTietHomNay();
     }
     
@@ -48,12 +48,60 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
         jLabel8.setText(String.valueOf(soSanPhamBanRa));
     }
     
-    public void tinhTopSanPhamBanChay() {
+    public void tinhTopSanPhamBanChayTatCa() {
         DefaultTableModel tableSanPham = (DefaultTableModel) this.rSTableMetro1.getModel();
         tableSanPham.setRowCount(0);
         
         ThongKeDAO thongKeDAO = new ThongKeDAO();
-        List<SanPhamBanChayDTO> sanPhamLst = thongKeDAO.tinhTopSanPhamBanChay();
+        List<SanPhamBanChayDTO> sanPhamLst = thongKeDAO.tinhTopSanPhamBanChayTatCa();
+        
+        for (SanPhamBanChayDTO sanPham : sanPhamLst) {
+            tableSanPham.addRow(new Object[] {
+                sanPham.getMaSP(),
+                sanPham.getTenSP(),
+                sanPham.getSoLuongBanRa(),
+            });
+        }
+    }
+    
+    public void tinhTopSanPhamBanChayNgayNay() {
+        DefaultTableModel tableSanPham = (DefaultTableModel) this.rSTableMetro1.getModel();
+        tableSanPham.setRowCount(0);
+        
+        ThongKeDAO thongKeDAO = new ThongKeDAO();
+        List<SanPhamBanChayDTO> sanPhamLst = thongKeDAO.tinhTopSanPhamBanChayNgayNay();
+        
+        for (SanPhamBanChayDTO sanPham : sanPhamLst) {
+            tableSanPham.addRow(new Object[] {
+                sanPham.getMaSP(),
+                sanPham.getTenSP(),
+                sanPham.getSoLuongBanRa(),
+            });
+        }
+    }
+   
+    public void tinhTopSanPhamBanChayThangNay() {
+        DefaultTableModel tableSanPham = (DefaultTableModel) this.rSTableMetro1.getModel();
+        tableSanPham.setRowCount(0);
+        
+        ThongKeDAO thongKeDAO = new ThongKeDAO();
+        List<SanPhamBanChayDTO> sanPhamLst = thongKeDAO.tinhTopSanPhamBanChayThangNay();
+        
+        for (SanPhamBanChayDTO sanPham : sanPhamLst) {
+            tableSanPham.addRow(new Object[] {
+                sanPham.getMaSP(),
+                sanPham.getTenSP(),
+                sanPham.getSoLuongBanRa(),
+            });
+        }
+    }
+    
+    public void tinhTopSanPhamBanChayNamNay() {
+        DefaultTableModel tableSanPham = (DefaultTableModel) this.rSTableMetro1.getModel();
+        tableSanPham.setRowCount(0);
+        
+        ThongKeDAO thongKeDAO = new ThongKeDAO();
+        List<SanPhamBanChayDTO> sanPhamLst = thongKeDAO.tinhTopSanPhamBanChayNamNay();
         
         for (SanPhamBanChayDTO sanPham : sanPhamLst) {
             tableSanPham.addRow(new Object[] {
@@ -80,6 +128,8 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
             });
         }
     }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,7 +153,7 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        rSComboMetro4 = new rojerusan.RSComboMetro();
+        cboLoc = new rojerusan.RSComboMetro();
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -255,16 +305,16 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(128, 0, 0));
         jLabel10.setText("Lọc Theo:");
 
-        rSComboMetro4.setBackground(new java.awt.Color(246, 225, 225));
-        rSComboMetro4.setForeground(new java.awt.Color(128, 0, 0));
-        rSComboMetro4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "Ngày Này", "Tháng Này", "Năm Này" }));
-        rSComboMetro4.setColorArrow(new java.awt.Color(128, 0, 0));
-        rSComboMetro4.setColorBorde(new java.awt.Color(128, 0, 0));
-        rSComboMetro4.setColorFondo(new java.awt.Color(246, 225, 225));
-        rSComboMetro4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        rSComboMetro4.addActionListener(new java.awt.event.ActionListener() {
+        cboLoc.setBackground(new java.awt.Color(246, 225, 225));
+        cboLoc.setForeground(new java.awt.Color(128, 0, 0));
+        cboLoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "Ngày Này", "Tháng Này", "Năm Này" }));
+        cboLoc.setColorArrow(new java.awt.Color(128, 0, 0));
+        cboLoc.setColorBorde(new java.awt.Color(128, 0, 0));
+        cboLoc.setColorFondo(new java.awt.Color(246, 225, 225));
+        cboLoc.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        cboLoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSComboMetro4ActionPerformed(evt);
+                cboLocActionPerformed(evt);
             }
         });
 
@@ -397,7 +447,7 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
                         .addGap(35, 35, 35)
                         .addComponent(jLabel10)
                         .addGap(50, 50, 50)
-                        .addComponent(rSComboMetro4, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cboLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,21 +470,33 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rSComboMetro4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(36, 36, 36)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rSComboMetro4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSComboMetro4ActionPerformed
+    private void cboLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rSComboMetro4ActionPerformed
+        String selectedItem = (String) cboLoc.getSelectedItem();
+
+        if (selectedItem.equals("Tất Cả")) {
+            tinhTopSanPhamBanChayTatCa();
+        } else if (selectedItem.equals("Ngày Này")) {
+            tinhTopSanPhamBanChayNgayNay();
+        } else if (selectedItem.equals("Tháng Này")) {
+            tinhTopSanPhamBanChayThangNay();
+        } else if (selectedItem.equals("Năm Này")) {
+            tinhTopSanPhamBanChayNamNay();
+        }
+    }//GEN-LAST:event_cboLocActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jfree.chart.renderer.category.BoxAndWhiskerRenderer boxAndWhiskerRenderer1;
+    private rojerusan.RSComboMetro cboLoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
@@ -455,7 +517,6 @@ public class QuanLyThongKeJpanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private rojerusan.RSComboMetro rSComboMetro4;
     private rojerusan.RSTableMetro rSTableMetro1;
     private rojerusan.RSTableMetro tblChiTietDoanhThuHomNay;
     // End of variables declaration//GEN-END:variables

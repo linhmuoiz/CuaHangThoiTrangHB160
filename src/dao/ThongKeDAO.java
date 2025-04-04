@@ -67,7 +67,7 @@ public class ThongKeDAO {
         }
     }
 
-    public List<SanPhamBanChayDTO> tinhTopSanPhamBanChay() {
+    public List<SanPhamBanChayDTO> tinhTopSanPhamBanChayTatCa() {
         String sql = "SELECT TOP 10 \n"
                 + "	sp.ID AS MaSP, \n"
                 + "	sp.TenSP, \n"
@@ -100,6 +100,108 @@ public class ThongKeDAO {
         }
     }
 
+    public List<SanPhamBanChayDTO> tinhTopSanPhamBanChayNgayNay() {
+        String sql = "SELECT TOP 10 \n"
+                + "	sp.ID AS MaSP, \n"
+                + "	sp.TenSP, \n"
+                + "	SUM(cthd.SoLuong) AS SoLuongBanRa\n"
+                + "FROM HoaDon hd\n"
+                + "INNER JOIN ChiTietHD cthd ON cthd.MaHD = hd.ID\n"
+                + "INNER JOIN SanPham sp ON sp.ID = cthd.MaSP\n"
+                + "WHERE hd.TrangThai = N'Hoàn thành'\n"
+                + "AND hd.NgayTao = CAST(GETDATE() AS DATE)"
+                + "GROUP BY sp.ID, sp.TenSP\n"
+                + "ORDER BY SoLuongBanRa DESC;";
+
+        List<SanPhamBanChayDTO> sanPhamLst = new ArrayList<SanPhamBanChayDTO>();
+
+        try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement ps = con.prepareStatement(sql);) {
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int MaSP = rs.getInt("MaSP");
+                String TenSP = rs.getString("TenSP");
+                int SoLuongSanPhamBanRa = rs.getInt("SoLuongBanRa");
+
+                SanPhamBanChayDTO sanPhamBanChayDTO = new SanPhamBanChayDTO(MaSP, TenSP, SoLuongSanPhamBanRa);
+                sanPhamLst.add(sanPhamBanChayDTO);
+            }
+            return sanPhamLst;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return sanPhamLst;
+        }
+    }
+
+    public List<SanPhamBanChayDTO> tinhTopSanPhamBanChayThangNay() {
+        String sql = "SELECT TOP 10 \n"
+                + "	sp.ID AS MaSP, \n"
+                + "	sp.TenSP, \n"
+                + "	SUM(cthd.SoLuong) AS SoLuongBanRa\n"
+                + "FROM HoaDon hd\n"
+                + "INNER JOIN ChiTietHD cthd ON cthd.MaHD = hd.ID\n"
+                + "INNER JOIN SanPham sp ON sp.ID = cthd.MaSP\n"
+                + "WHERE hd.TrangThai = N'Hoàn thành'\n"
+                + "AND MONTH(hd.NgayTao) = MONTH(GETDATE())\n"
+                + "AND YEAR(hd.NgayTao) = YEAR(GETDATE())\n"
+                + "GROUP BY sp.ID, sp.TenSP\n"
+                + "ORDER BY SoLuongBanRa DESC;";
+
+        List<SanPhamBanChayDTO> sanPhamLst = new ArrayList<SanPhamBanChayDTO>();
+
+        try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement ps = con.prepareStatement(sql);) {
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int MaSP = rs.getInt("MaSP");
+                String TenSP = rs.getString("TenSP");
+                int SoLuongSanPhamBanRa = rs.getInt("SoLuongBanRa");
+
+                SanPhamBanChayDTO sanPhamBanChayDTO = new SanPhamBanChayDTO(MaSP, TenSP, SoLuongSanPhamBanRa);
+                sanPhamLst.add(sanPhamBanChayDTO);
+            }
+            return sanPhamLst;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return sanPhamLst;
+        }
+    }
+    
+    public List<SanPhamBanChayDTO> tinhTopSanPhamBanChayNamNay() {
+        String sql = "SELECT TOP 10 \n"
+                + "	sp.ID AS MaSP, \n"
+                + "	sp.TenSP, \n"
+                + "	SUM(cthd.SoLuong) AS SoLuongBanRa\n"
+                + "FROM HoaDon hd\n"
+                + "INNER JOIN ChiTietHD cthd ON cthd.MaHD = hd.ID\n"
+                + "INNER JOIN SanPham sp ON sp.ID = cthd.MaSP\n"
+                + "WHERE hd.TrangThai = N'Hoàn thành'\n"
+                + "AND YEAR(hd.NgayTao) = YEAR(GETDATE())\n"
+                + "GROUP BY sp.ID, sp.TenSP\n"
+                + "ORDER BY SoLuongBanRa DESC;";
+
+        List<SanPhamBanChayDTO> sanPhamLst = new ArrayList<SanPhamBanChayDTO>();
+
+        try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement ps = con.prepareStatement(sql);) {
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int MaSP = rs.getInt("MaSP");
+                String TenSP = rs.getString("TenSP");
+                int SoLuongSanPhamBanRa = rs.getInt("SoLuongBanRa");
+
+                SanPhamBanChayDTO sanPhamBanChayDTO = new SanPhamBanChayDTO(MaSP, TenSP, SoLuongSanPhamBanRa);
+                sanPhamLst.add(sanPhamBanChayDTO);
+            }
+            return sanPhamLst;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return sanPhamLst;
+        }
+    }
     public List<DoanhThuChiTietDTO> doanhThuChiTietHomNay() {
         String sql = "SELECT SP.ID AS MaSanPham,\n"
                 + "    SP.TenSP AS TenSanPham,\n"
@@ -136,4 +238,5 @@ public class ThongKeDAO {
             return doanhThuLst;
         }
     }
+
 }

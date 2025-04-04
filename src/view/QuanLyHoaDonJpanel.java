@@ -54,7 +54,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
@@ -80,14 +80,14 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));
         jPanel2.setPreferredSize(new java.awt.Dimension(1300, 400));
 
-        jTextField7.setBackground(new java.awt.Color(246, 225, 225));
-        jTextField7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(128, 0, 0));
-        jTextField7.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(128, 0, 0)));
-        jTextField7.setMinimumSize(new java.awt.Dimension(300, 30));
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        txtTimKiem.setBackground(new java.awt.Color(246, 225, 225));
+        txtTimKiem.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        txtTimKiem.setForeground(new java.awt.Color(128, 0, 0));
+        txtTimKiem.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(128, 0, 0)));
+        txtTimKiem.setMinimumSize(new java.awt.Dimension(300, 30));
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                txtTimKiemActionPerformed(evt);
             }
         });
 
@@ -129,6 +129,11 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         jButton16.setBackground(new java.awt.Color(246, 225, 225));
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search-13-24.png"))); // NOI18N
         jButton16.setBorder(null);
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         tblDanhMuc.setBackground(new java.awt.Color(246, 225, 225));
         tblDanhMuc.setForeground(new java.awt.Color(255, 255, 255));
@@ -164,7 +169,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(53, 53, 53)
@@ -197,7 +202,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -290,9 +295,9 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_txtTimKiemActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -300,7 +305,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        jTextField7.setText("");
+        txtTimKiem.setText("");
         DefaultTableModel Tmodel = (DefaultTableModel) tblDanhMuc1.getModel();
         Tmodel.setRowCount(0);
         tblDanhMuc1.setModel(Tmodel);
@@ -341,6 +346,28 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblDanhMucMouseClicked
 
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here:
+        String TimKiem = txtTimKiem.getText();
+        HoaDonDAO hoaDonDAO = new HoaDonDAO();
+        List<HoaDonDTO> hoaDonLst = hoaDonDAO.TimKiemHoaDon(TimKiem);
+        
+        DefaultTableModel tableHoaDon = (DefaultTableModel) this.tblDanhMuc.getModel();
+        tableHoaDon.setRowCount(0);
+        
+        for (HoaDonDTO hoaDon : hoaDonLst) {
+            tableHoaDon.addRow(new Object[] {
+                hoaDon.getID(),
+                hoaDon.getTenKH(),
+                hoaDon.getSDT(),
+                hoaDon.getThanhTien(),
+                hoaDon.getHinhThucTT(),
+                hoaDon.getNgayTao(),
+                hoaDon.getTrangThai()
+            });
+        }
+    }//GEN-LAST:event_jButton16ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton16;
@@ -357,8 +384,8 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField7;
     private rojerusan.RSTableMetro tblDanhMuc;
     private rojerusan.RSTableMetro tblDanhMuc1;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

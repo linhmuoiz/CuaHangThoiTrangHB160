@@ -169,5 +169,41 @@ public class HoaDonDAO {
             return hoaDonLst;
         }
     }
+    
+    
+    public List<HoaDonDTO> TimKiemHoaDonTheoNgay(String ngayTimKiem) {
+        List<HoaDonDTO> hoaDonLst = new ArrayList<>();
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "SELECT hd.ID, kh.TenKH, kh.SDT, hd.ThanhTien,\n"
+                    + "       hd.HinhThucTT, hd.NgayTao, hd.TrangThai\n"
+                    + "FROM HoaDon hd\n"
+                    + "INNER JOIN KhachHang kh ON kh.ID = hd.MaKH\n"
+                    + "WHERE hd.NgayTao = ?";
 
+            System.out.println("Executing SQL Query: " + sql);
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+
+            ppStm.setString(1, ngayTimKiem);
+
+            ResultSet rs = ppStm.executeQuery();
+            
+            while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String TenKH = rs.getString("TenKH");
+                String SDT = rs.getString("SDT");
+                double ThanhTien = rs.getDouble("ThanhTien");
+                String HinhThucTT = rs.getString("HinhThucTT");
+                Date NgayTao = rs.getDate("NgayTao");
+                String TrangThai = rs.getString("TrangThai");
+
+                HoaDonDTO hoaDon = new HoaDonDTO(ID, TenKH, SDT, ThanhTien, HinhThucTT, NgayTao, TrangThai);
+                hoaDonLst.add(hoaDon);
+            }
+            return hoaDonLst;
+        } catch (Exception e) {
+            System.err.println("Lỗi TimKiemKhuyenMai: " + e.getMessage());
+            e.printStackTrace();
+            return hoaDonLst;
+        }
+    }
 }

@@ -42,6 +42,14 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
         }
     }
 
+    private boolean showPasswordDialog() {
+        java.awt.Frame parentFrame = (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this);
+        DoiMatKhauJdialog dialog = new DoiMatKhauJdialog(parentFrame, true);
+        dialog.setLocationRelativeTo(this); // Center relative to the JPanel
+        dialog.setVisible(true);
+        return dialog.isAuthenticated();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -268,22 +276,24 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        int dongDangChon = tblDanhMuc.getSelectedRow();
-        if (dongDangChon != -1) {
-            int MaDanhMuc = (int) tblDanhMuc.getValueAt(dongDangChon, 0);
+        if (showPasswordDialog()) {
+            int dongDangChon = tblDanhMuc.getSelectedRow();
+            if (dongDangChon != -1) {
+                int MaDanhMuc = (int) tblDanhMuc.getValueAt(dongDangChon, 0);
 
-            DanhMucDAO danhMucDao = new DanhMucDAO();
-            int ketQua = danhMucDao.XoaDanhMuc(MaDanhMuc);
+                DanhMucDAO danhMucDao = new DanhMucDAO();
+                int ketQua = danhMucDao.XoaDanhMuc(MaDanhMuc);
 
-            if (ketQua == 1) {
-                JOptionPane.showMessageDialog(this, "Xoá Danh Mục Thành Công");
-                txtTenDanhMuc.setText("");
-                fillTable();
+                if (ketQua == 1) {
+                    JOptionPane.showMessageDialog(this, "Xoá Danh Mục Thành Công");
+                    txtTenDanhMuc.setText("");
+                    fillTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xoá Danh Mục Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Xoá Danh Mục Không Thành Công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để xóa", "Error", JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để xóa", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 

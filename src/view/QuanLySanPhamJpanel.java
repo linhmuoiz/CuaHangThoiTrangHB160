@@ -138,6 +138,14 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         imagePath = null; // đặt lại đường dẫn
     }
 
+    private boolean showPasswordDialog() {
+        java.awt.Frame parentFrame = (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this);
+        DoiMatKhauJdialog dialog = new DoiMatKhauJdialog(parentFrame, true);
+        dialog.setLocationRelativeTo(this); // Center relative to the JPanel
+        dialog.setVisible(true);
+        return dialog.isAuthenticated();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -676,23 +684,24 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        int dongDangChon = tblDanhSach.getSelectedRow();
-        if (dongDangChon != -1){
-        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
-        int ID = (int) model.getValueAt(dongDangChon, 0);
-        
-        SanPhamDAO sanPham = new SanPhamDAO();
-        int ketQua = sanPham.XoaSanPham(ID);
-        if (ketQua == 1) {
-            JOptionPane.showMessageDialog(this, "Xoá Sản Phẩm Thành Công");
-            XoaNoiDungNhapLieu();
-            FillTable();
-        } else {
-            JOptionPane.showMessageDialog(this, "Xoá Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để xóa", "Error", JOptionPane.WARNING_MESSAGE);
+        if (showPasswordDialog()) {
+            int dongDangChon = tblDanhSach.getSelectedRow();
+            if (dongDangChon != -1) {
+                DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+                int ID = (int) model.getValueAt(dongDangChon, 0);
+
+                SanPhamDAO sanPham = new SanPhamDAO();
+                int ketQua = sanPham.XoaSanPham(ID);
+                if (ketQua == 1) {
+                    JOptionPane.showMessageDialog(this, "Xoá Sản Phẩm Thành Công");
+                    XoaNoiDungNhapLieu();
+                    FillTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xoá Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để xóa", "Error", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
@@ -702,80 +711,78 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        
+
         int dongDangChon = tblDanhSach.getSelectedRow();
-        if (dongDangChon != -1){
-        String TenSP = txtTenSanPham.getText();
-        String Gia = txtGia.getText();
-        String SoLuong = txtSoLuong.getText();
-        String TrangThai = (String) cboTrangThai.getSelectedItem();
-        String DanhMuc = (String) cboDanhMuc.getSelectedItem();
-        String MauSac = (String) cboMauSac.getSelectedItem();
-        String KichThuoc = (String) cboKichThuoc.getSelectedItem();
-        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
-        int ID = (int) model.getValueAt(dongDangChon, 0);
-        
-        
-        if (TenSP.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tên Sản Phẩm Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (Gia.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Giá Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (SoLuong.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Số Lượng Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        if (dongDangChon != -1) {
+            String TenSP = txtTenSanPham.getText();
+            String Gia = txtGia.getText();
+            String SoLuong = txtSoLuong.getText();
+            String TrangThai = (String) cboTrangThai.getSelectedItem();
+            String DanhMuc = (String) cboDanhMuc.getSelectedItem();
+            String MauSac = (String) cboMauSac.getSelectedItem();
+            String KichThuoc = (String) cboKichThuoc.getSelectedItem();
+            DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+            int ID = (int) model.getValueAt(dongDangChon, 0);
 
-        double giaDouble = 0;
-        try {
-            giaDouble = Double.parseDouble(Gia);
-            if (giaDouble < 0 || giaDouble == 0) {
-                JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Lại");
+            if (TenSP.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Tên Sản Phẩm Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Giá phải là một số thực hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        int SLint = 0;
-        try {
-            SLint = Integer.parseInt(SoLuong);
-            if (SLint <= 0) {
-                JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên dương lớn hơn 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            if (Gia.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Giá Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+            if (SoLuong.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Số Lượng Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        SanPhamDanhMucMauSacKichThuocDTO sanPham = new SanPhamDanhMucMauSacKichThuocDTO();
-        sanPham.setID(ID);
-        sanPham.setTenSp(TenSP);
-        sanPham.setGia(giaDouble);
-        sanPham.setSoLuong(SLint);
-        sanPham.setTrangThai(TrangThai);
-        sanPham.setTenDM(DanhMuc);
-        sanPham.setTenMS(MauSac);
-        sanPham.setTenKT(KichThuoc);
-        sanPham.setHinhAnh(imagePath);
+            double giaDouble = 0;
+            try {
+                giaDouble = Double.parseDouble(Gia);
+                if (giaDouble < 0 || giaDouble == 0) {
+                    JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Lại");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Giá phải là một số thực hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        SanPhamDAO sanPhamDAO = new SanPhamDAO();
-        int ketQua = sanPhamDAO.SuaSanPham(sanPham);
+            int SLint = 0;
+            try {
+                SLint = Integer.parseInt(SoLuong);
+                if (SLint <= 0) {
+                    JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên dương lớn hơn 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Số lượng phải là một số nguyên hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        if (ketQua == 1) {
-            JOptionPane.showMessageDialog(this, "Sửa Sản Phẩm Thành Công");
-            XoaNoiDungNhapLieu();
-            FillTable();
+            SanPhamDanhMucMauSacKichThuocDTO sanPham = new SanPhamDanhMucMauSacKichThuocDTO();
+            sanPham.setID(ID);
+            sanPham.setTenSp(TenSP);
+            sanPham.setGia(giaDouble);
+            sanPham.setSoLuong(SLint);
+            sanPham.setTrangThai(TrangThai);
+            sanPham.setTenDM(DanhMuc);
+            sanPham.setTenMS(MauSac);
+            sanPham.setTenKT(KichThuoc);
+            sanPham.setHinhAnh(imagePath);
+
+            SanPhamDAO sanPhamDAO = new SanPhamDAO();
+            int ketQua = sanPhamDAO.SuaSanPham(sanPham);
+
+            if (ketQua == 1) {
+                JOptionPane.showMessageDialog(this, "Sửa Sản Phẩm Thành Công");
+                XoaNoiDungNhapLieu();
+                FillTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Sửa Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
-        }
-        else{
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để sửa", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnSuaActionPerformed

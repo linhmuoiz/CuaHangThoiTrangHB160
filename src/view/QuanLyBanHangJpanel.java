@@ -54,7 +54,7 @@ import javax.swing.SwingWorker;
 import utils.GlobalState;
 import utils.readDetailOrderToForm;
 
-public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable, ThreadFactory{
+public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable, ThreadFactory {
 
     /**
      * Creates new form QuanLyBanHangJpanel
@@ -66,7 +66,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         readSanPham();
         resetTableChiTietHD();
     }
-    
+
     private WebcamPanel camPanel = null;
     private Webcam webcam = null;
     private ExecutorService executor = null;
@@ -110,7 +110,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         worker.execute(); // Chạy SwingWorker (bắt đầu thực thi doInBackground() trong một luồng nền)
     }
 
-     public void run() {
+    public void run() {
         try {
             do {
                 try {
@@ -257,7 +257,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         t.setDaemon(true);
         return t;
     }
-    
+
     public void thayDoiThongTinHoaDonTheoMaQR() {
         // Thay đổi bảng Chi tiết hóa đơn
         // Thay đổi Số lượng bán sẽ thay đổi Thành Tiền
@@ -530,6 +530,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         jScrollPane2 = new javax.swing.JScrollPane();
         rSTableMetro2 = new rojerusan.RSTableMetro();
         jButton15 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1500, 1000));
@@ -592,7 +593,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton8))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(366, 366, 366))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -661,7 +662,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -863,7 +864,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1009,7 +1010,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jButton7.setBackground(new java.awt.Color(255, 255, 255));
@@ -1273,6 +1274,17 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
             }
         });
 
+        jButton14.setBackground(new java.awt.Color(255, 255, 255));
+        jButton14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton14.setForeground(new java.awt.Color(128, 0, 0));
+        jButton14.setText("Sửa");
+        jButton14.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -1281,19 +1293,21 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 267, Short.MAX_VALUE))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)))
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(134, 134, 134))))
             .addComponent(jScrollPane2)
         );
         jPanel15Layout.setVerticalGroup(
@@ -1301,9 +1315,12 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton9)
-                        .addComponent(jButton10))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton9)
+                            .addComponent(jButton10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton14))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
@@ -1312,7 +1329,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
                             .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1345,9 +1362,9 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
                 .addGap(40, 40, 40)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 378, Short.MAX_VALUE)
+                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
                 .addGap(29, 29, 29))
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1583,11 +1600,11 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void LoadUp2Form(){
+    private void LoadUp2Form() {
         DefaultTableModel Tmodel;
         Tmodel = (DefaultTableModel) rSTableMetro3.getModel();
         Tmodel.setRowCount(0);
-        
+
         readDetailOrderToForm readFunction = new readDetailOrderToForm();
         HoaDonDTO info = readFunction.readHoaDonByID(GlobalState.MaHDChoChon);
         //
@@ -1595,9 +1612,9 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         jTextField10.setText(info.getSDT());
         rSComboMetro4.setSelectedItem(info.getHinhThucTT());
         jDateChooser10.setDate(info.getNgayTao());
-        
-       List<ChiTietHDDTO> lstChiTietDTO = new ArrayList<>();
-       lstChiTietDTO = readFunction.readChiTietHD(GlobalState.MaHDChoChon);
+
+        List<ChiTietHDDTO> lstChiTietDTO = new ArrayList<>();
+        lstChiTietDTO = readFunction.readChiTietHD(GlobalState.MaHDChoChon);
         for (ChiTietHDDTO chiTietHDDTO : lstChiTietDTO) {
             Tmodel.addRow(new Object[]{
                 chiTietHDDTO.getMaSP(),
@@ -1678,7 +1695,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here
-        
+
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -1691,6 +1708,12 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         dongWebcam();
     }//GEN-LAST:event_jButton13ActionPerformed
 
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+//        ChiTietHD chiTietHD = new ChiTietHD(MaHDMoi, MaSP, SoLuong, khuyenMai);
+//        ChiTietHDDAO chiTietHDDAO = new ChiTietHDDAO();
+//        chiTietHDDAO.createChiTietHD(chiTietHD);
+    }//GEN-LAST:event_jButton14ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel QRScanPanel;
@@ -1698,6 +1721,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton6;

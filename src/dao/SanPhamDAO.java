@@ -66,18 +66,17 @@ public class SanPhamDAO {
             return sanPhamLst;
         }
     }
-    
+
     //readSanPham cua Quan ly ban hang tai quay
     public List<SanPhamDTO> readSanPhamQLY() {
-        String sql = "SELECT ID, TenSP, Gia, SoLuong, TrangThai, dm.TenDM, ms.TenMS, kt.TenKT  \n" +
-                    "FROM SanPham sp\n" +
-                    "INNER JOIN DanhMuc dm ON dm.MaDM = sp.MaDM\n" +
-                    "INNER JOIN MauSac ms ON ms.MaMS = sp.MaMS\n" +
-                    "INNER JOIN KichThuoc kt ON kt.MaKT = sp.MaKT;";
+        String sql = "SELECT ID, TenSP, Gia, SoLuong, TrangThai, dm.TenDM, ms.TenMS, kt.TenKT  \n"
+                + "FROM SanPham sp\n"
+                + "INNER JOIN DanhMuc dm ON dm.MaDM = sp.MaDM\n"
+                + "INNER JOIN MauSac ms ON ms.MaMS = sp.MaMS\n"
+                + "INNER JOIN KichThuoc kt ON kt.MaKT = sp.MaKT WHERE sp.TrangThai = N'Đang Hoạt Động'";
         List<SanPhamDTO> sanPhamLst = new ArrayList<SanPhamDTO>();
-        
-        try (Connection con = KetNoiDB.getConnectDB(); 
-                PreparedStatement ps = con.prepareStatement(sql);) {
+
+        try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement ps = con.prepareStatement(sql);) {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -89,34 +88,35 @@ public class SanPhamDAO {
                 String MaDM = rs.getString("TenDM");
                 String MaMS = rs.getString("TenMS");
                 String MaKT = rs.getString("TenKT");
-                
+
                 SanPhamDTO sanPham = new SanPhamDTO(ID, TenNV, Gia, SoLuong, TrangThai, MaDM, MaMS, MaKT);
                 sanPhamLst.add(sanPham);
             }
             return sanPhamLst;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
             return sanPhamLst;
         }
-    }public List<ChiTietHDDTO> readSanPhamChon(int MaSPChon) {
-        String sql = "SELECT \n" +
-                    "    sp.ID, \n" +
-                    "    sp.TenSP, \n" +
-                    "    dm.TenDM, \n" +
-                    "    ms.TenMS, \n" +
-                    "    kt.TenKT, \n" +
-                    "    sp.Gia\n" +
-                    "FROM SanPham sp\n" +
-                    "INNER JOIN DanhMuc dm ON dm.MaDM = sp.MaDM\n" +
-                    "INNER JOIN MauSac ms ON ms.MaMS = sp.MaMS\n" +
-                    "INNER JOIN KichThuoc kt ON kt.MaKT = sp.MaKT\n" +
-                    "WHERE sp.ID = (?);";
-        
+    }
+
+    public List<ChiTietHDDTO> readSanPhamChon(int MaSPChon) {
+        String sql = "SELECT \n"
+                + "    sp.ID, \n"
+                + "    sp.TenSP, \n"
+                + "    dm.TenDM, \n"
+                + "    ms.TenMS, \n"
+                + "    kt.TenKT, \n"
+                + "    sp.Gia\n"
+                + "FROM SanPham sp\n"
+                + "INNER JOIN DanhMuc dm ON dm.MaDM = sp.MaDM\n"
+                + "INNER JOIN MauSac ms ON ms.MaMS = sp.MaMS\n"
+                + "INNER JOIN KichThuoc kt ON kt.MaKT = sp.MaKT\n"
+                + "WHERE sp.ID = (?);";
+
         List<ChiTietHDDTO> sanPhamChonLst = new ArrayList<ChiTietHDDTO>();
-        
-        try (Connection con = KetNoiDB.getConnectDB(); 
-                PreparedStatement ps = con.prepareStatement(sql);) {
-            
+
+        try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement ps = con.prepareStatement(sql);) {
+
             ps.setInt(1, MaSPChon);
             ResultSet rs = ps.executeQuery();
 
@@ -127,28 +127,27 @@ public class SanPhamDAO {
                 String TenMS = rs.getString("TenMS");
                 String TenKT = rs.getString("TenKT");
                 double Gia = rs.getDouble("Gia");
-                
+
                 ChiTietHDDTO sanPhamChon = new ChiTietHDDTO(MaSP, TenSP, TenDM, TenMS, TenKT, Gia);
                 sanPhamChonLst.add(sanPhamChon);
             }
             return sanPhamChonLst;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             return sanPhamChonLst;
         }
     }
 
-    public String getHinhAnhSanPham(int ID){
+    public String getHinhAnhSanPham(int ID) {
         String HinhAnh = null;
-        try (Connection conn = KetNoiDB.getConnectDB())  {
+        try (Connection conn = KetNoiDB.getConnectDB()) {
             String sql = "SELECT HinhAnh FROM SanPham WHERE ID = ?";
             System.out.println("Executing SQL Query: " + sql);
 
             PreparedStatement ppStm = conn.prepareStatement(sql);
             ppStm.setInt(1, ID);
             ResultSet rs = ppStm.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 HinhAnh = rs.getString("HinhAnh");
             }
         } catch (Exception e) {
@@ -157,7 +156,7 @@ public class SanPhamDAO {
         }
         return HinhAnh;
     }
-    
+
     public List<SanPhamDanhMucMauSacKichThuocDTO> TimKiemSanPham(String TimKiem) {
         List<SanPhamDanhMucMauSacKichThuocDTO> sanPhamLst = new ArrayList<>();
         try (Connection conn = KetNoiDB.getConnectDB()) {
@@ -177,9 +176,9 @@ public class SanPhamDAO {
                     + "WHERE SP.ID = ? OR SP.TenSP LIKE ?\n"
                     + "ORDER BY SP.ID;";
             System.out.println("Executing SQL Query: " + sql);
-            
+
             PreparedStatement ppStm = conn.prepareStatement(sql);
-            
+
             //Thiết lập Tham số thứ 1 (WHERE SP.ID = ?)
             try {
                 int idTimKiem = Integer.parseInt(TimKiem); //chuyển đổi TimKiem thành số nguyên
@@ -187,12 +186,12 @@ public class SanPhamDAO {
             } catch (Exception e) {
                 ppStm.setInt(1, 0); //Nếu không phải là số thì mặc định là 0 để tránh bị lỗi
             }
-            
+
             //Thiết lập tham số thứ 2(SP.TenSP LIKE ?)
-            ppStm.setString(2, "%" + TimKiem + "%"); 
-            
+            ppStm.setString(2, "%" + TimKiem + "%");
+
             ResultSet rs = ppStm.executeQuery();
-            
+
             while (rs.next()) {
                 int maSP = rs.getInt("MaSP");
                 String TenSP = rs.getString("TenSp");
@@ -215,12 +214,12 @@ public class SanPhamDAO {
             return sanPhamLst;
         }
     }
-    
-    public int ThemSanPham(SanPhamDanhMucMauSacKichThuocDTO sanPham){
-        try (Connection conn = KetNoiDB.getConnectDB()){
+
+    public int ThemSanPham(SanPhamDanhMucMauSacKichThuocDTO sanPham) {
+        try (Connection conn = KetNoiDB.getConnectDB()) {
             String sql = "INSERT INTO SanPham (TenSP, Gia, SoLuong, TrangThai, MaDM, MaMS, MaKT, HinhAnh) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ppStm = conn.prepareStatement(sql);
-            
+
             ppStm.setString(1, sanPham.getTenSp());
             ppStm.setDouble(2, sanPham.getGia());
             ppStm.setInt(3, sanPham.getSoLuong());
@@ -229,21 +228,21 @@ public class SanPhamDAO {
             ppStm.setInt(6, getMaMS(sanPham.getTenMS(), conn));
             ppStm.setInt(7, getMaKT(sanPham.getTenKT(), conn));
             ppStm.setString(8, sanPham.getHinhAnh());
-            
+
             int ketQua = ppStm.executeUpdate();
             return ketQua;
         } catch (Exception e) {
-             System.out.println("Lỗi");
+            System.out.println("Lỗi");
             return 0;
-           
+
         }
     }
-    
-    public int SuaSanPham(SanPhamDanhMucMauSacKichThuocDTO sanPham){
-        try (Connection conn = KetNoiDB.getConnectDB()){
+
+    public int SuaSanPham(SanPhamDanhMucMauSacKichThuocDTO sanPham) {
+        try (Connection conn = KetNoiDB.getConnectDB()) {
             String sql = "UPDATE SanPham SET TenSP = ?, Gia = ?, SoLuong = ?, TrangThai = ?, MaDM = ?, MaMS = ?, MaKT = ?, HinhAnh = ? WHERE ID = ?";
             PreparedStatement ppStm = conn.prepareStatement(sql);
-            
+
             ppStm.setString(1, sanPham.getTenSp());
             ppStm.setDouble(2, sanPham.getGia());
             ppStm.setInt(3, sanPham.getSoLuong());
@@ -253,21 +252,21 @@ public class SanPhamDAO {
             ppStm.setInt(7, getMaKT(sanPham.getTenKT(), conn));
             ppStm.setString(8, sanPham.getHinhAnh());
             ppStm.setInt(9, sanPham.getID());
-            
+
             int ketQua = ppStm.executeUpdate();
             return ketQua;
         } catch (Exception e) {
-             System.out.println("Lỗi");
+            e.printStackTrace();
             return 0;
-           
+
         }
     }
-    
-    public int XoaSanPham (int ID){
+
+    public int XoaSanPham(int ID) {
         try (Connection conn = KetNoiDB.getConnectDB()) {
             String sql = "DELETE FROM SanPham WHERE ID = ?";
             PreparedStatement ppStm = conn.prepareStatement(sql);
-            
+
             ppStm.setInt(1, ID);
             int ketQua = ppStm.executeUpdate();
             return ketQua;
@@ -276,9 +275,8 @@ public class SanPhamDAO {
             return 0;
         }
     }
-    
-    
-    private int getMaDM (String TenDM, Connection conn) {   // Phương thức lấy MaDM từ TenDM
+
+    private int getMaDM(String TenDM, Connection conn) {   // Phương thức lấy MaDM từ TenDM
         int MaDM = 0; // Khởi tạo MaDM
         try {
             String sql = "SELECT MaDM FROM DanhMuc WHERE TenDM = ?"; // Truy vấn SQL SELECT để lấy MaDM
@@ -294,64 +292,62 @@ public class SanPhamDAO {
         }
         return MaDM;  // Trả về MaDM
     }
-    
-    private int getMaMS(String TenMS, Connection conn){
+
+    private int getMaMS(String TenMS, Connection conn) {
         int MaMS = 0;
         try {
             String sql = "SELECT MaMS FROM MauSac WHERE TenMS = ?";
-            PreparedStatement ppStm = conn.prepareStatement(sql); 
+            PreparedStatement ppStm = conn.prepareStatement(sql);
             ppStm.setString(1, TenMS);
             ResultSet rs = ppStm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 MaMS = rs.getInt("MaMS");
             }
         } catch (Exception e) {
-            System.err.println("Error getting MaDM from database:"); 
-            e.printStackTrace(); 
+            System.err.println("Error getting MaDM from database:");
+            e.printStackTrace();
         }
         return MaMS;
     }
-    
-    private int getMaKT(String TenKT, Connection conn){
+
+    private int getMaKT(String TenKT, Connection conn) {
         int MaKT = 0;
         try {
             String sql = "SELECT MaKT FROM KichThuoc WHERE TenKT = ?";
-            PreparedStatement ppStm = conn.prepareStatement(sql); 
+            PreparedStatement ppStm = conn.prepareStatement(sql);
             ppStm.setString(1, TenKT);
             ResultSet rs = ppStm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 MaKT = rs.getInt("MaKT");
             }
         } catch (Exception e) {
-            System.err.println("Error getting MaDM from database:"); 
-            e.printStackTrace(); 
+            System.err.println("Error getting MaDM from database:");
+            e.printStackTrace();
         }
         return MaKT;
     }
+
     // Cập nhật số lượng sản phẩm khi đã thanh toán
     public int updateSanPham(int ID, int SoLuongDaBan) {
         String selectSQL = "SELECT SoLuong FROM SanPham WHERE ID = (?)";
-        String updateSQL  = "UPDATE SanPham SET SoLuong = (?) WHERE ID = (?);";
-       
-        try (Connection con = KetNoiDB.getConnectDB(); 
-                PreparedStatement psSelect = con.prepareStatement(selectSQL);
-                PreparedStatement psUpdate  = con.prepareStatement(updateSQL);) {
-            
+        String updateSQL = "UPDATE SanPham SET SoLuong = (?) WHERE ID = (?);";
+
+        try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement psSelect = con.prepareStatement(selectSQL); PreparedStatement psUpdate = con.prepareStatement(updateSQL);) {
+
             psSelect.setInt(1, ID);
             ResultSet rs = psSelect.executeQuery();
-            
+
             if (rs.next()) {
                 int SoLuongHienTai = rs.getInt("SoLuong");
                 int SoLuongMoi = SoLuongHienTai - SoLuongDaBan;
-                
+
                 psUpdate.setInt(1, SoLuongMoi);
                 psUpdate.setInt(2, ID);
             }
 
             int ketQua = psUpdate.executeUpdate();
             return ketQua;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             return 0;
         }
     }

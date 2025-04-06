@@ -268,7 +268,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
         cboTrangThai.setBackground(new java.awt.Color(246, 225, 225));
         cboTrangThai.setForeground(new java.awt.Color(128, 0, 0));
-        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang Hoạt Đông", "Không Hoạt Động" }));
+        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Đang Hoạt Động", "Không Hoạt Động" }));
         cboTrangThai.setColorArrow(new java.awt.Color(128, 0, 0));
         cboTrangThai.setColorBorde(new java.awt.Color(128, 0, 0));
         cboTrangThai.setColorFondo(new java.awt.Color(246, 225, 225));
@@ -393,7 +393,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 4, Short.MAX_VALUE))
+                        .addGap(0, 10, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -428,15 +428,15 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel17)
-                                            .addComponent(cboDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                                            .addComponent(cboDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 38, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel18)
-                                            .addComponent(cboMauSac, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                                            .addComponent(cboMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 38, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel19)
-                                            .addComponent(cboKichThuoc, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
+                                            .addComponent(cboKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 38, Short.MAX_VALUE)))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGap(4, 4, 4)
                                         .addComponent(btnXoa)

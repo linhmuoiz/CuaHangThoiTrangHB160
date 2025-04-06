@@ -7,8 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import utils.KetNoiDB;
 
@@ -53,7 +53,7 @@ public class HoaDonDAO {
 }
     
     public List<HoaDon> readHoaDonCho() {
-        String sql = "SELECT ID, NgayTao, TrangThai FROM HoaDon WHERE TrangThai != N'Hủy';";
+        String sql = "SELECT ID, NgayTao, TrangThai FROM HoaDon WHERE TrangThai = N'Đang xử lý'";
         List<HoaDon> hoaDonLst = new ArrayList<HoaDon>();
         
         try (Connection con = KetNoiDB.getConnectDB(); 

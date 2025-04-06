@@ -65,7 +65,7 @@ public class ChiTietHDDAO {
         }
     }
      public int createChiTietHD(ChiTietHD chiTietHD) {
-        String sql = "INSERT INTO ChiTietHD VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO ChiTietHD VALUES (?, ?, ?, ?)";
        
         try (Connection con = KetNoiDB.getConnectDB(); 
                 PreparedStatement ps = con.prepareStatement(sql);) {
@@ -81,7 +81,20 @@ public class ChiTietHDDAO {
         catch (SQLException e) {
             return 0;
         }
-    }
+     }
+     public int deletePrevOrderDetail(int MaHD){
+         String sql = "DELETE * FROM ChiTietHD WHERE MaHD = ?";
+         
+         try(Connection conn = KetNoiDB.getConnectDB()){
+             PreparedStatement ppStm = conn.prepareStatement(sql);
+             ppStm.setInt(1, MaHD);
+             return 1;
+         }
+         catch(Exception e){
+             e.printStackTrace();
+             return 0;
+         }
+     }
     
     public List<ChiTietHD> findChiTietHD(int maHoaDon) {
         String sql = "SELECT * FROM ChiTietHD WHERE MaHD = (?);";

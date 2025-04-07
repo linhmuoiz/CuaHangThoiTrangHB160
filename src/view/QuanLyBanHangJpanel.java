@@ -238,7 +238,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
                 webcam.close(); // Đóng webcam.
             }
         }
-        
+
         // Remove camPanel from QRScanPanel *before* setting it to null
         if (camPanel != null) { // Kiểm tra nếu camPanel tồn tại
 
@@ -258,25 +258,25 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         return t;
     }
 
-    private void ScanRsTable3(){
+    private void ScanRsTable3() {
         SanPhamDAO spDAO = new SanPhamDAO();
         int soLuongHienTai;
         int i;
         int ID1;
         int ID2;
         DefaultTableModel Tmodel = (DefaultTableModel) rSTableMetro3.getModel();
-        for( i = 0; i<rSTableMetro3.getRowCount(); i++){
+        for (i = 0; i < rSTableMetro3.getRowCount(); i++) {
             ID1 = (int) rSTableMetro3.getValueAt(i, 0);
-            
-            for(int j=i+1; j<rSTableMetro3.getRowCount(); j++){
+
+            for (int j = i + 1; j < rSTableMetro3.getRowCount(); j++) {
                 ID2 = (int) rSTableMetro3.getValueAt(j, 0);
-                if (ID1 == ID2){
+                if (ID1 == ID2) {
                     String soLuongStr = String.valueOf(rSTableMetro3.getValueAt(i, 5));
-                    soLuongHienTai = Integer.parseInt(soLuongStr)+1;
+                    soLuongHienTai = Integer.parseInt(soLuongStr) + 1;
                     rSTableMetro3.setValueAt(soLuongHienTai, i, 5);
                     double soLuong = Double.parseDouble(String.valueOf(rSTableMetro3.getValueAt(i, 5)));
                     double gia = spDAO.getGiaSP(Integer.parseInt(String.valueOf(rSTableMetro3.getValueAt(i, 0))));
-                    double thanhTien = soLuong*gia;
+                    double thanhTien = soLuong * gia;
                     rSTableMetro3.setValueAt(thanhTien, i, 6);
                     Tmodel.removeRow(j);
                     rSTableMetro3.setModel(Tmodel);
@@ -284,6 +284,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
             }
         }
     }
+
     public void thayDoiThongTinHoaDonTheoMaQR() {
         // Thay đổi bảng Chi tiết hóa đơn
         // Thay đổi Số lượng bán sẽ thay đổi Thành Tiền
@@ -551,6 +552,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         rSTableMetro2 = new rojerusan.RSTableMetro();
         jButton15 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1500, 1000));
@@ -1302,6 +1304,17 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
             }
         });
 
+        jButton17.setBackground(new java.awt.Color(255, 255, 255));
+        jButton17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton17.setForeground(new java.awt.Color(128, 0, 0));
+        jButton17.setText("Xóa");
+        jButton17.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(128, 0, 0)));
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -1309,22 +1322,24 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))
+                    .addComponent(jLabel18)
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(134, 134, 134))))
+                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(58, 58, 58))
             .addComponent(jScrollPane2)
         );
         jPanel15Layout.setVerticalGroup(
@@ -1332,21 +1347,27 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton9)
-                            .addComponent(jButton10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton14))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel19)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton9)
+                                    .addComponent(jButton10))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton14)
+                                    .addComponent(jButton17))))
+                        .addGap(18, 18, 18)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1447,7 +1468,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
     String amount;
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         MaHD = GlobalState.MaHDChoChon;
-        System.out.println("MaHD: "+MaHD);
+        System.out.println("MaHD: " + MaHD);
         HinhThucThanhToan = rSComboMetro4.getSelectedItem().toString();
         TrangThai = "Hoàn thành";
         amount = jTextField17.getText();
@@ -1469,9 +1490,10 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
             if (ketQua == 1) {
                 this.readSanPham();
                 this.readHoaDonCho();
+                this.clean();
                 JOptionPane.showMessageDialog(this, "Thanh toán thành công");
             } else {
-                System.out.println("KQ: "+ketQua);
+                System.out.println("KQ: " + ketQua);
                 JOptionPane.showMessageDialog(this, "Thanh toán thất bại!");
             }
         }
@@ -1573,7 +1595,10 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        this.resetTableChiTietHD();
+       this.clean();
+    }//GEN-LAST:event_jButton10ActionPerformed
+    private void clean(){
+         this.resetTableChiTietHD();
 
         jTextField9.setText("");
         jTextField10.setText("");
@@ -1585,8 +1610,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         jTextField19.setText("");
         jTextField13.setText("");
         jTextField16.setText("");
-    }//GEN-LAST:event_jButton10ActionPerformed
-
+    }
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // Điền SĐT -> Thêm -> Nếu SĐT trùng thì ra luôn Khách Hàng, nếu chưa có thì tạo mới 
         String TenKH = jTextField9.getText();
@@ -1694,7 +1718,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
     }//GEN-LAST:event_rSTableMetro2MouseClicked
 
     private void rSTableMetro3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_rSTableMetro3PropertyChange
-        
+
         this.thayDoiThongTinHoaDon();
     }//GEN-LAST:event_rSTableMetro3PropertyChange
 
@@ -1708,11 +1732,17 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         int currentID = Integer.parseInt((String.valueOf(rSTableMetro1.getValueAt(soDongChon, 0))));
         GlobalState.MaHDChoChon = currentID;
         this.LoadUp2Form();
+        this.ScanRsTable3();
+        this.triggerDiscount();
     }//GEN-LAST:event_rSTableMetro1MouseClicked
 
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here
+        this.triggerDiscount();
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void triggerDiscount(){
         String discountCode = jTextField13.getText();
         KhuyenMaiDAO kmDAO = new KhuyenMaiDAO();
         int discountPack = kmDAO.getDiscountPack(discountCode);
@@ -1726,8 +1756,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
             jTextField16.setText(String.valueOf(TongTienKhuyenMai));
             jTextField17.setText(String.valueOf(TongTienThanhToan));
         }
-    }//GEN-LAST:event_jButton16ActionPerformed
-
+    }
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         moWebcam();
@@ -1739,9 +1768,30 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        ChiTietHDDAO chiTietDAO = new ChiTietHDDAO();
+        int MaHD = GlobalState.MaHDChoChon;
+        System.out.println("MaHD: " + MaHD);
+        chiTietDAO.deletePrevOrderDetail(MaHD);
 
-        
+        DefaultTableModel tableChiTietHD = (DefaultTableModel) rSTableMetro3.getModel();
+        int rowCount = tableChiTietHD.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            int MaSP = Integer.parseInt(tableChiTietHD.getValueAt(i, 0).toString());
+            int SoLuong = Integer.parseInt(tableChiTietHD.getValueAt(i, 5).toString());
+            ChiTietHD chiTietHD = new ChiTietHD(MaHD, MaSP, SoLuong);
+            chiTietDAO.insertCTHDByID(chiTietHD, MaHD);
+
+        }
+        this.ScanRsTable3();
+        JOptionPane.showMessageDialog(this, "Update đơn hàng thành công");
     }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel tableChiTietHD = (DefaultTableModel) rSTableMetro3.getModel();
+        int currentRow = rSTableMetro3.getSelectedRow();
+        tableChiTietHD.removeRow(currentRow);
+    }//GEN-LAST:event_jButton17ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1753,6 +1803,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

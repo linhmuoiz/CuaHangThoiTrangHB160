@@ -24,6 +24,11 @@ public class ChiTietHD {
         this.SoLuong = SoLuong;
         this.MaKM = MaKM;
     }
+    public ChiTietHD(int MaHD, int MaSP, int SoLuong) {
+        this.MaHD = MaHD;
+        this.MaSP = MaSP;
+        this.SoLuong = SoLuong;
+    }
 
     public int getID() {
         return ID;

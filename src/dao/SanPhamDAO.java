@@ -346,8 +346,27 @@ public class SanPhamDAO {
             }
 
             int ketQua = psUpdate.executeUpdate();
+            System.out.println("ketQua: "+ketQua);
             return ketQua;
         } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public double getGiaSP(int MaSP){
+        String sql = "select Gia from SanPham where ID = ?";
+        double gia = 0;
+        try(Connection conn = KetNoiDB.getConnectDB()){
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            ppStm.setInt(1, MaSP);
+            ResultSet rs = ppStm.executeQuery();
+            if (rs.next()){
+                gia = rs.getDouble("Gia");
+            }
+            return gia;
+        }
+        catch(Exception e){
+            e.printStackTrace();
             return 0;
         }
     }

@@ -353,7 +353,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
         for (ChiTietHDDTO hoaDon : chiTietHDLst) {
             double TongGiaTriSanPham = hoaDon.getGia();
-            double TongTienGiam = (TongDonHang * hoaDon.getGioiGiamGia()) / 100;
+//            double TongTienGiam = (TongDonHang * hoaDon.getGioiGiamGia()) / 100;
 //            double SoTienGiamTungSanPham = (TongGiaTriSanPham/TongDonHang) * TongTienGiam;
 
             tableChiTietHD.addRow(new Object[]{

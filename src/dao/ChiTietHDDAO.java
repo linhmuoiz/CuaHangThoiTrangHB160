@@ -55,7 +55,7 @@ public class ChiTietHDDAO {
                 double Gia = rs.getDouble("Gia");
                 int GoiGiamGia = rs.getInt("GoiGiamGia");
                 
-                ChiTietHDDTO chiTietHoaDon = new ChiTietHDDTO(MaSP, TenSP, TenDM, TenMS, TenKT, SoLuong, Gia, GoiGiamGia);
+                ChiTietHDDTO chiTietHoaDon = new ChiTietHDDTO(MaSP, TenSP, TenDM, TenMS, TenKT, SoLuong, Gia);
                 chiTietHoaDonLst.add(chiTietHoaDon);
             }
             return chiTietHoaDonLst;

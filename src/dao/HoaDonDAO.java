@@ -72,7 +72,7 @@ public class HoaDonDAO {
     }
 
     public int createHoaDon(HoaDon hoaDon) {
-        String sql = "INSERT INTO HoaDon VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO HoaDon VALUES (?, ?, ?, ?, ?, ?);";
 
         try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement ps = con.prepareStatement(sql);) {
 
@@ -82,7 +82,7 @@ public class HoaDonDAO {
 
             ps.setDate(4, new java.sql.Date(hoaDon.getNgayTao().getTime()));
             ps.setString(5, hoaDon.getTrangThai());
-
+            ps.setString(6, hoaDon.getMaKM());
             int ketQua = ps.executeUpdate();
             return ketQua;
         } catch (SQLException e) {
@@ -93,7 +93,8 @@ public class HoaDonDAO {
     public int findHoaDonMoi() {
         String sql = "SELECT TOP 1 ID FROM HoaDon ORDER BY ID DESC;";
 
-        try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement ps = con.prepareStatement(sql);) {
+        try (Connection con = KetNoiDB.getConnectDB(); 
+                PreparedStatement ps = con.prepareStatement(sql);) {
 
             ResultSet rs = ps.executeQuery();
 
@@ -204,6 +205,23 @@ public class HoaDonDAO {
             System.err.println("Lỗi TimKiemKhuyenMai: " + e.getMessage());
             e.printStackTrace();
             return hoaDonLst;
+        }
+    }
+    public String getMaGG(int MaHD){
+        String codeDiscount = "";
+        String sql = "select MaKM from HoaDon where ID = ?";
+        try(Connection conn = KetNoiDB.getConnectDB()){
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            ppStm.setInt(1, MaHD);
+            ResultSet rs = ppStm.executeQuery();
+            if (rs.next()){
+                codeDiscount = rs.getString("MaKM");
+            }
+            return codeDiscount;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return codeDiscount;
         }
     }
 }

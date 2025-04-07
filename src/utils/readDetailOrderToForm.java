@@ -42,7 +42,6 @@ public class readDetailOrderToForm {
                 HinhThucTT = rs.getString("HinhThucTT");
                 NgayTao = rs.getDate("NgayTao");
                 TrangThai = rs.getString("TrangThai");
-
             }
             return new HoaDonDTO(ID, TenKH, SDT, ThanhTien, HinhThucTT, NgayTao, TrangThai);
         } catch (SQLException e) {
@@ -84,9 +83,8 @@ public class readDetailOrderToForm {
                 String TenKT = rs.getString("TenKT");
                 int SoLuong = rs.getInt("SoLuong");
                 double Gia = rs.getDouble("Gia");
-                int GoiGiamGia = rs.getInt("GoiGiamGia");
                 
-                ChiTietHDDTO chiTietHoaDon = new ChiTietHDDTO(MaSP, TenSP, TenDM, TenMS, TenKT, SoLuong, Gia, GoiGiamGia);
+                ChiTietHDDTO chiTietHoaDon = new ChiTietHDDTO(MaSP, TenSP, TenDM, TenMS, TenKT, SoLuong, Gia);
                 chiTietHoaDonLst.add(chiTietHoaDon);
             }
             return chiTietHoaDonLst;

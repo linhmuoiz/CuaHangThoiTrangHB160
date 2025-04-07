@@ -9,7 +9,6 @@ public class ChiTietHDDTO {
     private String TenKT;
     private int SoLuong;
     private double Gia;
-    private int GioiGiamGia;
 
     public ChiTietHDDTO() {
     }
@@ -25,7 +24,7 @@ public class ChiTietHDDTO {
     
     
 
-    public ChiTietHDDTO(int MaSP, String TenSP, String TenDM, String TenMS, String TenKT, int SoLuong, double Gia, int GioiGiamGia) {
+    public ChiTietHDDTO(int MaSP, String TenSP, String TenDM, String TenMS, String TenKT, int SoLuong, double Gia) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
         this.TenDM = TenDM;
@@ -33,10 +32,9 @@ public class ChiTietHDDTO {
         this.TenKT = TenKT;
         this.SoLuong = SoLuong;
         this.Gia = Gia;
-        this.GioiGiamGia = GioiGiamGia;
     }
 
-    public ChiTietHDDTO(int ID, int MaSP, String TenSP, String TenDM, String TenMS, String TenKT, int SoLuong, double Gia, int GioiGiamGia) {
+    public ChiTietHDDTO(int ID, int MaSP, String TenSP, String TenDM, String TenMS, String TenKT, int SoLuong, double Gia) {
         this.ID = ID;
         this.MaSP = MaSP;
         this.TenSP = TenSP;
@@ -45,7 +43,6 @@ public class ChiTietHDDTO {
         this.TenKT = TenKT;
         this.SoLuong = SoLuong;
         this.Gia = Gia;
-        this.GioiGiamGia = GioiGiamGia;
     }
     
     
@@ -104,14 +101,6 @@ public class ChiTietHDDTO {
 
     public void setGia(double Gia) {
         this.Gia = Gia;
-    }
-
-    public int getGioiGiamGia() {
-        return GioiGiamGia;
-    }
-
-    public void setGioiGiamGia(int GioiGiamGia) {
-        this.GioiGiamGia = GioiGiamGia;
     }
 
     public int getID() {

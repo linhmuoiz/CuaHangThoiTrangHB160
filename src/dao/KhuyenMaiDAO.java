@@ -191,5 +191,23 @@ public class KhuyenMaiDAO {
             return null;
         }
     }
+    
+    public int getDiscountPack(String codeDiscount){
+        int discountPack = 0;
+        try(Connection conn = KetNoiDB.getConnectDB()){
+            String sql = "select GoiGiamGia from KhuyenMai where CodeGiamGia = ?";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            ppStm.setString(1, codeDiscount);
+            ResultSet rs = ppStm.executeQuery();
+            if (rs.next()){
+                discountPack = rs.getInt("GoiGiamGia");
+            }
+            return discountPack;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return discountPack;
+        }
+    }
 
 }

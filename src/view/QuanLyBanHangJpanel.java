@@ -1446,7 +1446,8 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
     String TrangThai;
     String amount;
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        MaHD = GlobalState.MaHDChon;
+        MaHD = GlobalState.MaHDChoChon;
+        System.out.println("MaHD: "+MaHD);
         HinhThucThanhToan = rSComboMetro4.getSelectedItem().toString();
         TrangThai = "Hoàn thành";
         amount = jTextField17.getText();
@@ -1470,6 +1471,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
                 this.readHoaDonCho();
                 JOptionPane.showMessageDialog(this, "Thanh toán thành công");
             } else {
+                System.out.println("KQ: "+ketQua);
                 JOptionPane.showMessageDialog(this, "Thanh toán thất bại!");
             }
         }

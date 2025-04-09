@@ -455,7 +455,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
 
                 for (ChiTietHD chiTietHD : chiTietHDLst) {
                     SanPhamDAO sanPhamDAO = new SanPhamDAO();
-                    sanPhamDAO.updateSanPham(chiTietHD.getMaSP(), chiTietHD.getSoLuong());
+                    sanPhamDAO.updateSanPhamMua(chiTietHD.getMaSP(), chiTietHD.getSoLuong());
                 }
 
                 if (ketQua == 1) {
@@ -1446,21 +1446,40 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
     }//GEN-LAST:event_jTextField19ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // Chọn bảng hóa đơn chờ sẽ xóa hóa đơn đó
-        int MaHD = GlobalState.MaHDChoChon;
+                              
+    // Chọn hóa đơn cần xóa
+    int MaHD = GlobalState.MaHDChoChon;
 
-        System.out.println("MaHD");
-        System.out.println(MaHD);
+    if (MaHD == 0) {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xóa!");
+        return;
+    }
 
-        HoaDonDAO hoaDonDAO = new HoaDonDAO();
-        int ketQuaHoaDon = hoaDonDAO.updateHoaDonHuy(MaHD);
+    HoaDonDAO hoaDonDAO = new HoaDonDAO();
+    ChiTietHDDAO chiTietHDDAO = new ChiTietHDDAO();
+    SanPhamDAO sanPhamDAO = new SanPhamDAO();
 
-        if (ketQuaHoaDon == 1) {
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
-            this.readHoaDonCho();
-        } else {
-            JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+    // Cập nhật trạng thái hóa đơn thành "Hủy"
+    int ketQuaHoaDon = hoaDonDAO.updateHoaDonHuy(MaHD);
+
+    if (ketQuaHoaDon == 1) {
+        // Lấy danh sách sản phẩm trong chi tiết hóa đơn
+        List<ChiTietHD> danhSachChiTiet = chiTietHDDAO.findChiTietHD(MaHD);
+
+        for (ChiTietHD chiTiet : danhSachChiTiet) {
+            int MaSP = chiTiet.getMaSP();
+            int SoLuongDaHuy = chiTiet.getSoLuong();
+
+            // Hoàn lại số lượng sản phẩm trong database
+            sanPhamDAO.updateSanPhamHuy(MaSP, SoLuongDaHuy);
         }
+        this.readSanPham();
+        JOptionPane.showMessageDialog(this, "Xóa hóa đơn thành công");
+        this.readHoaDonCho(); // Làm mới lại danh sách hóa đơn
+    } else {
+        JOptionPane.showMessageDialog(this, "Xóa hóa đơn thất bại!");
+    }
+
     }//GEN-LAST:event_jButton6ActionPerformed
     int MaHD;
     String HinhThucThanhToan;
@@ -1484,7 +1503,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
 
             for (ChiTietHD chiTietHD : chiTietHDLst) {
                 SanPhamDAO sanPhamDAO = new SanPhamDAO();
-                sanPhamDAO.updateSanPham(chiTietHD.getMaSP(), chiTietHD.getSoLuong());
+                sanPhamDAO.updateSanPhamMua(chiTietHD.getMaSP(), chiTietHD.getSoLuong());
             }
             System.out.println(ketQua);
             if (ketQua == 1) {
@@ -1550,6 +1569,10 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
                 ChiTietHD chiTietHD = new ChiTietHD(MaHDMoi, MaSP, SoLuong, khuyenMai.getMaKM());
                 ChiTietHDDAO chiTietHDDAO = new ChiTietHDDAO();
                 chiTietHDDAO.createChiTietHD(chiTietHD);
+                
+                SanPhamDAO sanPhamDAO = new SanPhamDAO();
+                sanPhamDAO.updateSanPhamMua(MaSP, SoLuong);
+              
             }
             GlobalState.MaHDChon = MaHDMoi;
             this.readHoaDonCho();
@@ -1566,32 +1589,45 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
     }//GEN-LAST:event_jTextField15ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        int MaSP = GlobalState.MaSPChon;
+                                        
+    int MaSP = GlobalState.MaSPChon;
 
-        switch (MaSP) {
-            case 0:
-                this.sayMessage("Vui lòng chọn một dòng sản phẩm muốn thêm ở bảng dưới");
-                break;
-            default:
-                SanPhamDAO sanPhamDAO = new SanPhamDAO();
-                List<ChiTietHDDTO> sanPhamChonLst = sanPhamDAO.readSanPhamChon(MaSP);
+    switch (MaSP) {
+        case 0:
+            this.sayMessage("Vui lòng chọn một dòng sản phẩm muốn thêm ở bảng dưới");
+            break;
+        default:
+            SanPhamDAO sanPhamDAO = new SanPhamDAO();
+            List<ChiTietHDDTO> sanPhamChonLst = sanPhamDAO.readSanPhamChon(MaSP);
 
-                DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
+            DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
 
-                for (ChiTietHDDTO sanPham : sanPhamChonLst) {
-                    tableSanPhamChon.addRow(new Object[]{
-                        GlobalState.MaSPChon,
-                        sanPham.getTenSP(),
-                        sanPham.getTenDM(),
-                        sanPham.getTenMS(),
-                        sanPham.getTenKT(),
-                        GlobalState.SoLuongSPChon,
-                        sanPham.getGia() * GlobalState.SoLuongSPChon,});
+            for (ChiTietHDDTO sanPham : sanPhamChonLst) {
+                tableSanPhamChon.addRow(new Object[]{
+                    GlobalState.MaSPChon,
+                    sanPham.getTenSP(),
+                    sanPham.getTenDM(),
+                    sanPham.getTenMS(),
+                    sanPham.getTenKT(),
+                    GlobalState.SoLuongSPChon,
+                    sanPham.getGia() * GlobalState.SoLuongSPChon,
+                });
+            }
+            // Hiển thị số lượng trừ tạm thời trên bảng sản phẩm
+            for (int i = 0; i < rSTableMetro2.getRowCount(); i++) {
+                int idSanPham = Integer.parseInt(rSTableMetro2.getValueAt(i, 0).toString());
+                if (idSanPham == MaSP) {
+                    int SoLuongHienTai = Integer.parseInt(rSTableMetro2.getValueAt(i, 5).toString());
+                    rSTableMetro2.setValueAt(SoLuongHienTai - GlobalState.SoLuongSPChon, i, 5);
+                    break;
                 }
-                this.ScanRsTable3();
-                this.thayDoiThongTinHoaDon();
-                break;
-        }
+            }
+
+           
+            this.ScanRsTable3();
+            this.thayDoiThongTinHoaDon();
+            break;
+    }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed

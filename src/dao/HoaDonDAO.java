@@ -224,4 +224,5 @@ public class HoaDonDAO {
             return codeDiscount;
         }
     }
+    
 }

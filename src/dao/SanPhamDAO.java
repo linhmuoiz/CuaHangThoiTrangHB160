@@ -328,11 +328,12 @@ public class SanPhamDAO {
     }
 
     // Cập nhật số lượng sản phẩm khi đã thanh toán
-    public int updateSanPham(int ID, int SoLuongDaBan) {
+    public int updateSanPhamMua(int ID, int SoLuongDaBan) {
         String selectSQL = "SELECT SoLuong FROM SanPham WHERE ID = (?)";
         String updateSQL = "UPDATE SanPham SET SoLuong = (?) WHERE ID = (?);";
 
-        try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement psSelect = con.prepareStatement(selectSQL); PreparedStatement psUpdate = con.prepareStatement(updateSQL);) {
+        try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement psSelect = con.prepareStatement(selectSQL); 
+                PreparedStatement psUpdate = con.prepareStatement(updateSQL);) {
 
             psSelect.setInt(1, ID);
             ResultSet rs = psSelect.executeQuery();
@@ -353,6 +354,34 @@ public class SanPhamDAO {
             return 0;
         }
     }
+    // Cập nhật số lượng sản phẩm khi đã thanh toán
+    public int updateSanPhamHuy(int ID, int SoLuongDaHuy) {
+        String selectSQL = "SELECT SoLuong FROM SanPham WHERE ID = (?)";
+        String updateSQL = "UPDATE SanPham SET SoLuong = (?) WHERE ID = (?);";
+
+        try (Connection con = KetNoiDB.getConnectDB(); PreparedStatement psSelect = con.prepareStatement(selectSQL); 
+                PreparedStatement psUpdate = con.prepareStatement(updateSQL);) {
+
+            psSelect.setInt(1, ID);
+            ResultSet rs = psSelect.executeQuery();
+
+            if (rs.next()) {
+                int SoLuongHienTai = rs.getInt("SoLuong");
+                int SoLuongMoi = SoLuongHienTai + SoLuongDaHuy;
+
+                psUpdate.setInt(1, SoLuongMoi);
+                psUpdate.setInt(2, ID);
+            }
+
+            int ketQua = psUpdate.executeUpdate();
+            System.out.println("ketQua: "+ketQua);
+            return ketQua;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public double getGiaSP(int MaSP){
         String sql = "select Gia from SanPham where ID = ?";
         double gia = 0;

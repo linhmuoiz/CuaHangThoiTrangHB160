@@ -100,7 +100,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             String projectPath = System.getProperty("user.dir");
 
             // 2. Tạo đường dẫn tuyệt đối đầy đủ đến hình ảnh
-            String absoluteImagePath = projectPath + "\\src\\icon\\" + imagePath;
+            String absoluteImagePath = projectPath + "\\src\\png\\" + imagePath;
 
             // 3. Tạo ImageIcon từ đường dẫn tuyệt đối
             ImageIcon imageIcon = new ImageIcon(absoluteImagePath);
@@ -803,7 +803,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             String projectPath = System.getProperty("user.dir"); // Thường thì user.dir sẽ trỏ đến thư mục dự án
 
             // 2. Tạo đường dẫn tuyệt đối đến thư mục icon
-            String iconFolderPath = projectPath + "\\src\\icon\\"; //hoặc "/src/icon/" tuỳ hệ điều hành
+            String iconFolderPath = projectPath + "\\src\\png\\"; //hoặc "/src/icon/" tuỳ hệ điều hành
 
             // 3. Tạo đường dẫn tương đối
             try {

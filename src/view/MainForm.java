@@ -4,6 +4,7 @@
  */
 package view;
 
+import dao.NhanVienDAO;
 import javax.swing.JPanel;
 import utils.XImage;
 
@@ -19,8 +20,8 @@ public class MainForm extends javax.swing.JFrame {
     public MainForm() {
         init();
         initComponents();
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         showPanel(new QuanLyBanHangJpanel());
-        
     }
 
     private void showPanel(JPanel panel) {
@@ -635,6 +636,8 @@ public class MainForm extends javax.swing.JFrame {
 
     private void labelDangXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelDangXuatMouseClicked
         // TODO add your handling code here:
+        NhanVienDAO nvDAO = new NhanVienDAO();
+        nvDAO.updateTrangThaiNhanVienBySDT("Offline");
         this.dispose();
         MainForm main = new MainForm();
         main.setVisible(true);

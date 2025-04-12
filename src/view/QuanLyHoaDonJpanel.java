@@ -226,7 +226,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Sản Phẩm", "Tên Sản Phẩm", "Danh Mục", "Màu", "Kích Thước", "Số Lượng", "Giá Bán", "Tổng Tiền"
+                "Mã Sản Phẩm", "Tên Sản Phẩm", "Danh Mục", "Màu", "Kích Thước", "Số Lượng", "Giá Bán", "Tổng Tiền", "Trạng Thái"
             }
         ));
         tblDanhMuc1.setColorBackgoundHead(new java.awt.Color(128, 0, 0));
@@ -294,16 +294,16 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Định dạng mong muốn
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 
-        Date ngayTimKiem = dcNgayTimKiem.getDate();  // Lấy đối tượng Date
+        Date ngayTimKiem = dcNgayTimKiem.getDate(); 
 
         if (ngayTimKiem == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày tìm kiếm.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        try { // Thêm khối try-catch xung quanh việc định dạng ngày tháng và truy cập DB
+        try {
             String ngayTimKiemFormatted = dateFormat.format(ngayTimKiem);
 
             HoaDonDAO hoaDonDAO = new HoaDonDAO();
@@ -320,7 +320,6 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
                     hoaDon.getThanhTien(),
                     hoaDon.getHinhThucTT(),
                     hoaDon.getNgayTao(),
-                    hoaDon.getTrangThai()
                 });
             }
         } catch (Exception e) {
@@ -353,8 +352,6 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
         for (ChiTietHDDTO hoaDon : chiTietHDLst) {
             double TongGiaTriSanPham = hoaDon.getGia();
-//            double TongTienGiam = (TongDonHang * hoaDon.getGioiGiamGia()) / 100;
-//            double SoTienGiamTungSanPham = (TongGiaTriSanPham/TongDonHang) * TongTienGiam;
 
             tableChiTietHD.addRow(new Object[]{
                 hoaDon.getMaSP(),
@@ -364,9 +361,9 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
                 hoaDon.getTenKT(),
                 hoaDon.getSoLuong(),
                 hoaDon.getGia(),
-                //                SoTienGiamTungSanPham,
-
-                hoaDon.getSoLuong() * hoaDon.getGia(),});
+                hoaDon.getSoLuong() * hoaDon.getGia(),
+                hoaDon.getTrangThai() 
+            });
         }
     }//GEN-LAST:event_tblDanhMucMouseClicked
 

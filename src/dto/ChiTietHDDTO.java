@@ -9,22 +9,22 @@ public class ChiTietHDDTO {
     private String TenKT;
     private int SoLuong;
     private double Gia;
+    private String TrangThai; 
 
     public ChiTietHDDTO() {
     }
 
-    public ChiTietHDDTO(int ID, String TenSP, String TenDM, String TenMS, String TenKT, double Gia) {
+    public ChiTietHDDTO(int ID, String TenSP, String TenDM, String TenMS, String TenKT, double Gia, String TrangThai) {
         this.ID = ID;
         this.TenSP = TenSP;
         this.TenDM = TenDM;
         this.TenMS = TenMS;
         this.TenKT = TenKT;
         this.Gia = Gia;
+        this.TrangThai = TrangThai;
     }
-    
-    
 
-    public ChiTietHDDTO(int MaSP, String TenSP, String TenDM, String TenMS, String TenKT, int SoLuong, double Gia) {
+    public ChiTietHDDTO(int MaSP, String TenSP, String TenDM, String TenMS, String TenKT, int SoLuong, double Gia, String TrangThai) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
         this.TenDM = TenDM;
@@ -32,9 +32,10 @@ public class ChiTietHDDTO {
         this.TenKT = TenKT;
         this.SoLuong = SoLuong;
         this.Gia = Gia;
+        this.TrangThai = TrangThai;
     }
 
-    public ChiTietHDDTO(int ID, int MaSP, String TenSP, String TenDM, String TenMS, String TenKT, int SoLuong, double Gia) {
+    public ChiTietHDDTO(int ID, int MaSP, String TenSP, String TenDM, String TenMS, String TenKT, int SoLuong, double Gia, String TrangThai) {
         this.ID = ID;
         this.MaSP = MaSP;
         this.TenSP = TenSP;
@@ -43,9 +44,8 @@ public class ChiTietHDDTO {
         this.TenKT = TenKT;
         this.SoLuong = SoLuong;
         this.Gia = Gia;
+        this.TrangThai = TrangThai;
     }
-    
-    
 
     public int getMaSP() {
         return MaSP;
@@ -103,6 +103,14 @@ public class ChiTietHDDTO {
         this.Gia = Gia;
     }
 
+    public String getTrangThai() { 
+        return TrangThai;
+    }
+
+    public void setTrangThai(String TrangThai) { 
+        this.TrangThai = TrangThai;
+    }
+
     public int getID() {
         return ID;
     }
@@ -110,6 +118,4 @@ public class ChiTietHDDTO {
     public void setID(int ID) {
         this.ID = ID;
     }
-    
-    
 }

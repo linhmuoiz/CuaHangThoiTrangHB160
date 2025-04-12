@@ -691,16 +691,17 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                 int ID = (int) model.getValueAt(dongDangChon, 0);
 
                 SanPhamDAO sanPham = new SanPhamDAO();
-                int ketQua = sanPham.XoaSanPham(ID);
+                int ketQua = sanPham.CapNhatTrangThaiSanPham(ID, "Đã Xóa");
+
                 if (ketQua == 1) {
-                    JOptionPane.showMessageDialog(this, "Xoá Sản Phẩm Thành Công");
-                    XoaNoiDungNhapLieu();
+                    JOptionPane.showMessageDialog(this, "Sản phẩm đã được xóa thành công");
+                    model.removeRow(dongDangChon);
                     FillTable();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Xoá Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Ẩn sản phẩm thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để xóa", "Error", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để ẩn", "Error", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnXoaActionPerformed

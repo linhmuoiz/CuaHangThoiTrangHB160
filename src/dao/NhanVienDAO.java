@@ -59,7 +59,7 @@ public class NhanVienDAO {
         }
     }
     public int createNhanVien(NhanVien nhanVien) {
-        String sql = "INSERT INTO NhanVien VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO NhanVien VALUES (?, ?, ?, ?, ?, ?);";
         
         try (Connection con = KetNoiDB.getConnectDB(); 
                 PreparedStatement ps = con.prepareStatement(sql);) {
@@ -69,7 +69,7 @@ public class NhanVienDAO {
             ps.setString(3, nhanVien.getMatKhauDN());
             ps.setString(4, nhanVien.getDiaChi());
             ps.setString(5, nhanVien.getGioiTinh());
-            
+            ps.setString(6, "Offline");
             int ketQua = ps.executeUpdate();
             return ketQua;
         }
@@ -221,6 +221,23 @@ public class NhanVienDAO {
        }
        catch(Exception e){
            e.printStackTrace();
+       }
+   }
+   public boolean isDuplicateSDT(String sdt){
+       boolean isDup = false;
+       String sql = "select * from NhanVien where SDT = ?";
+       try(Connection conn = KetNoiDB.getConnectDB()){
+           PreparedStatement ppStm = conn.prepareStatement(sql);
+           ppStm.setString(1, sdt);
+           ResultSet rs = ppStm.executeQuery();
+           if (rs.next() == true){
+               isDup = true;
+           }
+           return isDup;
+       }
+       catch(Exception e){
+           e.printStackTrace();
+           return isDup;
        }
    }
 }

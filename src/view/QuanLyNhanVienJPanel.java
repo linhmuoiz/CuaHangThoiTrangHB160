@@ -693,14 +693,19 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         }
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         int ID = (int) model.getValueAt(dongDangChon, 0);
-
+        String sdt = String.valueOf(model.getValueAt(dongDangChon, 3));
         NhanVienDAO nhanVien = new NhanVienDAO();
-        int ketQua = nhanVien.XoaNhanVien(ID);
-        if (ketQua == 1) {
-            JOptionPane.showMessageDialog(this, "Xoá Nhân viên Thành Công");
-            readNhanVien();
+        String trangThai = nhanVien.getTrangThaiNhanVienBySDT(sdt);
+        if (trangThai.equals("Online") == true) {
+            JOptionPane.showMessageDialog(this, "Nhân viên đang hoạt động, không cho phép xóa !!!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Xoá Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            int ketQua = nhanVien.XoaNhanVien(ID);
+            if (ketQua == 1) {
+                JOptionPane.showMessageDialog(this, "Xoá Nhân viên Thành Công");
+                readNhanVien();
+            } else {
+                JOptionPane.showMessageDialog(this, "Xoá Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -739,18 +744,25 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         if (TenNV.isBlank() || SDT.isBlank() || MatKhauDN.isBlank() || DiaChi.isBlank() || GioiTinh.isBlank()) {
             JOptionPane.showMessageDialog(this, "Không được để trống bất kỳ trường nào!");
             return;
-        }
-
-        NhanVien nhanVien = new NhanVien(TenNV, SDT, MatKhauDN, DiaChi, GioiTinh);
-
-        NhanVienDAO nhanVienDAO = new NhanVienDAO();
-        int ketQua = nhanVienDAO.createNhanVien(nhanVien);
-
-        if (ketQua == 1) {
-            JOptionPane.showMessageDialog(this, "Thanh cong");
-            readNhanVien();
         } else {
-            JOptionPane.showMessageDialog(this, "That bai");
+            NhanVienDAO nvDAO = new NhanVienDAO();
+            boolean isDUplicate = nvDAO.isDuplicateSDT(SDT);
+            System.out.println("DUP: " + isDUplicate);
+            if (isDUplicate == false) {
+                NhanVien nhanVien = new NhanVien(TenNV, SDT, MatKhauDN, DiaChi, GioiTinh);
+
+                NhanVienDAO nhanVienDAO = new NhanVienDAO();
+                int ketQua = nhanVienDAO.createNhanVien(nhanVien);
+
+                if (ketQua == 1) {
+                    JOptionPane.showMessageDialog(this, "Thanh cong");
+                    readNhanVien();
+                } else {
+                    JOptionPane.showMessageDialog(this, "That bai");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Tài khoản với SĐT này đã tồn tại !!!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -764,53 +776,52 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int dongDangChon = tblNhanVien.getSelectedRow();
-        
-        if (dongDangChon != -1){
-        String TenNV = jTextField3.getText();
-        String DiaChia = jTextField4.getText();
-        String SDT = jTextField2.getText();
-        String MK = new String(jPasswordField1.getPassword());  // Lấy mật khẩu từ jPasswordField
-        String gioiTinh = jRadioButton1.isSelected() ? "Nam" : "Nữ";
 
-        DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
-        int ID = (int) model.getValueAt(dongDangChon, 0);
-        if (TenNV.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Tên Nhân Viên Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (DiaChia.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Địa chỉ Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (SDT.isBlank()) {
-            JOptionPane.showMessageDialog(this, "SĐT Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (MK.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Mật khẩu không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        NhanVien nhanVien = new NhanVien();
-        nhanVien.setID(ID);
-        nhanVien.setTenNV(TenNV);
-        nhanVien.setDiaChi(DiaChia);
-        nhanVien.setMatKhauDN(MK);
-        nhanVien.setGioiTinh(gioiTinh);
-        nhanVien.setSDT(SDT);
+        if (dongDangChon != -1) {
+            String TenNV = jTextField3.getText();
+            String DiaChia = jTextField4.getText();
+            String SDT = jTextField2.getText();
+            String MK = new String(jPasswordField1.getPassword());  // Lấy mật khẩu từ jPasswordField
+            String gioiTinh = jRadioButton1.isSelected() ? "Nam" : "Nữ";
 
-        NhanVienDAO nhanVienDAO = new NhanVienDAO();
-        int IDNV = (int) tblNhanVien.getValueAt(dongDangChon, 0);
-        int ketQua = nhanVienDAO.SuaNhanVien(nhanVien, IDNV);
+            DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
+            int ID = (int) model.getValueAt(dongDangChon, 0);
+            if (TenNV.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Tên Nhân Viên Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (DiaChia.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Địa chỉ Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (SDT.isBlank()) {
+                JOptionPane.showMessageDialog(this, "SĐT Không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (MK.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Mật khẩu không Được Để Trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            NhanVien nhanVien = new NhanVien();
+            nhanVien.setID(ID);
+            nhanVien.setTenNV(TenNV);
+            nhanVien.setDiaChi(DiaChia);
+            nhanVien.setMatKhauDN(MK);
+            nhanVien.setGioiTinh(gioiTinh);
+            nhanVien.setSDT(SDT);
 
-        if (ketQua == 1) {
-            JOptionPane.showMessageDialog(this, "Sửa Thành Công");
-            readNhanVien();
+            NhanVienDAO nhanVienDAO = new NhanVienDAO();
+            int IDNV = (int) tblNhanVien.getValueAt(dongDangChon, 0);
+            int ketQua = nhanVienDAO.SuaNhanVien(nhanVien, IDNV);
+
+            if (ketQua == 1) {
+                JOptionPane.showMessageDialog(this, "Sửa Thành Công");
+                readNhanVien();
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Sửa Thất Bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để sửa", "Error" ,JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng dữ liệu để sửa", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

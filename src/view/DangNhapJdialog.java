@@ -26,6 +26,7 @@ public class DangNhapJdialog extends javax.swing.JDialog {
 
     String sdt;
     String pass;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,14 +182,13 @@ public class DangNhapJdialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private boolean validField(){
-         sdt = txtSdt.getText();
-         pass = String.valueOf(txtPass.getPassword());
-        
-        if (sdt.isBlank() == true || pass.isBlank() == true){
+    private boolean validField() {
+        sdt = txtSdt.getText();
+        pass = String.valueOf(txtPass.getPassword());
+
+        if (sdt.isBlank() == true || pass.isBlank() == true) {
             return false;
-        }
-        else{
+        } else {
             return true;
         }
     }
@@ -199,20 +199,24 @@ public class DangNhapJdialog extends javax.swing.JDialog {
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
 
         boolean legitValid = this.validField();
-        if (legitValid == true){
+        if (legitValid == true) {
             NhanVienDAO nvDAO = new NhanVienDAO();
             boolean isLogged;
             isLogged = nvDAO.checkLogin(sdt, pass);
-            if (isLogged == true){
-//                System.out.println("Logged in");
+            if (isLogged == true) {
                 GlobalState.SDT = sdt;
-                this.dispose();
-            }
-            else{
+                String status = nvDAO.getTrangThaiNhanVienBySDT(GlobalState.SDT);
+                if (status.equals("Online")){
+                    JOptionPane.showMessageDialog(rootPane, "Tài khoản này hiện đang được đăng nhập tại nơi khác!!!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                }
+                else{
+                    nvDAO.updateTrangThaiNhanVienBySDT("Online");
+                    this.dispose();
+                }
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Tài khoản hoặc mật khẩu sai");
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng không để trống các ô đầu vào");
         }
     }//GEN-LAST:event_btnDangNhapActionPerformed
@@ -262,8 +266,8 @@ public class DangNhapJdialog extends javax.swing.JDialog {
             }
         });
     }
-    
-    public void init(){
+
+    public void init() {
         this.setIconImage(XImage.getAppIcon()); //set icon
         this.setLocationRelativeTo(null);
         this.setUndecorated(true);

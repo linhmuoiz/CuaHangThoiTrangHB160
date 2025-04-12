@@ -193,4 +193,34 @@ public class NhanVienDAO {
             return nhanVienLst;
         }
     }
+    
+   public String getTrangThaiNhanVienBySDT(String sdt){
+       String sql = "SELECT TrangThai from NhanVien where SDT = ?";
+       String status = null;
+       try(Connection conn = KetNoiDB.getConnectDB()){
+           PreparedStatement ppStm = conn.prepareStatement(sql);
+           ppStm.setString(1, sdt);
+           ResultSet rs = ppStm.executeQuery();
+           if (rs.next()){
+               status = rs.getString("TrangThai");
+           }
+           return status;
+       }
+       catch(Exception e){
+           e.printStackTrace();
+           return status;
+       }
+   }
+   public void updateTrangThaiNhanVienBySDT(String trangThai){
+       String sql = "update NhanVien set TrangThai = ? where SDT = ?";
+       try(Connection conn = KetNoiDB.getConnectDB()){
+           PreparedStatement ppStm = conn.prepareStatement(sql);
+           ppStm.setString(1, trangThai);
+           ppStm.setString(2, GlobalState.SDT);
+           ppStm.executeUpdate();
+       }
+       catch(Exception e){
+           e.printStackTrace();
+       }
+   }
 }

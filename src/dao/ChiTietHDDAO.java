@@ -29,13 +29,12 @@ public class ChiTietHDDAO {
                 + "    kt.TenKT, \n"
                 + "    cthd.SoLuong, \n"
                 + "    sp.Gia, \n"
-                + "    km.GoiGiamGia\n"
+                + "    sp.TrangThai \n" 
                 + "FROM ChiTietHD cthd\n"
                 + "INNER JOIN SanPham sp ON sp.ID = cthd.MaSP\n"
                 + "INNER JOIN DanhMuc dm ON dm.MaDM = sp.MaDM\n"
                 + "INNER JOIN MauSac ms ON ms.MaMS = sp.MaMS\n"
                 + "INNER JOIN KichThuoc kt ON kt.MaKT = sp.MaKT\n"
-                + "LEFT JOIN KhuyenMai km ON km.MaKM = cthd.MaKM\n"
                 + "WHERE cthd.MaHD = ?;";
 
         List<ChiTietHDDTO> chiTietHoaDonLst = new ArrayList<ChiTietHDDTO>();
@@ -53,9 +52,9 @@ public class ChiTietHDDAO {
                 String TenKT = rs.getString("TenKT");
                 int SoLuong = rs.getInt("SoLuong");
                 double Gia = rs.getDouble("Gia");
-                int GoiGiamGia = rs.getInt("GoiGiamGia");
+                String TrangThai = rs.getString("TrangThai"); 
 
-                ChiTietHDDTO chiTietHoaDon = new ChiTietHDDTO(MaSP, TenSP, TenDM, TenMS, TenKT, SoLuong, Gia);
+                ChiTietHDDTO chiTietHoaDon = new ChiTietHDDTO(MaSP, TenSP, TenDM, TenMS, TenKT, SoLuong, Gia, TrangThai);
                 chiTietHoaDonLst.add(chiTietHoaDon);
             }
             return chiTietHoaDonLst;
@@ -109,6 +108,7 @@ public class ChiTietHDDAO {
             return 0;
         }
     }
+
     public List<ChiTietHD> findChiTietHD(int maHoaDon) {
         String sql = "SELECT * FROM ChiTietHD WHERE MaHD = (?);";
         List<ChiTietHD> chiTietHDLst = new ArrayList<ChiTietHD>();

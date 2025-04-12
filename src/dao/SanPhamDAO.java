@@ -399,4 +399,34 @@ public class SanPhamDAO {
             return 0;
         }
     }
+    public void updateSoLuongByID(int maSP, int soLuong){
+        String sql = "Update SanPham SET SoLuong = ? Where ID = ?";
+        try(Connection conn = KetNoiDB.getConnectDB()){
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            ppStm.setInt(1, maSP);
+            ppStm.setInt(2, soLuong);
+            ppStm.executeUpdate();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public int getSoLuongByID(int maSP) {
+    String sql = "SELECT SoLuong FROM SanPham WHERE ID = ?";
+    try (Connection conn = KetNoiDB.getConnectDB();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, maSP);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("SoLuong");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0;
 }
+
+
+}
+

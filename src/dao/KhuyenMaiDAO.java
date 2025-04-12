@@ -195,7 +195,7 @@ public class KhuyenMaiDAO {
     public int getDiscountPack(String codeDiscount){
         int discountPack = 0;
         try(Connection conn = KetNoiDB.getConnectDB()){
-            String sql = "select GoiGiamGia from KhuyenMai where CodeGiamGia = ?";
+            String sql = "select GoiGiamGia from KhuyenMai where CodeGiamGia = ? AND NgayBD <= GETDATE() AND NgayKT >= GETDATE()";
             PreparedStatement ppStm = conn.prepareStatement(sql);
             ppStm.setString(1, codeDiscount);
             ResultSet rs = ppStm.executeQuery();

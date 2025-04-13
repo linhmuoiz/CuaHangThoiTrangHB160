@@ -186,6 +186,8 @@ public class DoiMatKhauJpanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
         } else {
             JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng!");
+            jPasswordField1.setText("");
+            jPasswordField2.setText("");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 

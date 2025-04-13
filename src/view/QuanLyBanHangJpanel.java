@@ -488,14 +488,14 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
             // Lấy mã sản phẩm và số lượng cần hoàn lại từ bảng chi tiết hóa đơn
             int maSP = Integer.parseInt(rSTableMetro3.getValueAt(currentRow, 0).toString());
             int refundAmount = Integer.parseInt(rSTableMetro3.getValueAt(currentRow, 5).toString());
-            
+
             // Lấy số lượng hiện tại của sản phẩm từ database
             SanPhamDAO sanPhamDAO = new SanPhamDAO();
             int currentAmount = sanPhamDAO.getSoLuongByID(maSP);
 
             // Cập nhật số lượng mới bằng cách cộng thêm số lượng đã hoàn lại
             int updatedAmount = currentAmount + refundAmount;
-            System.out.println("Update Amount: "+updatedAmount);
+            System.out.println("Update Amount: " + updatedAmount);
             sanPhamDAO.updateSoLuongByID(maSP, updatedAmount);
             this.readSanPham();
         } catch (Exception e) {
@@ -1590,36 +1590,47 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
 
         int MaSP = GlobalState.MaSPChon;
-
+        boolean isValid2Use = true;
         switch (MaSP) {
             case 0:
                 this.sayMessage("Vui lòng chọn một dòng sản phẩm muốn thêm ở bảng dưới");
                 break;
             default:
-                SanPhamDAO sanPhamDAO = new SanPhamDAO();
-                List<ChiTietHDDTO> sanPhamChonLst = sanPhamDAO.readSanPhamChon(MaSP);
 
-                DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
-
-                for (ChiTietHDDTO sanPham : sanPhamChonLst) {
-                    tableSanPhamChon.addRow(new Object[]{
-                        GlobalState.MaSPChon,
-                        sanPham.getTenSP(),
-                        sanPham.getTenDM(),
-                        sanPham.getTenMS(),
-                        sanPham.getTenKT(),
-                        GlobalState.SoLuongSPChon,
-                        sanPham.getGia() * GlobalState.SoLuongSPChon,});
-                }
                 // Hiển thị số lượng trừ tạm thời trên bảng sản phẩm
                 for (int i = 0; i < rSTableMetro2.getRowCount(); i++) {
                     int idSanPham = Integer.parseInt(rSTableMetro2.getValueAt(i, 0).toString());
                     if (idSanPham == MaSP) {
                         int SoLuongHienTai = Integer.parseInt(rSTableMetro2.getValueAt(i, 5).toString());
                         int soLuongFinal = SoLuongHienTai - GlobalState.SoLuongSPChon;
-                        rSTableMetro2.setValueAt(soLuongFinal, i, 5);
+                        if (soLuongFinal <= 0) {
+                            isValid2Use = false;
+                            soLuongFinal = 0;
+                            rSTableMetro2.setValueAt(soLuongFinal, i, 5);
+                        } else {
+                            rSTableMetro2.setValueAt(soLuongFinal, i, 5);
+                        }
                         break;
                     }
+                }
+
+                SanPhamDAO sanPhamDAO = new SanPhamDAO();
+                List<ChiTietHDDTO> sanPhamChonLst = sanPhamDAO.readSanPhamChon(MaSP);
+
+                DefaultTableModel tableSanPhamChon = (DefaultTableModel) this.rSTableMetro3.getModel();
+                if (isValid2Use == true) {
+                    for (ChiTietHDDTO sanPham : sanPhamChonLst) {
+                        tableSanPhamChon.addRow(new Object[]{
+                            GlobalState.MaSPChon,
+                            sanPham.getTenSP(),
+                            sanPham.getTenDM(),
+                            sanPham.getTenMS(),
+                            sanPham.getTenKT(),
+                            GlobalState.SoLuongSPChon,
+                            sanPham.getGia() * GlobalState.SoLuongSPChon,});
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hết hàng rồi bạn ơi", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                 }
 
                 this.ScanRsTable3();
@@ -1819,7 +1830,7 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
         // TODO add your handling code here:
         DefaultTableModel tableChiTietHD = (DefaultTableModel) rSTableMetro3.getModel();
         int currentRow = rSTableMetro3.getSelectedRow();
-        System.out.println("ROw: "+currentRow);
+        System.out.println("ROw: " + currentRow);
         if (currentRow != -1) {
             // Hoàn lại số lượng sản phẩm về danh sách sản phẩm
             refundAmountByDeleteRow(currentRow);

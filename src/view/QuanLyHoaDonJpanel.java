@@ -57,6 +57,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -67,6 +68,8 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         jButton16 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDanhMuc = new rojerusan.RSTableMetro();
+        rdoMa = new javax.swing.JRadioButton();
+        rdoSDT = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -158,6 +161,19 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblDanhMuc);
 
+        buttonGroup1.add(rdoMa);
+        rdoMa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        rdoMa.setForeground(new java.awt.Color(128, 0, 0));
+        rdoMa.setSelected(true);
+        rdoMa.setText("Theo Mã");
+        rdoMa.setToolTipText("");
+
+        buttonGroup1.add(rdoSDT);
+        rdoSDT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        rdoSDT.setForeground(new java.awt.Color(128, 0, 0));
+        rdoSDT.setText("Theo SDT");
+        rdoSDT.setToolTipText("");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -172,9 +188,13 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(rdoMa)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoSDT))
                     .addComponent(dcNgayTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 453, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -204,7 +224,10 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
                         .addGap(30, 30, 30))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rdoMa)
+                            .addComponent(rdoSDT))
                         .addGap(18, 18, 18)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
@@ -369,28 +392,53 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-        String TimKiem = txtTimKiem.getText();
-        HoaDonDAO hoaDonDAO = new HoaDonDAO();
-        List<HoaDonDTO> hoaDonLst = hoaDonDAO.TimKiemHoaDon(TimKiem);
+        String theo = rdoMa.isSelected() ? "Theo Mã" : "Theo SDT";
 
-        DefaultTableModel tableHoaDon = (DefaultTableModel) this.tblDanhMuc.getModel();
-        tableHoaDon.setRowCount(0);
+        if ("Theo Mã".equals(theo)) {
+            String TimKiem = txtTimKiem.getText();
+            HoaDonDAO hoaDonDAO = new HoaDonDAO();
+            List<HoaDonDTO> hoaDonLst = hoaDonDAO.TimKiemHoaDonTheoMa(TimKiem);
 
-        for (HoaDonDTO hoaDon : hoaDonLst) {
-            tableHoaDon.addRow(new Object[]{
-                hoaDon.getID(),
-                hoaDon.getTenKH(),
-                hoaDon.getSDT(),
-                hoaDon.getThanhTien(),
-                hoaDon.getHinhThucTT(),
-                hoaDon.getNgayTao(),
-                hoaDon.getTrangThai()
-            });
+            DefaultTableModel tableHoaDon = (DefaultTableModel) this.tblDanhMuc.getModel();
+            tableHoaDon.setRowCount(0);
+
+            for (HoaDonDTO hoaDon : hoaDonLst) {
+                tableHoaDon.addRow(new Object[]{
+                    hoaDon.getID(),
+                    hoaDon.getTenKH(),
+                    hoaDon.getSDT(),
+                    hoaDon.getThanhTien(),
+                    hoaDon.getHinhThucTT(),
+                    hoaDon.getNgayTao(),
+                    hoaDon.getTrangThai()
+                });
+            }
+        }
+        else if("Theo SDT".equals(theo)){
+            String TimKiem = txtTimKiem.getText();
+            HoaDonDAO hoaDonDAO = new HoaDonDAO();
+            List<HoaDonDTO> hoaDonLst = hoaDonDAO.TimKiemHoaDonTheoSDT(TimKiem);
+
+            DefaultTableModel tableHoaDon = (DefaultTableModel) this.tblDanhMuc.getModel();
+            tableHoaDon.setRowCount(0);
+
+            for (HoaDonDTO hoaDon : hoaDonLst) {
+                tableHoaDon.addRow(new Object[]{
+                    hoaDon.getID(),
+                    hoaDon.getTenKH(),
+                    hoaDon.getSDT(),
+                    hoaDon.getThanhTien(),
+                    hoaDon.getHinhThucTT(),
+                    hoaDon.getNgayTao(),
+                    hoaDon.getTrangThai()
+                });
+            }
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private com.toedter.calendar.JDateChooser dcNgayTimKiem;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton6;
@@ -403,6 +451,8 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JRadioButton rdoMa;
+    private javax.swing.JRadioButton rdoSDT;
     private rojerusan.RSTableMetro tblDanhMuc;
     private rojerusan.RSTableMetro tblDanhMuc1;
     private javax.swing.JTextField txtTimKiem;

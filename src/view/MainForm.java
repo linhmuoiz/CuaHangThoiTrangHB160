@@ -531,7 +531,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_panelSanPhamMouseEntered
 
     private void panelKhuyenMaiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelKhuyenMaiMouseEntered
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_panelKhuyenMaiMouseEntered
 
     private void panelThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelThongKeMouseEntered
@@ -586,7 +586,12 @@ public class MainForm extends javax.swing.JFrame {
 
     private void labelKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelKhuyenMaiMouseClicked
         // TODO add your handling code here:
-        showPanel(new QuanLyKhuyenMaiJpanel());
+        if (showPasswordDialog()) { 
+       showPanel(new QuanLyKhuyenMaiJpanel()); 
+    } else {
+        showPanel(new QuanLyBanHangJpanel());
+    }
+        
     }//GEN-LAST:event_labelKhuyenMaiMouseClicked
 
     private void panelBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBanHangMouseClicked

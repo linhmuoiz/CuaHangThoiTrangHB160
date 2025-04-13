@@ -26,6 +26,14 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
         initComponents();
         fillTable();
     }
+    private boolean showPasswordDialog() {
+        java.awt.Frame parentFrame = (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this);
+        DoiMatKhauJdialog dialog = new DoiMatKhauJdialog(parentFrame, true);
+        dialog.setLocationRelativeTo(this); // Center relative to the JPanel
+        dialog.setVisible(true);
+        return dialog.isAuthenticated();
+    }
+
 
     private void fillTable() {
         KhuyenMaiDAO khuyenMaiDAO = new KhuyenMaiDAO();
@@ -529,6 +537,7 @@ public class QuanLyKhuyenMaiJpanel extends javax.swing.JPanel {
 
     private void btnXoajButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoajButton10ActionPerformed
         // TODO add your handling code here:
+        
         int dongDangChon = tblDanhSach.getSelectedRow();
         if (dongDangChon != -1){
         DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();

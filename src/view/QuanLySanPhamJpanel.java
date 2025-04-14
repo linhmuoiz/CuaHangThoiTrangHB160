@@ -847,51 +847,58 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
         String theo = rdoMa.isSelected() ? "Theo Mã" : "Theo Tên";
+        String TimKiem = txtTimKiem.getText();
 
         if ("Theo Mã".equals(theo)) {
-            String TimKiem = txtTimKiem.getText();
-            SanPhamDAO sanPhamDAO = new SanPhamDAO();
-            List<SanPhamDanhMucMauSacKichThuocDTO> sanPhamLst = sanPhamDAO.TimKiemSanPhamTheoMa(TimKiem);
-            DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+            if (TimKiem.isBlank() == true) {
+                FillTable();
+            } else {
+                SanPhamDAO sanPhamDAO = new SanPhamDAO();
+                List<SanPhamDanhMucMauSacKichThuocDTO> sanPhamLst = sanPhamDAO.TimKiemSanPhamTheoMa(TimKiem);
+                DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
 
-            model.setRowCount(0);
-            for (SanPhamDanhMucMauSacKichThuocDTO sanPham : sanPhamLst) {
-                System.out.println("Adding product: " + sanPham.getTenSp());
+                model.setRowCount(0);
+                for (SanPhamDanhMucMauSacKichThuocDTO sanPham : sanPhamLst) {
+                    System.out.println("Adding product: " + sanPham.getTenSp());
 
-                Object[] rowData = {
-                    sanPham.getID(),
-                    sanPham.getTenSp(),
-                    sanPham.getGia(),
-                    sanPham.getSoLuong(),
-                    sanPham.getTrangThai(),
-                    sanPham.getTenDM(),
-                    sanPham.getTenMS(),
-                    sanPham.getTenKT()
-                };
-                model.addRow(rowData);
+                    Object[] rowData = {
+                        sanPham.getID(),
+                        sanPham.getTenSp(),
+                        sanPham.getGia(),
+                        sanPham.getSoLuong(),
+                        sanPham.getTrangThai(),
+                        sanPham.getTenDM(),
+                        sanPham.getTenMS(),
+                        sanPham.getTenKT()
+                    };
+                    model.addRow(rowData);
+                }
             }
-        }
-        else if("Theo Tên".equals(theo)){
-            String TimKiem = txtTimKiem.getText();
-            SanPhamDAO sanPhamDAO = new SanPhamDAO();
-            List<SanPhamDanhMucMauSacKichThuocDTO> sanPhamLst = sanPhamDAO.TimKiemSanPhamTheoTen(TimKiem);
-            DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
 
-            model.setRowCount(0);
-            for (SanPhamDanhMucMauSacKichThuocDTO sanPham : sanPhamLst) {
-                System.out.println("Adding product: " + sanPham.getTenSp());
+        } else if ("Theo Tên".equals(theo)) {
+            if (TimKiem.isBlank() == true) {
+                FillTable();
+            } else {
+                SanPhamDAO sanPhamDAO = new SanPhamDAO();
+                List<SanPhamDanhMucMauSacKichThuocDTO> sanPhamLst = sanPhamDAO.TimKiemSanPhamTheoTen(TimKiem);
+                DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
 
-                Object[] rowData = {
-                    sanPham.getID(),
-                    sanPham.getTenSp(),
-                    sanPham.getGia(),
-                    sanPham.getSoLuong(),
-                    sanPham.getTrangThai(),
-                    sanPham.getTenDM(),
-                    sanPham.getTenMS(),
-                    sanPham.getTenKT()
-                };
-                model.addRow(rowData);
+                model.setRowCount(0);
+                for (SanPhamDanhMucMauSacKichThuocDTO sanPham : sanPhamLst) {
+                    System.out.println("Adding product: " + sanPham.getTenSp());
+
+                    Object[] rowData = {
+                        sanPham.getID(),
+                        sanPham.getTenSp(),
+                        sanPham.getGia(),
+                        sanPham.getSoLuong(),
+                        sanPham.getTrangThai(),
+                        sanPham.getTenDM(),
+                        sanPham.getTenMS(),
+                        sanPham.getTenKT()
+                    };
+                    model.addRow(rowData);
+                }
             }
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed

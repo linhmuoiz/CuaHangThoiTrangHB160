@@ -155,6 +155,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         txtTenSanPham = new javax.swing.JTextField();
@@ -183,6 +184,8 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
         jLabel23 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
+        rdoMa = new javax.swing.JRadioButton();
+        rdoTen = new javax.swing.JRadioButton();
         jLabel22 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -401,7 +404,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))
+                        .addGap(0, 4, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -436,15 +439,15 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel17)
-                                            .addComponent(cboDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 38, Short.MAX_VALUE))
+                                            .addComponent(cboDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel18)
-                                            .addComponent(cboMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 38, Short.MAX_VALUE))
+                                            .addComponent(cboMauSac, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel19)
-                                            .addComponent(cboKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 38, Short.MAX_VALUE)))
+                                            .addComponent(cboKichThuoc, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGap(4, 4, 4)
                                         .addComponent(btnXoa)
@@ -520,6 +523,17 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             }
         });
 
+        buttonGroup1.add(rdoMa);
+        rdoMa.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        rdoMa.setForeground(new java.awt.Color(128, 0, 0));
+        rdoMa.setSelected(true);
+        rdoMa.setText("Theo Mã");
+
+        buttonGroup1.add(rdoTen);
+        rdoTen.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        rdoTen.setForeground(new java.awt.Color(128, 0, 0));
+        rdoTen.setText("Theo Tên");
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -532,6 +546,10 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(rdoMa)
+                .addGap(36, 36, 36)
+                .addComponent(rdoTen)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
@@ -539,10 +557,14 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel23)
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel23)
+                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rdoMa)
+                        .addComponent(rdoTen)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -824,26 +846,53 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        String TimKiem = txtTimKiem.getText();
-        SanPhamDAO sanPhamDAO = new SanPhamDAO();
-        List<SanPhamDanhMucMauSacKichThuocDTO> sanPhamLst = sanPhamDAO.TimKiemSanPham(TimKiem);
-        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        String theo = rdoMa.isSelected() ? "Theo Mã" : "Theo Tên";
 
-        model.setRowCount(0);
-        for (SanPhamDanhMucMauSacKichThuocDTO sanPham : sanPhamLst) {
-            System.out.println("Adding product: " + sanPham.getTenSp());
+        if ("Theo Mã".equals(theo)) {
+            String TimKiem = txtTimKiem.getText();
+            SanPhamDAO sanPhamDAO = new SanPhamDAO();
+            List<SanPhamDanhMucMauSacKichThuocDTO> sanPhamLst = sanPhamDAO.TimKiemSanPhamTheoMa(TimKiem);
+            DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
 
-            Object[] rowData = {
-                sanPham.getID(),
-                sanPham.getTenSp(),
-                sanPham.getGia(),
-                sanPham.getSoLuong(),
-                sanPham.getTrangThai(),
-                sanPham.getTenDM(),
-                sanPham.getTenMS(),
-                sanPham.getTenKT()
-            };
-            model.addRow(rowData);
+            model.setRowCount(0);
+            for (SanPhamDanhMucMauSacKichThuocDTO sanPham : sanPhamLst) {
+                System.out.println("Adding product: " + sanPham.getTenSp());
+
+                Object[] rowData = {
+                    sanPham.getID(),
+                    sanPham.getTenSp(),
+                    sanPham.getGia(),
+                    sanPham.getSoLuong(),
+                    sanPham.getTrangThai(),
+                    sanPham.getTenDM(),
+                    sanPham.getTenMS(),
+                    sanPham.getTenKT()
+                };
+                model.addRow(rowData);
+            }
+        }
+        else if("Theo Tên".equals(theo)){
+            String TimKiem = txtTimKiem.getText();
+            SanPhamDAO sanPhamDAO = new SanPhamDAO();
+            List<SanPhamDanhMucMauSacKichThuocDTO> sanPhamLst = sanPhamDAO.TimKiemSanPhamTheoTen(TimKiem);
+            DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+
+            model.setRowCount(0);
+            for (SanPhamDanhMucMauSacKichThuocDTO sanPham : sanPhamLst) {
+                System.out.println("Adding product: " + sanPham.getTenSp());
+
+                Object[] rowData = {
+                    sanPham.getID(),
+                    sanPham.getTenSp(),
+                    sanPham.getGia(),
+                    sanPham.getSoLuong(),
+                    sanPham.getTrangThai(),
+                    sanPham.getTenDM(),
+                    sanPham.getTenMS(),
+                    sanPham.getTenKT()
+                };
+                model.addRow(rowData);
+            }
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
@@ -885,6 +934,7 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
     private javax.swing.JButton btnThemAnh;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private rojerusan.RSComboMetro cboDanhMuc;
     private rojerusan.RSComboMetro cboKichThuoc;
     private rojerusan.RSComboMetro cboMauSac;
@@ -904,6 +954,8 @@ public class QuanLySanPhamJpanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblHinhAnh;
+    private javax.swing.JRadioButton rdoMa;
+    private javax.swing.JRadioButton rdoTen;
     private rojerusan.RSTableMetro tblDanhSach;
     private javax.swing.JTextField txtGia;
     private javax.swing.JTextField txtSoLuong;

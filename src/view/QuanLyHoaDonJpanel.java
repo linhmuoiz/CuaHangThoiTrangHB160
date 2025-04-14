@@ -143,7 +143,7 @@ public class QuanLyHoaDonJpanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Hoá Đơn", "Tên Khách Hàng", "Số Điện Thoại", "Hình Thức Thanh Toán", "Tổng Tiền", "Ngày Tạo", "Trạng Thái"
+                "Mã Hoá Đơn", "Tên Khách Hàng", "Số Điện Thoại", "Tổng Tiền", "Hình Thức Thanh Toán", "Ngày Tạo", "Trạng Thái"
             }
         ));
         tblDanhMuc.setColorBackgoundHead(new java.awt.Color(128, 0, 0));

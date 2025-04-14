@@ -176,6 +176,10 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
                                     try {
                                         int quantity = Integer.parseInt(inputslsp); // Chuyển đổi số lượng đã nhập thành một số nguyên.
                                         if (quantity > 0) { // Kiểm tra nếu số lượng lớn hơn 0.
+                                            GlobalState.SoLuongSPChon = quantity;
+                                            
+                                            
+                                            
                                             GlobalState.MaSPChon = productID; // Lưu mã sản phẩm đã chọn vào biến toàn cục GlobalState.MaSPChon.
                                             GlobalState.SoLuongSPChon = quantity; // Lưu số lượng sản phẩm đã chọn vào biến toàn cục GlobalState.SoLuongSPChon.
                                             double ThanhTien = GlobalState.SoLuongSPChon * sanPhamDaTimThay.getGia(); // Tính thành tiền bằng cách nhân số lượng với giá sản phẩm.
@@ -1837,8 +1841,9 @@ public class QuanLyBanHangJpanel extends javax.swing.JPanel implements Runnable,
 
             // Xóa dòng khỏi bảng chi tiết hóa đơn
             tableChiTietHD.removeRow(currentRow);
-
+            thayDoiThongTinHoaDon();
             JOptionPane.showMessageDialog(this, "Xóa sản phẩm thành công!");
+            
         } else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm để xóa!");
         }

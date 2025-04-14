@@ -168,7 +168,7 @@ public class QuanLyDanhMucJpanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 28)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(128, 0, 0));
-        jLabel2.setText("Điều Chỉnh Thông Tinh Danh Mục");
+        jLabel2.setText("Điều Chỉnh Thông Tin Danh Mục");
 
         jPanel4.setBackground(new java.awt.Color(246, 225, 225));
         jPanel4.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(128, 0, 0)));

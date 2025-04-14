@@ -23,7 +23,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
      * Creates new form QuanLyNhanVien
      */
     public QuanLyNhanVienJPanel() {
-        initComponents();
+        initComponents(); // khoi tao gd ngươi dung
         readNhanVien();
     }
 
@@ -56,6 +56,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         rSTableMetroBeanInfo1 = new rojerusan.RSTableMetroBeanInfo();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -78,6 +79,9 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNhanVien = new rojerusan.RSTableMetro();
+        rdoMa = new javax.swing.JRadioButton();
+        rdoTen = new javax.swing.JRadioButton();
+        rdoSDT = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jTextField5 = new javax.swing.JTextField();
@@ -374,12 +378,30 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         tblNhanVien.setColorFilasForeground1(new java.awt.Color(128, 0, 0));
         tblNhanVien.setColorFilasForeground2(new java.awt.Color(128, 0, 0));
         tblNhanVien.setColorForegroundHead(new java.awt.Color(246, 225, 225));
+        tblNhanVien.setColorSelBackgound(new java.awt.Color(128, 0, 0));
+        tblNhanVien.setColorSelForeground(new java.awt.Color(246, 225, 225));
         tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblNhanVienMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblNhanVien);
+
+        buttonGroup2.add(rdoMa);
+        rdoMa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        rdoMa.setForeground(new java.awt.Color(128, 0, 0));
+        rdoMa.setSelected(true);
+        rdoMa.setText("Theo Mã");
+
+        buttonGroup2.add(rdoTen);
+        rdoTen.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        rdoTen.setForeground(new java.awt.Color(128, 0, 0));
+        rdoTen.setText("Theo Tên");
+
+        buttonGroup2.add(rdoSDT);
+        rdoSDT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        rdoSDT.setForeground(new java.awt.Color(128, 0, 0));
+        rdoSDT.setText("Theo SDT");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -388,11 +410,22 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(rdoMa, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rdoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(71, 71, 71))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(rdoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,6 +434,12 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdoMa)
+                    .addComponent(rdoSDT))
+                .addGap(35, 35, 35)
+                .addComponent(rdoTen)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -549,7 +588,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
                                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel16)
@@ -854,36 +893,66 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String timKiem = txtTimKiem.getText();
         if (timKiem.isBlank() == true) {
-            NhanVienDAO nhanVienDAO = new NhanVienDAO();
-            List<NhanVien> nhanVienLst = nhanVienDAO.readNhanVien();
-
-            DefaultTableModel tableNhanVien = (DefaultTableModel) this.tblNhanVien.getModel();
-            tableNhanVien.setRowCount(0);
-
-            for (NhanVien nhanVien : nhanVienLst) {
-                tableNhanVien.addRow(new Object[]{
-                    nhanVien.getID(),
-                    nhanVien.getTenNV(),
-                    nhanVien.getGioiTinh(),
-                    nhanVien.getSDT(),
-                    nhanVien.getDiaChi()
-                });
-            }
+            readNhanVien();
         } else {
-            NhanVienDAO nhanVienDAO = new NhanVienDAO();
-            List<NhanVien> nhanVienLst = nhanVienDAO.TimKiemNhanVien(timKiem);
+            String theo;
+            if (rdoMa.isSelected()) {
+                theo = "Theo Mã";
+            } else if (rdoTen.isSelected()) { 
+                theo = "Theo Tên";
+            } else { 
+                theo = "Theo SDT";
+            }
+            if ("Theo Mã".equals(theo)) {
+                NhanVienDAO nhanVienDAO = new NhanVienDAO();
+                List<NhanVien> nhanVienLst = nhanVienDAO.TimKiemNhanVienTheoMa(timKiem);
 
-            DefaultTableModel tableNhanVien = (DefaultTableModel) this.tblNhanVien.getModel();
-            tableNhanVien.setRowCount(0);
+                DefaultTableModel tableNhanVien = (DefaultTableModel) this.tblNhanVien.getModel();
+                tableNhanVien.setRowCount(0);
 
-            for (NhanVien nhanVien : nhanVienLst) {
-                tableNhanVien.addRow(new Object[]{
-                    nhanVien.getID(),
-                    nhanVien.getTenNV(),
-                    nhanVien.getGioiTinh(),
-                    nhanVien.getSDT(),
-                    nhanVien.getDiaChi()
-                });
+                for (NhanVien nhanVien : nhanVienLst) {
+                    tableNhanVien.addRow(new Object[]{
+                        nhanVien.getID(),
+                        nhanVien.getTenNV(),
+                        nhanVien.getGioiTinh(),
+                        nhanVien.getSDT(),
+                        nhanVien.getDiaChi()
+                    });
+                }
+            }
+            else if("Theo Tên".equals(theo)){
+                NhanVienDAO nhanVienDAO = new NhanVienDAO();
+                List<NhanVien> nhanVienLst = nhanVienDAO.TimKiemNhanVienTheoTen(timKiem);
+
+                DefaultTableModel tableNhanVien = (DefaultTableModel) this.tblNhanVien.getModel();
+                tableNhanVien.setRowCount(0);
+
+                for (NhanVien nhanVien : nhanVienLst) {
+                    tableNhanVien.addRow(new Object[]{
+                        nhanVien.getID(),
+                        nhanVien.getTenNV(),
+                        nhanVien.getGioiTinh(),
+                        nhanVien.getSDT(),
+                        nhanVien.getDiaChi()
+                    });
+                }
+            }
+            else{
+                NhanVienDAO nhanVienDAO = new NhanVienDAO();
+                List<NhanVien> nhanVienLst = nhanVienDAO.TimKiemNhanVienTheoSDT(timKiem);
+
+                DefaultTableModel tableNhanVien = (DefaultTableModel) this.tblNhanVien.getModel();
+                tableNhanVien.setRowCount(0);
+
+                for (NhanVien nhanVien : nhanVienLst) {
+                    tableNhanVien.addRow(new Object[]{
+                        nhanVien.getID(),
+                        nhanVien.getTenNV(),
+                        nhanVien.getGioiTinh(),
+                        nhanVien.getSDT(),
+                        nhanVien.getDiaChi()
+                    });
+                }
             }
     }//GEN-LAST:event_btnTimKiemActionPerformed
     }
@@ -891,6 +960,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTimKiem;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -929,6 +999,9 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private rojerusan.RSTableMetroBeanInfo rSTableMetroBeanInfo1;
+    private javax.swing.JRadioButton rdoMa;
+    private javax.swing.JRadioButton rdoSDT;
+    private javax.swing.JRadioButton rdoTen;
     private rojerusan.RSTableMetro tblNhanVien;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables

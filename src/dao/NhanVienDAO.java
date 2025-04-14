@@ -18,6 +18,7 @@ public class NhanVienDAO {
     public boolean checkLogin(String sdt, String pass){
         try(Connection conn = KetNoiDB.getConnectDB()){
             PreparedStatement ppStm = conn.prepareStatement("SELECT * FROM NhanVien WHERE SDT = ? AND MatKhauDN = ?");
+            // gan gtri ? vào sql
             ppStm.setString(1, sdt);
             ppStm.setString(2, pass);
             ResultSet rs = ppStm.executeQuery();
@@ -39,7 +40,7 @@ public class NhanVienDAO {
         List<NhanVien> nhanVienLst = new ArrayList<NhanVien>();
         
         try (Connection con = KetNoiDB.getConnectDB(); 
-                PreparedStatement ps = con.prepareStatement(sql);) {
+                PreparedStatement ps = con.prepareStatement(sql);) { // cbi câu lệch để thực thi
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -117,6 +118,7 @@ public class NhanVienDAO {
 
     public NhanVien getNhanVienById(int id) {
         String sql = "SELECT * FROM NhanVien WHERE id = ?";
+        //khai báo
         int ID = 0;
         String tenNV = null;
         String gioi = null;
@@ -129,6 +131,7 @@ public class NhanVienDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                // lay dl từ rs gan vao bien
                 ID = rs.getInt("id");
                 tenNV = rs.getString("TenNV");
                 gioi = rs.getString("GioiTinh");
@@ -148,7 +151,7 @@ public class NhanVienDAO {
         
         try (Connection con = KetNoiDB.getConnectDB(); 
                 PreparedStatement ps = con.prepareStatement(sql);) {
-            
+            // thiet lap gia tri
             ps.setString(1, matKhauMoi);
             ps.setString(2, GlobalState.SDT);
             ps.setString(3, matKhauHienTai);
@@ -167,14 +170,13 @@ public class NhanVienDAO {
     
     
     
-    public List<NhanVien> TimKiemNhanVien(String TimKiem){
+    public List<NhanVien> TimKiemNhanVienTheoMa(String TimKiem){
         List<NhanVien> nhanVienLst = new ArrayList<>();
         try (Connection conn = KetNoiDB.getConnectDB()) {
-            String sql = "SELECT * FROM NhanVien WHERE TenNV LIKE ? OR SDT LIKE ?";
+            String sql = "SELECT * FROM NhanVien WHERE ID = ?";
             PreparedStatement ppStm = conn.prepareStatement(sql);
             
-            ppStm.setString(1, "%" + TimKiem + "%");
-            ppStm.setString(2, "%" + TimKiem + "%");
+            ppStm.setString(1, TimKiem );
            ResultSet rs = ppStm.executeQuery();
            
            while (rs.next()) {
@@ -194,9 +196,62 @@ public class NhanVienDAO {
         }
     }
     
+    public List<NhanVien> TimKiemNhanVienTheoTen(String TimKiem){
+        List<NhanVien> nhanVienLst = new ArrayList<>();
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "SELECT * FROM NhanVien WHERE TenNV LIKE ? ";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            
+            ppStm.setString(1, "%" + TimKiem + "%");
+           ResultSet rs = ppStm.executeQuery();
+           
+           while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String tenNV = rs.getString("TenNV");
+                String SDT = rs.getString("SDT");
+                String diaChi = rs.getString("DiaChi");
+                String GioiTinh = rs.getString("GioiTinh");
+                
+                NhanVien nhanVien = new NhanVien(ID, tenNV, SDT, GioiTinh, diaChi);
+                nhanVienLst.add(nhanVien);
+            }
+           return nhanVienLst;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return nhanVienLst;
+        }
+    }
+    
+    
+    public List<NhanVien> TimKiemNhanVienTheoSDT(String TimKiem){
+        List<NhanVien> nhanVienLst = new ArrayList<>();
+        try (Connection conn = KetNoiDB.getConnectDB()) {
+            String sql = "SELECT * FROM NhanVien WHERE SDT LIKE ?";
+            PreparedStatement ppStm = conn.prepareStatement(sql);
+            
+            ppStm.setString(1, "%" + TimKiem + "%");
+           ResultSet rs = ppStm.executeQuery();
+           
+           while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String tenNV = rs.getString("TenNV");
+                String SDT = rs.getString("SDT");
+                String diaChi = rs.getString("DiaChi");
+                String GioiTinh = rs.getString("GioiTinh");
+                
+                NhanVien nhanVien = new NhanVien(ID, tenNV, SDT, GioiTinh, diaChi);
+                nhanVienLst.add(nhanVien);
+            }
+           return nhanVienLst;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return nhanVienLst;
+        }
+    }
+    //lấy đọc
    public String getTrangThaiNhanVienBySDT(String sdt){
        String sql = "SELECT TrangThai from NhanVien where SDT = ?";
-       String status = null;
+       String status = null; // luu kq trang thai
        try(Connection conn = KetNoiDB.getConnectDB()){
            PreparedStatement ppStm = conn.prepareStatement(sql);
            ppStm.setString(1, sdt);
@@ -211,6 +266,7 @@ public class NhanVienDAO {
            return status;
        }
    }
+   // cập nhật
    public void updateTrangThaiNhanVienBySDT(String trangThai){
        String sql = "update NhanVien set TrangThai = ? where SDT = ?";
        try(Connection conn = KetNoiDB.getConnectDB()){
@@ -224,7 +280,7 @@ public class NhanVienDAO {
        }
    }
    public boolean isDuplicateSDT(String sdt){
-       boolean isDup = false;
+       boolean isDup = false; // chưa bi trùng
        String sql = "select * from NhanVien where SDT = ?";
        try(Connection conn = KetNoiDB.getConnectDB()){
            PreparedStatement ppStm = conn.prepareStatement(sql);
